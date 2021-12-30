@@ -1,0 +1,24 @@
+<!--
+    업로드할 파일을 선택할 수 있는 컨트롤을 생성	
+    <input type="file" name="서버쪽에서 파일을 식별하기 위한 이름" />
+
+    *주의:
+        form태그에서 반드시 enctype="multipart/form-data"라는 속성을 지정해야 한다.
+-->
+
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        </head>
+        <body>
+                <form action="12.24 example_receive.php" method="POST" enctype="multipart/form-data">
+                    <!--
+                        enctype="multipart/form-data"이라는 속성값을 반드시 지정해야 한다.        
+                    -->
+                    
+                    <input type="file" name="image" />
+                    <input type="submit" />
+                </form>
+        </body>
+</html>

@@ -1,0 +1,61 @@
+<!--
+    사용자로부터 "텍스트"를 입력받을 수 있는 창
+
+    <input type="text" name="값의 이름" value="값" disabled="disabled" readonly="readonly" />
+
+        type : text를 사용해야 텍스트 필드가 된다. 
+        name : 입력한 데이터의 이름
+        value : 데이터의 값. 입력한 데이터의 기본 값으로 이 값이 기본적으로 텍스트 필드에 표시된다. 
+        disabled : 값으로 disabled을 지정하면 텍스트 필드가 불능 상태(사용자가 입력할 수 없는 상태)가 된다. 서버로 전송해도 이 속성이 설정된 컨트롤의 데이터는 서버로 전송되지 않는다. 
+        readonly : 값으로 readonly를 지정하면 텍스트 필드에 값이 입력되지 않는다.(value를 특정 지정된 default값을 서버로 전송하도록 하거나, 값을 보내지 않는 상태로 만들 수 있다.) 서버로는 데이터가 전송된다
+
+
+    사용자로부터 여러 줄의 텍스트 데이터를 입력받을 때 사용한다.
+    <textarea name="값의 이름" rows="행의 수" cols="열의 수" disabled="disabled" readonly="readonly">값</textarea>
+        rows : 입력한 행위 수 만큼 높이가 정해진다.(글자 칸 수)
+        cols : 입력한 열의 수 만큼 폭이 정해진다.(글자 칸 수)
+        열고 닫는 태그 안에 "값"을 넣으면 해당 값이 넣어진 상태로 사용자가 데이터를 입력/수정할 수 있게 된다.
+    
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>생활코딩</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+    <form action="url" method="GET">
+
+        <!-- 닉네임을 입력하라는 input 태그를 사용-->
+        닉네임 :
+        <input type="text" name="nickname" />
+        <br />
+        <input type="submit" />
+
+        <br>
+
+        <!-- 비밀번호를 입력하라는 input 태그를 사용(password type으로 지정하여 ***로 숨김 표시)-->
+        비밀번호 :
+        <input type="password" name="password" />
+        <br />
+        <input type="submit" />
+
+
+        <!--hidden data 사용예시-->
+        이름 :
+        <input type="text" name="name" />
+        <input type="hidden" name="language" value="ko" />
+        <!-- 한국어라는 언어로 해당 데이터가 입력되었다는 정보를 서버측에 자동으로 저장할 수 있도록하는 역할:
+                    사용자로부터 입력받아서 처리하는 정보가 아니라, 그 외적인 정보를 처리할 때 도움을 받을 수 있다.
+            -->
+
+        <br />
+        <input type="submit" />
+    </form>
+</body>
+
+</html>

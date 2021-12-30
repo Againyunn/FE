@@ -1,0 +1,59 @@
+<!-- 표(table)
+    <tr> table row로 표의 줄 단위를 의미
+    <th> 하나의 제목 단위(볼드 처리된 글자)를 의미한다.
+    <td> 하나의 박스 단위를 의미한다.
+    
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    </head>
+    <body>
+        <table border="1">
+            <tr>
+                <td>이름</td><td>성별</td><td>나이</td>
+            </tr>
+            <tr>
+                <td>최진혁</td><td>남</td><td>6</td>
+            </tr>
+            <tr>
+                <td>최유빈</td><td>여</td><td>2</td>
+            </tr>
+        </table>
+
+        <br>
+        <table border="1">
+            <tr>
+                <th>이름</th><th>성별</th><th>나이</th>
+            </tr>
+            <tr>
+                <td>최진혁</td><td>남</td><td>6</td>
+            </tr>
+            <tr>
+                <td>최유빈</td><td>여</td><td>2</td>
+            </tr>
+        </table>
+
+        <br>
+        <table border="1">
+            <tr>
+                <th>이름</th><th>성별</th><th>나이</th>
+            </tr>
+            <tr>
+                <td>최진혁</td><td>남</td><td rowspan="2">비공개</td>
+
+                <!--
+                    span: 묶다
+                    rowspan= "숫자" : 숫자 개수만큼의 행을 하나로 묶는다 의미 -->
+            </tr>
+            <tr>
+                <td>최유빈</td><td>여</td>
+                <!-- 
+                    rowspan으로 묶여 있으므로 굳이 아래의 td에는 값을 표기하지 않는다.
+                -->
+            </tr>
+        </table>
+    </body>
+</html>

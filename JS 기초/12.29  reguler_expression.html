@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <script>
+        // 정규표현식 링크  :   https://opentutorials.org/course/909/5142
+        // 정규표현식을 통해 복잡한 코드 혹은 반복적인 코드를 최소화할 수 있다.
+
+        // 정규 표현식 리터럴:
+        var pattern = /a/;  // 찾고자하는 대상이 'a'임을 변수 pattern에 정의
+
+        // 정규 표현식 객체 생성자:
+        var pattern = new RegExp('a'); // 찾고자하는 대상이 'a'임을 변수 pattern에 정의
+
+        // RegExp.exec()    : [추출 목적]해당 정규 표현식의 값을 찾아, "반환(return)"하라는 의미
+        console.log(pattern.exec('abcdef')); // ["a"]   :객체 pattern에서 'a'를 찾는 정규식을 입력했는데, 대상에서 a가 존재하기 때문에 'a'값을 반환
+
+        console.log(pattern.exec('bcdefg')); // null    :탐색하는 곳에 정규식을 통해 찾는 값인 'a'가 없으므로, null 값을 반환
+
+        var pattern = /a./; // 찾고자 하는 대상'a'와 그 뒤에 올 수 있는 어떤 값(문자)를 표현할 때 '.'으로 표현
+        console.log(pattern.exec('abcdefg')); // ["ab"]     :정규식에 a와 그 뒤의 어떤 값(문자)를 찾으라고 입력되었으므로, ab를 반환한다.
+
+        // RegExp.test()    : [정보 유무 확인]해당 정규 표현식의 값의 유무를 "T/F"(Boolean)으로 반환하라는 의미
+        console.log(pattern.test('abcdefg'));  // true      : a.(a와 그 뒤의 어떤 값)이 존재하므로, true반환
+
+        // 정규표현식: String의 형태 활용법
+        'abcdef'.match(pattern); // ["a"]   :pattern에 위치한 a를 반환
+
+        'abcdef'.replace(pattern, 'A'); //  Abcdef      :a대신에 A로 값을 바꾸라는 명령어
+
+        // 정규표현식의 옵션
+        // i    :대문자와 소문자를 구분하지 않도록 정규표현식 설정
+        var xi = '/a/';
+        console.log("Abcde".match(xi)); // null
+
+        var oi = /a/i;
+        console.log("Abcde".match(oi)); // ["A"]    :소문자 a를 변수 oi에 넣어서 match를 통해 검색했지만, 대문자인 A를 찾아서 반환할 수 있다. 
+
+        // g    :검색된 모든 결과를 리턴한다.(기본적으로 정규식 검색을 통해서는 1개의 결과만 얻을 수 있다. 중복값은 표현x)
+        var xg = /a/;
+        console.log("abcdea".match(xg));    // ["a"]    :정규식에서 특정 문자를 검색하면 해당 문자가 여러 번 나오더라도 1개의 알맞은 문자만 반환된다.
+
+        var og = /a/g;
+        console.log("abcdea".match(og));    // ["a", "a"]   :g를 사용하면 특정 문자를 검색했을 때, 중복값이 있다면 중복값 모두를 반환한다.
+
+        // 정규표현식 캡쳐 기능
+        var pattern = /(\w+)\s(\w+)/; // (  )   :묶음 단위 , \w+     :모든 유형의 문자이며 여러 개의 문자,  \s      :공백(space),   \w  :모든 유형의 문자 1개
+        var str = "coding everybody";
+        var result = str.replace(pattern, "$2, $1");
+        console.log(result);
+
+        var urlPattern = /\b(?:https?):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*/gim;
+        var content = '생활코딩 : http://opentutorials.org/course/1 입니다. 네이버 : http://naver.com 입니다. ';
+        var result = content.replace(urlPattern, function(url){
+            return '<a href="'+url+'">'+url+'</a>';
+        });
+        console.log(result);
+
+        // 실행결과:
+        //  생활코딩 : <a href="http://opentutorials.org/course/1">http://opentutorials.org/course/1</a> 입니다. 네이버 : <a href="http://naver.com">http://naver.com</a> 입니다.
+        
+    </script>
+</body >
+</html>

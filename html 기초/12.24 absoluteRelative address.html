@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <style>
+            img{
+                height:50px;
+                width:50px;
+            }
+            #structure{
+                width:379px;
+                height:124px;
+                border:1px solid gray;
+            }
+            body{
+                font-size:0.8em;
+            }
+            table {
+                width:100%;
+                border-collapse: collapse;
+            }
+            td, th{
+                border:1px solid gray;
+                padding:5px;
+            }
+            textarea{
+                width:100%;
+                border:none;
+            }
+            .div{width:50px}
+            .ex{width:30px;}
+            .desc{width:150px}
+            .result{width:60px}
+        </style>
+    </head>
+    <body>
+        <p>
+            exampe1.html 파일이 아래와 같은 디렉토리 구조 위에 위치한다고 간주한다. <br />
+            <img id="structure" src="structure.gif" />
+        </p>
+        <table>
+            <tr>
+                <th class="div">구분</th>
+                <th class="ex">기호</th>
+                <th class="desc">설명</th>
+                <th class="code">코드</th>
+                <th class="result">결과</th>
+            </tr>
+            <tr>
+                <td rowspan="3">상대경로</td>
+                <td>../</td>
+                <td>부모 디렉토리</td>
+                <td>
+                    <textarea><img src="../image/logo.png" /></textarea>
+                </td>
+                <td>
+                    <img src="../image/logo.png" />
+                </td>
+                    <!--
+
+                        ../
+                        (상대주소 입력)
+                        현재 위치한 디렉토리의 부모 디렉토리를 지칭하는 말
+                    -->
+            </tr>
+            <tr>
+                <td>./</td>
+                <td>현재 디렉토리</td>
+                <td>
+                    <textarea><img src="./image/logo.png" /></textarea>
+                </td>
+                <td>
+                    <img src="./image/logo.png" />
+                </td>
+                    <!--
+                        ./
+                        (상대주소 입력)
+                        현재 디렉토리를 지칭하는 말
+                    -->
+            </tr>
+             
+            <tr>
+                <td>없음</td>
+                <td>현재 디렉토리 기호는 생략할 수 있다</td>
+                <td>
+                    <textarea><img src="image/logo.png" /></textarea>
+                </td>
+                <td>
+                    <img src="image/logo.png" />
+                </td>
+                    <!--  
+                        (상대주소 입력)
+                        현재 디렉토리를 지칭하는(./)는 생략할 수 있다.
+                    -->
+            </tr>
+            <tr>
+                <td rowspan="2">절대경로</td>
+                <td>/</td>
+                <td>루트(root) 디렉토리</td>
+                <td>
+                    <textarea><img src="/codingeverybody_html_tutorial/url_72/image/logo.png" /></textarea>
+                </td>
+                <td>
+                    <img src="/codingeverybody_html_tutorial/url_72/image/logo.png" />
+                </td>
+                <!--
+                    (절대주소 입력)
+                    폴더 자체의 root 주소부터 현재 파일이 위치한 주소까지 모두 표기
+                -->
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td>URL을 사용</td>
+                <td>
+                    <textarea><img src="http://codingeverybody.com/codingeverybody_html_tutorial/url_72/image/logo.png" /></textarea>
+                </td>
+                <td>
+                    <img src="http://codingeverybody.com/codingeverybody_html_tutorial/url_72/image/logo.png" />
+                </td>
+                <!--
+                    (절대주소 입력)
+                    url형식으로 http://도메인(IP)주소 + root주소 가 입력되는 형태
+                -->
+            </tr>
+        </table>
+    </body>
+</html>

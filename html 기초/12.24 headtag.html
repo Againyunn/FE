@@ -1,0 +1,30 @@
+<!-- head tag: html문서의 meta data를 담는 태그로 html의 정보를 담는 역할을 수행한다.-->
+
+<!-- mate tag: 문서에 대한 정보를 기술하는 태그
+
+    <meta name="" content="" />
+    * content의 종류:
+        description : 해당 웹 페이지가 다루는 전반적인 내용의 요약 본
+        keywords : 해당 웹 페이지의 주요 키워드
+        * description과 keywords는 검색 엔진과 같은 시스템에서 중요하게 사용하는 콘텐츠
+
+        http-equiv="Content-Type": 해당 html에서 사용하는 콘텐츠의 인코딩 타입
+        http-equiv="refresh": 특정 url에 잠시 머물렀다가 특정 사이트로 이동하게 하는 기능으로 content="숫자; url"을 통해 자동으로 이동할 url을 해당 웹 페이지에 머무르는 시간과 url을 지정할 수 있다.
+    <meta http-equiv="" content="" />
+
+
+    title tag:
+        해당 웹페이지의 제목을 나타내는 값
+        검색엔진과 같은 외부서버에서 유입될 때 title의 키워드를 통해 접속이 원활하도록 하는 역할 수행
+
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="description" content="생활코딩은 일반인에게 프로그래밍을 알려주는 온라인 수업" />
+        <meta name="keywords" content="생활코딩, HTML, HEAD, META" />
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <meta http-equiv="refresh" content="2;url=http://opentutorials.org/">
+    </head>
+</html>

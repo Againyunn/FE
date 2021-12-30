@@ -1,0 +1,63 @@
+<!--
+    iframe: 웹 페이지의 일부만 노출
+    iframe 사용하기: 유튜브, 페이스북, 인스타그램 좋아요 등 외부 사이트의 콘텐츠를 가져와서 넣을 수 있다.
+
+    <iframe src="불러올 웹페이지의 URL" scrolling="스크롤링 허용여부(yes|no|auto)">
+    iframe를 지원하지 않는 브라우저인 경우 대체정보를 제공(대체 정보를 제공하는 창: 링크를 넣을 수 있을 것)
+    </iframe>
+
+    src : 불러올 페이지의  URL
+    scrolling : 아이프레임 안에서 스크롤링을 허용할 것인지를 지정
+    auto : 스크롤이 필요한 경우만 스크롤 바를 노출 (기본 값)
+    yes : 스크롤링 허용, 스크롤이 필요 없는 경우도 스크롤 바를 노출
+    no : 스크롤 하지 않음
+
+-->
+
+<!--
+    !!!!문제점!!!! : html5로 업데이트되면서 다양한 문제가 발생하여, 현재 frame은 사용 제한을 권고하는 상태. 따라서 가능하면 iframe을 사용하자
+    frame: 웹 페이지 전체를 노출(하나의 화면에서 여러 개의 페이지를 분할하여 보여주는 형태)
+    * frame 사용 시 장점:
+        frame에 유지할 특정 내용(리스트나 다른 배열)을 넣고, 다른 frame에 웹 페이지가 이동될 내용을 넣으면 화면 구성을 일부 유지하면서 웹 페이지를 이동하며 탐색이 가능하도록 할 수 있다.
+
+    frame 문법:
+    
+    <frameset (cols | rows)="열 혹은 행의 크기(콤마로 구분)">
+    <frame src="frame_a.htm" name="프레임의 이름" />
+    </frameset>
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--브라우져가 frameset을 지원하는 경우
+        각 frame에 해당하는 html문서를 로드해서 불러오는 역할 수행
+    -->
+
+<frameset cols="40%, 60%">
+    <!--행 형태로 분리하여 배열하라는 의미-->
+    <frameset rows="25%, 75%">
+        <!--열 형태로 분리하여 배열하라는 의미-->
+        <frame src="12.24 contents_of_frame1.html" />
+        <frame src="12.24 contents_of_frame2.html" />
+    </frameset>
+    <frame name="content" src="12.24 contents_of_frame3.html" />
+    
+    <!--브라우져가 frameset을 지원하지 않는 경우-->
+    <noframes>
+        <body>
+            <!--iframe의 예제-->
+            <iframe src="http://opentutorials.org" width="90%" height="300" frameborder="1" scrolling="auto"></iframe>
+
+            <!--frame의 예제-->
+            <p>This frameset document contains:</p>
+            <ul>
+                <li><a href="12.24 contents_of_frame1.html">contents_of_frame1.html</a></li>
+                <li><a href="12.24 contents_of_frame2.html">contents_of_frame1.html</a></li>
+                <li><a href="12.24 contents_of_frame3.html">contents_of_frame1.html</a></li>
+            </ul>
+        </body>
+    </noframes>
+</frameset>
+
+</html>
