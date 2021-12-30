@@ -119,4 +119,35 @@ function decrease(num){
 alert(cal(increase, 1));    // 함수 increase를 함수 cal의 인자로 사용했다.
 alert(cal(decrease, 1));    // 함수 decrease를 함수 cal의 인자로 사용했다.
 
+// 함수의 중첩 사용 (JS가 함수도 객체로 가질 수 있다는 특성을 활용)
+// 함수는 함수의 리턴 값으로 사용할 수 있다.
+function cal(mode){
+    var funcs = {
+        'plus' : function(left, right){return left + right},
+        'minus' : function(left, right){return left - right}
+    }
+    return funcs[mode];
+}
+
+alert(cal('plus')(2,1)); // cal('plus')라고 cal함수의 key인 plus를 호출하고, cal함수의 key plus의 value인 함수의 인자값 (수1, 수2)를 입력
+alert(cal('minus')(2,1));   // 
+
+// 함수는 배열 값으로 사용할 수 있다.
+var process = [
+    function(input){ return input + 10;},       // process라는 배열 내의 0번째 인덱스로 함수 저장
+    function(input){ return input * input;},    // process라는 배열 내의 1번째 인덱스로 함수 저장
+    function(input){ return input / 2;}         // process라는 배열 내의 2번째 인덱스로 함수 저장
+];
+
+var input = 1;
+for(var i = 0; i < process.length; i++){        // process배열의 인덱스 수 만큼 반복
+    input = process[i](input);                  // process배열 내의 각 인덱스에 input값 대입
+}
+
+alert(input);
+
+// first-class citizen(object) :     변수, 매개변수, 리턴값 의 용도로 사용될 수 있는 값
+/* JS의 독특한 문법! */
+// 함수도 first-class object에 해당하여, 변수/매개변수/리턴값으로 사용할 수 있다.(일반 변수처럼 함수를 사용할 수 있다.)
+
 
