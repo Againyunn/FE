@@ -1,0 +1,65 @@
+01.11학습내역
+
+JSX → React.createElement 표현식
+	JS안에서 HTML요소들을 직접 표현할 수 있게 하는 방식
+	
+Babel → JS Complier
+	JSX를 사용하기 위해 필요한 컴파일러
+
+Fragment → React.Fragment or <> </>
+	JSX를 React.Fragment로 사용하여 html tag를 html과 유사한 형태로 사용할 수 있다.
+
+Funtion → 재사용 가능한 Element를 찍어낼 수 있다.
+
+Custom Element → Upper case로 이름을 지정해야 한다.
+	소문자로 시작하게 되면 기존 html의 tag와 충돌 발생 위험이 있기 때문에 html 자체적으로 금지한다.
+
+Children → Children인자는 개수 제한이 없다.
+	여러 객체를 제한 없이 설정할 수 있다.
+
+Interpolation → 이미 HTML에서 사용하고 있던 방식으로, JS와 JSX를 섞어서 필요에 따라 함께 사용할 수 있게 한다.
+	한 줄 단위로 서로 다른 문법을 사용할 수 있다.
+
+리엑트와 리랜더링 알아보기
+바닐라JS → 변경으로 인해 element 자체를 다시 생성
+
+React → 변경된 부분만 다시 생성
+
+개발에 있어 모든 점은 Trade-off 관계에 있다.
+
+React 객체는 불변의 객체(immutable)이다. 
+즉 개발자는 전체적인 코드를 react에게 넘기면 react가 알아서 코드 내에서 변경된 부분을 찾아 변경된 부분만을 찾아서 다시 생성한다.
+
+<React의 element tree 비교 순서>
+element type을 비교
+key를 비교
+props를 비교
+
+
+HTML의 tag's Children
+const element_React = <button>{number_React}</button>;
+const element_React2 = <button children = {number_React} />
+
+둘은 동일한 역할을 수행한다.
+
+리엑트의 엘리먼트 → 불면객체
+변경사항 반영 → 리엑트에게 일임
+리엑트의 비교 → Reconcilliation(리엑트의 재조정 알고리즘)
+
+Virtual DOM → 비교시 활용
+
+이벤트 표현:
+
+바닐라JS:
+on{even} 형식
+ex) onclick	onmouseout	onfocus		onblur
+
+React JS:
+on{Event} 형식
+ex) onClick	onMouseOut	onFocus		onBlur
+
+이벤트 핸들러 써보기:
+Object.assign → 객체 내용복사
+
+전역변수 변경 → ReactDOM.render를 활용
+	JS는 함수가 생성될 때의 변수 상태 그대로 유지하므로, render자체를 새롭게 업데이트 해주어야 값이 바뀌었음을 인식할 수 있다.

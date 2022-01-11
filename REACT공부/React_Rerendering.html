@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <h1>바닐라 JS활용</h1>
+    <div id="root_Vanilla">
+    </div>
+
+    <script>
+        // 전체적인 모든 것을 다 바꾼다.
+
+        const rootElement_vanilla = document.getElementById("root_Vanilla");
+
+        function random_vanilla() {
+            const number_vanilla = Math.floor(Math.random() * (10 - 1) + 1);
+
+            const element_vanilla = `<button>${number_vanilla}</button>`;
+
+            rootElement_vanilla.innerHTML = element_vanilla;
+        }
+
+        setInterval(random_vanilla, 1000);
+    </script>
+
+    <br>
+
+
+    <h1>React 활용</h1>
+    <div id="root_React">
+    </div>
+
+    <script type="text/babel">
+        // 변경이 필요한 부분만 바꾼다.(메모리 사용 및 처리 속도의 효과성↑)
+        const rootElement_React = document.getElementById("root_React");
+
+        function random_React() {
+            const number_React = Math.floor(Math.random() * (10 - 1) + 1);
+
+            const element_React = <button>{number_React}</button>;
+
+            const element_React2 = <button children={number_React} />
+
+            ReactDOM.render(element_React, rootElement_React);
+        }
+
+        setInterval(random_React, 1000);
+    </script>
+
+
+    <h1>React 예시 공식문서</h1>
+    <div id="root">
+    </div>
+
+    <script type="text/babel">
+        function tick() {
+            const element = (
+                <div>
+                    <h3>Hello, world!</h3>
+                    <h4>It is {new Date().toLocaleTimeString()}</h4>
+                </div>
+            );
+            ReactDOM.render(element, document.getElementById('root'));
+        }
+
+        setInterval(tick, 1000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <div id="root">
+    <!-- <h1>Hi</h1>
+      <h3>Bye</h3>
+      <h5>children</h5> -->
+  </div>
+
+  <!-- <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      //const element = <h1 className="title1">Hi</h1>;
+
+      const text = "Hello world!";
+      const titleClassName = "title";
+      //const element_test = <h1 className={titleClassName}>{text}</h1>; //html 의 요소에 객체의 형태로 직접 변수를 입력할 수도 있다.
+
+      const props = { className: titleClassName, children: text };
+      //const custom1 = <h1 { ... props}/>; //아래의 코드를 하나하나 입력할 필요없이 내부 요소를 다룰 수 있다.
+
+      const custom1 = (
+        <h1 className={props.className} children={props.children} />
+      );
+      const element = custom1;
+      ReactDOM.render(element, rootElement);
+      //ReactDOM.render(element_test, rootElement); //reder는 1번만 가능하다
+    </script> -->
+
+  <!-- <div id="test">
+      <h1>Hi</h1>
+      <h3>Bye</h3>
+      <h5>children</h5>
+    </div> -->
+
+  <script type="text/babel">
+    // const rootElement = document.getElementById("root");
+
+    // // div 자체를 새로 생성하여 React로 값을 입력하는 경우
+    // const test_element = (
+    //   <div
+    //     className="box"
+    //     children={[
+    //       React.createElement("h1", null, "Hi"),
+    //       React.createElement("h3", null, "Bye"),
+    //       React.createElement("h5", null, "Children")
+    //     ]}
+    //   />
+    // );
+    // ReactDOM.render(test_element, rootElement);
+
+    // // React.Fragment 를 활용하여 기존에 존재하는 div안에 해당 값만을 넣어주는 형태
+    // const test_element = (
+    //   <React.Fragment
+    //     className="box"
+    //     children={[
+    //       React.createElement("h1", null, "Hi"),
+    //       React.createElement("h3", null, "Bye"),
+    //       React.createElement("h5", null, "Children")
+    //     ]}
+    //   />
+    // );
+    // ReactDOM.render(test_element, rootElement);
+
+    // // JSX를 활용하는 경우(children인자로 넣는 경우)
+    // const test_element = (
+    //   <React.Fragment
+    //     className="box"
+    //     children={[<h1>Hi</h1>, <h3>Bye</h3>, <h5>Children</h5>]}
+    //   />
+    // );
+    // ReactDOM.render(test_element, rootElement);
+
+    // // JSX를 활용하는 경우(html처럼 값을 넣는 경우)
+    // const test_element = (
+    //   <React.Fragment>
+    //     <h1>Hi</h1>,<h3>Bye</h3>,<h5>Children</h5>
+    //   </React.Fragment>
+    // );
+    // ReactDOM.render(test_element, rootElement);
+
+    // // JSX를 활용하는 경우(html처럼 값을 넣는 경우)
+    // const test_element = (
+    //   <>
+    //     <h1>Hi</h1>,<h3>Bye</h3>,<h5>Children</h5>
+    //   </>
+    // );
+    // ReactDOM.render(test_element, rootElement);
+
+    const rootElement = document.getElementById("root");
+
+    // const paint = (title, description) => (
+    //   <>
+    //     <h1>{title}</h1>
+    //     <h3>{description}</h3>
+    //    </>
+    // );
+
+    // const element_check = (
+    //   <>
+    //     {paint("Good", "good")}
+    //     {paint("Bad", "bad")}
+    //     {paint("So so", "so so")}
+    //   </>
+    // );
+
+    // // 함수를 활용해서 html tag 내부의 값을 지정
+    // // React의 Paint 함수를 만들어서 html 태그처럼 사용할 수 있다.
+    // // JSX를 return하는 함수 생성
+    // const Paint = ({ title, description, children }) => {
+    //   return (
+    //     <>
+    //       <h1>{title}</h1>
+    //       <h3>{description}</h3>
+    //       {children}
+    //     </>
+    //   );
+    // };
+
+
+    // const element = (
+    //     <>
+    //     <Paint title="really?" description="of course!!">
+    //       <Paint title="이주영" description="사랑해" children="정재윤"/>
+    //       <Paint title="Good" description="good" children="dev"/>
+    //     </Paint>
+    //     </>
+    //   );
+
+    //   // ReactDOM.render(element_check, rootElement);
+    //   ReactDOM.render(element, rootElement);
+
+
+
+    // // JSX 함수인 Text에 입력받은 인자값이 대문자로 시작하는 경우와 그렇지 않은 경우 나누는 방법:
+    // const Text = ({ text }) => {
+    //   if (text.charAt(0) === text.charAt(0).toUpperCase()) {
+    //     return <h1>{text}</h1>
+    //   }
+    //   else {
+    //     return <h3>{text}</h3>
+    //   }
+    // };
+
+    // const test_text = "Hello"
+
+    // const element = (
+    //   <>
+    //     <Text text={test_text} />
+    //   </>
+    // );
+
+    // // ReactDOM.render(element_check, rootElement);
+    // ReactDOM.render(element, rootElement);
+
+    // // JS함수로 Number 함수 정의 : 홀수 이면 h5 짝수 이면 h3반환
+    // // 일반 수식으로 작성
+    // function Number({ text }) {
+    //   if (text % 2 !== 0) {
+    //     return (
+    //       <h5>
+    //         {text}
+    //       </h5>
+    //     );
+    //   }
+    //   else {
+    //     return (
+    //       <h3>
+    //         {text}
+    //       </h3>
+    //     );
+    //   }
+    // };
+
+    // // 동일한 함수를 빠르게 작성하는 방법
+    // // 람다 수식으로 짧게 작성
+    // function Number_Lamda({ text }) {
+    //   return text % 2 === 0 ? <h3>{text}</h3> : <h5>{text}</h5>;
+    // }
+
+    // const test_num1 = 2;
+    // const test_num2 = 5;
+
+    // const element = (
+    //   <>
+    //     <Number text={test_num1} />
+    //     <Number text={test_num2} />
+    //   </>
+    // )
+
+    // // ReactDOM.render(element_check, rootElement);
+    // ReactDOM.render(element, rootElement);
+
+    // 특정 값이 true인지 확인 후, true하면 해당 값에 대한 변화를 주는 함수
+    function Check_True({ selected, text }) {
+      return selected ? <h1>{text}</h1> : <h3>{text}</h3>;
+    }
+
+    const test_if_true1 = "Hello";
+    const test_if_true2 = "안녕하세요";
+    const test_if_true3 = "bom dia";
+
+    // // 일반적으로 활용
+    // const element = (
+    //   <>
+    //     <Check_True text={test_if_true1} />
+    //     <Check_True text={test_if_true2} selected={true} />
+    //     <Check_True text={test_if_true3} />
+    //   </>
+    // )
+
+    // 반복문 및 수식을 활용할 때 : map을 활용
+    const element = (
+      <>
+      {
+        ([1,2,3,4,5,6,7,8,9,10].map((number) => (
+          <Check_True 
+          className="title"
+          key = {number} // map을 사용할 때는 반드시 key를 unique하게 지정한다.
+          text={number} 
+          selected={number%2 === 0} />
+        ))
+        )
+    }
+      </>
+    )
+
+   ReactDOM.render(element, rootElement);
+
+  </script>
+
+</body>
+
+</html>

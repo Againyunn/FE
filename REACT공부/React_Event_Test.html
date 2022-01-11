@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- REACT Source -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- babel Source -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root">
+    </div>
+
+    <script type="text/babel">
+        // 일반 활용
+        // const rootElement = document.getElementById("root")
+        // const element = <button onClick={() => alert("pressed")} onMouseOut={() => alert("Bye")}>Press</button>
+        // ReactDOM.render(element, rootElement);
+
+        // 객체 활용(불필요한 반복 최소화하기 위해 노력하자)
+        const rootElement = document.getElementById("root")
+        const handClick = () => alert("pressed")
+        const handleMouseOut = () => alert("Bye")
+        const element = <button onClick={handClick} onMouseOut={handleMouseOut}>Press</button>
+        ReactDOM.render(element, rootElement);
+    </script>
+
+    <div id="search_bar"></div>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById("root");
+
+        const state = { keyword: "", typing: false, result: "" };
+
+        const App = () => {
+            function handChange() {
+                setState({ typing: true, keyword: event.target.value });
+            }
+
+            function handleClick() {
+                setState({
+                    typing: false,
+                    result: `we find results of ${state.keyword}` // '가 아닌 `를 사용해야 한다.(타 언어에 익숙하면 주의!)
+                });
+            }
+            
+            return (
+                <>
+                    <input onChange={handChange} />
+                    <button onClick={handleClick}>search</button>
+                    <p>{state.typing ? `Looking for ${state.keyword}...`: state.result}</p>
+                </>
+            );
+        };
+
+        function setState(newState) { // setter와 유사 역할 수행
+            Object.assign(state, newState); // Object.assign 기존의 값에 변경된 값을 입력한다는 의미로 setter함수와 유사
+            render(); 
+        }
+
+        function render() { // 전역변수 state의 값을 변경 한 뒤, 프로그램(html 및 전체 JS함수들)에 적용하기 위해 함수로 처리 -> JS는 함수가 선언될 때의 변수 및 함수 상태 그대로 유지된다.
+            ReactDOM.render(<App />, rootElement);
+        }
+
+        render();
+
+    </script>
+
+</body>
+
+</html>
