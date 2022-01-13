@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root">
+    </div>
+
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .blue {
+            background-color: #008CBA;
+        }
+
+        /* Blue */
+        .red {
+            background-color: #f44336;
+        }
+
+        /* Red */
+        .black {
+            background-color: #e7e7e7;
+            color: black;
+        }
+
+        /* Gray */
+        .gray {
+            background-color: #555555;
+        }
+
+        /* Black */
+    </style>
+
+    <script type="text/babel">
+
+        // props = { className , style, children}; 등이 포함된다. 이때 children은 여럿 가능
+        // 만약에 HTML tag의 각 props의 인자들을 직접 명시 안하고 ...rest 로 찍으면 따로 언급한 props의 요소 외의 나머지는 모두 ...rest의 항목으로 자동 적용된다.
+        // 중첩된 값이 입력될 경우, 마지막에 입력된 prop가 주도권을 잡는다.
+        function Button({className,color, style, ...rest}){
+            return( // 아래의 className이 빈 값이면 아무값을 입력x 하고, 빈값이 아니면 해당 class의 값을 반환
+            <button 
+            className={`button ${className === "" ? "" :` ${className}` }`} 
+            style={{ backgroundColor: color, borderRadius: 8, ...style }}
+            {...rest}
+            /> 
+            
+            )}
+
+        const rootElement = document.getElementById("root");
+
+        const element = (
+            // 가능하면 JSX로 사용할 때는 class 이름 그 자체를 사용하기보다, className을 사용(기존의 html 태그와 충돌방지용)
+            <>
+                <Button style= {{ borderRadius: "50%"}}>Green</Button>
+                <Button className="blue" style={{ borderRadius: 8}}>Blue</Button>
+                <Button className="red">Red</Button>
+                <Button className="black">Gray</Button>
+                <Button className="gray">Black</Button>
+
+            </>
+        );
+    
+    ReactDOM.render(element, rootElement);
+    </script>
+
+</body>
+
+</html>

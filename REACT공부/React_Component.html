@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- REACT Source -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- babel Source -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="search_bar"></div>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById("search_bar");
+
+        // custom hook 만들기(함수 생성을 통해)
+        // useEffect의 불필요한 반복을 줄이기 위한 함수 생성 → 만약에 함수처리를 안하면, keyword / result 과 같은 각각의 항목마다 useEffect를 사용해야 한다.
+        function useLocalStorage(itemName, value = "") {
+            const [state, setState] = React.useState(() => {
+                return window.localStorage.getItem(itemName) || value; // 2번째 인자 값이 없다면, 빈칸이 적용 or 2번째 인자 값으로 false를 입력받으면
+            });
+
+            React.useEffect(() => 
+            {
+                console.log("effect");
+                window.localStorage.setItem(itemName, state);
+            }, [state] ) 
+
+            return [state, setState]; // 배열 형태로 진행
+        }
+
+        // useState: 글자, 배열, 객체 뭐든 넣을 수 있다.
+        // component가 생성될 때 내부의 모든 값은 초기화된다.
+        // 즉 useState() 안의 값이 초기값이다.
+        const App = () => {
+            // //React.useState를 "array"형식으로 표현
+            // const [keyword, setKeyword] = React.useState("");
+
+            // //React.useState를 각 상수로 나누어 표현(위와 아래 표현은 모두 동일한 기능 수행)
+            // const keywordState = React.useState("");
+            // const keyword = keywordState[0];
+            // const setKeyword = keywordState[1];
+
+            // // local storage에 저장된 데이터를 반환하여 다시 불러오기
+            // // 그러나, local storage에서 데이터를 매번 물러보고 다시 render하는 비효율이 지속적으로 발생 → 처리 속도가 느려질 수 있다.
+            // // 따라서 local storage에서 데이터를 호출하는 경우엔 render를 먼저 실행(창이 먼저 켜지게)하고 나중에 localstorage의 값을 불러온다.
+            // const [keyword, setKeyword] = React.useState(
+            // () => {
+            //     console.log("initialize");
+            //     return window.localStorage.getItem("keyword");
+            // }
+            // )
+
+            // // 개별 side effect 활용
+            // const [keyword, setKeyword] = React.useState(""); 
+            // const [result, setResult] = React.useState("");
+            // const [typing, setTyping] = React.useState(false); // 변화를 주어, 반환 값이 달라지게 만들 부분 
+            
+
+            // 함수로 반복 최소화한 side effect이용
+            const [keyword, setKeyword] =useLocalStorage("keyword");
+            const [result, setResult] = useLocalStorage("");
+            const [typing, setTyping] = useLocalStorage(false);
+
+            console.log("render")
+
+
+            // // useEffect: 특정 값이 바뀔 때만 이를 확인해서 변경사항을 적용하는 방법
+            // React.useEffect(() => 
+            // {
+            //     console.log("effect");
+            //     window.localStorage.getItem("keyword", keyword);
+            // }, [keyword] ) // keyword가 바뀌면 localStorage의 값이 변경(useEffect 실행)
+
+            
+
+            function handChange() {
+                window.localStorage.setItem("keyword", event.target.value);
+                setKeyword(event.target.value);
+                setTyping(true);
+            }
+
+            function handleClick() {
+                setTyping(false);
+                setResult(`We find result of ${keyword}`);
+            }
+
+            return (
+                <>
+                    <input onChange={handChange} value={keyword}/>
+                    <button onClick={handleClick}>search</button>
+                    <p>{typing? `Looking for ${keyword}...`: result }</p>
+                </>
+            );
+        };
+
+        ReactDOM.render(<App />, rootElement);
+    </script>
+</body>
+</html>

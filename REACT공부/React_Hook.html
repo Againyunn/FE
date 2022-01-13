@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- REACT Source -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- babel Source -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="search_bar"></div>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById("search_bar");
+
+        // ***** 향후에 hook을 활용한 기능 구현 시 우선 순위를 고려해서 설계 필요
+        // hook 실행의 각 메서드 별 우선 순위:
+        // 1순위: 웹 페이지의 render
+        // 2순위: child의 useEffect발동
+        // 3순위: 외부의 useEffect발동(html 태그 내의 child 외부에 정의된 동작)
+        //      따라서, 외부의 useEffect에 부여한 기능이 가장 늦게 실행된다.
+        
+        const Child = () => {
+            const [text, setText] = React.useState(() => {
+                console.log("Child useState");
+                return ""; 
+            });
+
+            React.useEffect(() => {
+                console.log("Child useEffect, text");
+            },[text]);
+
+
+            function heandleChange(event) {
+                setText(event.target.value);
+            };
+
+            const element = (
+                <>
+                    <input onChange={handleChange} />
+                    <p></p>
+                </>
+            );
+
+
+            console.log("Child render end");
+            return element;
+        };
+
+        const App = () => {
+            console.log("App render start");
+            const [show, setShow] = React.useState(() => {
+
+                console.log("App useState");
+                return false;
+            });
+
+            React.useEffect(() => {
+                console.log("App useEffect, [show]")
+
+                return () =>{
+                    console.log("App useEffect [Clean Up], [show]")
+                }
+            }, [show]);
+
+            function handleClick() {
+                // // if문을 활용한 일반적인 방법
+                // setShow(true);
+                // if(show){
+                //     setShow(false); 
+                // }
+                // else{
+                //     setShow(true);
+                // }
+
+                // React useState의 특성: 첫번째 이자로 이전 값으로 받은 값을 포함하고 있다. 
+                setShow((prev) => !prev); // 첫번째 인자인 prev를 호출해서 값을 반대로 반환
+            }
+
+
+            return (
+                <>
+                    <button onClick={handleClick}>Search</button>
+                    {show ?    // show 값이 true이면 값을 반환한다
+                        // (
+                        //     <>
+                        //         <input />
+                        //         <p></p>
+                        //     </>
+                        // ) : // show 값이 false이면 값을 반환하지 않는다
+
+                        <Child /> : // 위의 input과 <p>를 포함하고 있는 Child함수를 입력(Child 자체가 미리 생성되면 불필요하게 매번 input과 <p>의 반복 생성을 줄일 수 있다.)
+                        null
+                    }
+                </>
+            );
+        };
+
+        ReactDOM.render(<App />, rootElement);
+        console.log("App render end");
+    </script>
+</body>
+
+</html>

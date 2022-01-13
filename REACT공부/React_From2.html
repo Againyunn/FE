@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- REACT Source -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- babel Source -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById("root");
+
+        const App = () => {
+
+
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                const phoneNumber = event.target.elements.phone.value; //객체의 트리 항목에 해당하는 값을 반환
+
+
+                // if(phoneNumber.startsWith(0)){ // startsWith(변수) : 해당 변수로 시작하는 지 검증 후 T/F반환
+                //     alert("Good");
+                // }
+                // else{
+                //     alert("Bad");
+                // }
+
+                alert(phoneNumber); // React식으로 변경 (App 안에서 phoneNumber라는 컴포넌트를 관리)
+            };
+
+            const [phoneNumber, setPhoneNumber] = React.useState(""); // React 식으로 변경
+            const [message, setMessage] = React.useState("");
+
+
+            const handleChange = (event) => {
+                event.preventDefault();
+                const phoneNumber = event.target.value; // 검증을 input 태그 내부에서 시행하므로, form에서 event를 검증할 때와 다르게 적용한다.
+
+
+                if (phoneNumber.startsWith(0)) { // startsWith(변수) : 해당 변수로 시작하는 지 검증 후 T/F반환
+                    setMessage("Phone number is valid");
+                    setPhoneNumber(event.target.value); // input 값에 입력되는 데이터(value)를 직접 가져오기
+                }
+                else if(event.target.value.length ===0){
+                    setPhoneNumber(""); // null을 넣으면 안된다! → "" 와  null 은 다르다.(null을 넣게 되면 setPhoneNumber을 초기화하는 역할을 하여 브라우저의 모든 값이 사라진다.)
+                    setMessage("Phone number should start with 0");
+                }
+                else {
+                    setPhoneNumber(""); // null을 넣으면 안된다! → "" 와  null 은 다르다.(null을 넣게 되면 setPhoneNumber을 초기화하는 역할을 하여 브라우저의 모든 값이 사라진다.)
+                    setMessage("Phone number should start with 0");
+                }
+            }
+
+            return (
+                <>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="phone">Phone Number:</label>
+                        <br />
+                        <input id="phone" name="phone" onChange={handleChange} value={phoneNumber}/>
+                        <p>{message}</p>
+                        <br />
+                        <br />
+                        <button type="submit" value="sumit" disabled={phoneNumber.length <= 0 || message === "Phone number should start with 0"}>submit</button>
+                        <br/>
+                        <p>{phoneNumber}</p>
+                    </form>
+                </>
+            );
+        };
+        ReactDOM.render(<App />, rootElement);
+
+    </script>
+</body>
+
+</html>
