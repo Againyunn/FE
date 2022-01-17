@@ -1,0 +1,421 @@
+CSS란?  Cascading Style Sheets
+ 
+기본적인 문법:
+    Selector {
+        Property:value;
+    }
+
+    ex) h1 {
+        color: skyblue;
+        font-size: 12px;
+    }
+
+selecter가 될 수 있는 것들:
+1) HTML Tag
+    ex) p{
+        text-align: center;
+        color: red;
+    }
+2) HTML Id
+    ex) #profile{
+        text-align: center;
+        color: red;
+    }
+3) HTML Class
+    3-1) HTML 파일 내의 모든 tag 중 class명이 .profile인 모든 엘리먼트에 사용할 class 정의
+        ex) .profile{
+            text-align: center;
+            color: red;
+        }
+
+    3-2) HTML tag 중 특정 tag의 class에만 사용할 class 정의
+        ex) p.profile{
+            text-align: center;
+            color: red;
+        }
+
+    * HTML tag은 여러 개의 class를 상속받을 수 있다.
+        ex) .profile{
+            text-align: center;
+            }
+            .large{
+                text-align: center;
+            }
+        
+            <p class="profile large">Hello world</p>  //두가지 class 모두 p 태그에 적용된다.
+
+* 공통된 여러 개의 selector 한 번에 정의하기
+ex) h1, h2, p{
+        text-align: center;
+        color: red;
+    }
+        
+
+CSS 소스 처리
+1) external CSS
+- <link>로 처리
+    ex) <head>
+            <link rel="stylesheet" href="파일/링크 명"/>    //rel : relationship
+
+2) internal CSS
+- <head> 하위의 <style>에 정의
+
+3) inline CSS
+- HTML tag에 style로 직접 입력
+
+
+* CSS 색깔지정은 html 공부 내용 참고
+색의 표현 유형 차이:
+1) RGB value:  Red + Green + Blue 의 3원색 조합으로 색을 만들어내는 원리
+    표시형식: rgb(숫자, 숫자, 숫자)
+2) HEX value: RGB형식으로 색을 표시 하되, 숫자 조합으로 색을 표현
+    표시형식: #rrggbb → #숫자6자리
+
+
+Background 처리
+- 종류
+    1) Background-color :배경 색
+    2) Background-image :배경 이미지
+    3) Background-repeat    :반복되는 패턴 배경
+    4) Background-attachment    :특정 위치에 이미지 고정
+        fixed / scoll 중 선택
+    5) Background-position  :배경화면의 위치    
+        배경화면이 화면에 위치할 특정 지점 지정
+    6) Background
+
+    ex) <style>
+            body{
+                background-image: url("img_tree.png");
+                background-repeat: no-repeat;
+                background-position: right top;
+                margin-right: 200px;
+                background-attachment: scoll;
+            }
+
+Border 처리
+- 종류
+    1) dotted : 작은 점선
+    2) dashed : 큰 점선
+    3) solid : 칸(일반적인 줄선)
+    4) double : 이중선
+    5) outset : 볼록 선
+    6) inset : 오목 선
+    7) none : 선 없음
+    8) hidden : 선 숨김
+
+    ex1) 옆에만 선이 초록색 선이 생기도록 경계 만들기 
+        <style>
+            .profile{
+                /*border-style: solid;*/
+                border-top-style: hidden;
+                border-rigth-style: solid;
+                border-left-style: solid;
+                border-buttom-style: hidden;
+                border-width: 2px;
+                border-color: green;
+            }
+        </style>
+
+    ex2) 그래프처럼 표현 
+        <style>
+            .profile{
+                border-left: 10px solid green;
+                background-color: lightgrey;
+            }
+        </style>
+    
+Margin/padding 처리:
+- margin: 엘리먼트 간의 외부 간격
+- padding: 엘리먼트 내부에서 가장자리와의 간격
+- 종류
+    1) margin-top / padding-top: 위쪽 여백만 지정
+    2) margin-right /padding-right: 오른쪽 여백만 지정
+    3) margin-bottom /padding-bottom : 아래 여백만 지정
+    4) margin-left /padding-left: 왼쪽 여백만 지정
+    5) margin /padding:
+        ex)  위/오/왼/아래 여백 지정
+            p{
+                margin: 25px 50px 75px 100px;
+            }
+
+        ex)  위/오(왼)/아래 여백 지정
+            p{ 
+                margin: 25px 50px 75px
+            }
+        
+        ex) 위(아래)/오(왼) 여백 지정
+            p{
+                margin: 25px 50px
+            }
+
+* margin/padding끼리 충돌이 발생하면, 충돌 값들 중 "가장 큰 값"을 기준으로 삼고 충돌을 해결한다.(작은 값을 무시)
+
+text처리
+text alignment
+종류:
+    1) center/ left / right
+    2) justify  :줄 맞춤
+    ex) h1{
+        text-align: justify
+    }
+
+text decolation
+종류:   
+    1) overline : 글씨 위에 줄
+    2) line-through : 글씨 관통하는 줄
+    3) underline : 글씨 아래 밑줄
+    ex) h1{
+            text-decolation: underline;
+        }
+
+text transform
+- 대/소문자 변환
+- 종류:
+    1) uppercase : 대문자 변환
+    2) lowercase : 소문자 변환
+    3) capitalize : 어절 단위로 대문자 변환
+    ex) p{
+        text-transform: capitalize;
+        }
+
+text indentation
+- 글씨 간격
+- 종류:
+    1) text-indent: 들여쓰기 간격 조절
+    2) letter-spacing: 글씨 간의 간격 조절(+는 멀어지게, -는 좁아지게)
+
+text shadow
+- text-shadow
+- 형식: text-shadow: 그림자가로길이 그림자세로길이 (blur효과) (색) ;
+    ex) p1{
+        text-shadow: 2px 2px 5px red;
+    }
+
+font처리
+* html 복습 부분 참고
+
+link처리
+- 종류:
+    1) a:link       :일반 상태일 때
+    2) a:visited    :클릭 이후, 방문한 링크의 색
+    3) a:hover      :마우스 이동 시 변화할 색
+    4) a:active     :동작 시 변화할 색
+
+    ex) <style>
+            a:hover{
+                color:red;
+                text-decoration: underline;
+                font-familly: 폰트명; 
+                ...
+            }
+
+position처리
+- 종류:
+    1) static   :가장 일반적인 상태
+    2) relative :화면에 따라 설정한 상대적 위치로 배치(relative가 아닌 콘텐츠는 신경x)
+    3) fixed    :화면의 특정 위치에 고정(scroll이 움직여도 해당 위치에 고정)
+    4) absolute :화면에 상관없이 특정 위치에 고정
+
+overflow처리
+- 종류:
+    1) visible :일반적인 상태(해당 콘텐츠의 모든 요소가 노출)
+    2) hidden  :특정 영역이 아닌 경우, 콘텐츠를 잘라서 노출(보이는 영역 외에 조정 불가능)
+    3) scroll  :scroll을 통해 노출되지 않은 영역 확인 가능, 항상 scrollber를 노출
+    4) auto    :scroll처럼 노출되지 않은 영역을 확인할 수 있지만, 움직일 때만 옆에 scrollber를 노출
+
+페이지 내 배치
+float처리
+- 종류:
+    1) left     :대상을 타 엘리먼트 왼쪽에 위치 
+    2) right    :대상을 타 엘리먼트 오른쪽에 위치 
+    3) none     :이미지와 동일한 행을 비움
+
+clear처리
+- 종류:
+    1) none     :일반적인 상태(clear 값이 없는 상태)
+    2) left     :float된 엘리먼트 왼쪽으로 대상을 밀어낸 위치로 배열
+    3) right    :float된 엘리먼트 오른쪽으로 대상을 밀어낸 위치로 배열
+    4) both     :float된 엘리먼트 양쪽으로 대상을 밀어낸 위치로 배열
+
+ex) <style>
+        .divStyle{
+            overflow: auto;
+        }
+
+        .imgStyle{
+            float: left;
+        }
+
+        .pStyle{
+            clear: right;
+        }
+    </style>
+
+배치
+center an image
+- 이미지를 페이지 중앙에 위치시키고 싶을 경우
+- 활용: margin-left: auto; margin-right: auto; display: block;
+
+combinators
+종류:  
+    1) 빈칸     :여러 개의 동등한 selector선언
+    2) >        :좌 > 우 일 때, 좌(부모) 우(자식)의 상속관계 지정
+    3) +        :좌 + 우 일 때, "좌" 엘리먼트 뒤에 바로 "우" 엘리먼트가 놓이면 적용되는 기능
+    4) ~        :좌 ~ 우 일 때, "좌" 엘리먼트 부터 "우" 엘리먼트 사이에 놓인 모든 엘리먼트에 광역적으로 적용되는 기능
+
+opacity
+- 엘리먼트에 blur 효과 적용(0.0~1.0 까지 존재_숫자가 클 수록 선명함)
+- 활용
+    1) 동적기능 부여
+    ex) <style>
+            img{
+                opacity: 0.5;
+            }
+            img:hover{
+                opacity:1.0;
+            }
+    
+    2) 색감 조절(채도 조절)
+    ex) <style>
+            div.first{
+                background: rgba(숫자, 숫자, 숫자, 0.1);  /* opacity 0.1적용 */
+            }
+            div.second{
+                background: red;
+                opacity: 0.5    /* opacity 0.5적용 */
+            }
+
+navigation bar
+1) vertical Navbar
+    ex) <style>
+            ul{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 25%;
+                background-color: white;
+                position: fixed;
+                height: 100%
+                overflow: auto;
+            }
+
+            li a{
+                display: block;
+                color: white;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+            li a.action{
+                background-color: green;
+                color: white;
+            }
+
+            li a:hover:not(.active){    // :not(.action)    action class인 경우에는 적용x라는 명령어
+                background-color: gray;
+                color: white;
+            }
+        </style>
+        <body>
+            <ul>
+                <li><a class="active" href="링크">Home</a></li>
+                <li><a href="링크2">News</a></li>
+                <li><a href="링크3">Contact</a></li>
+            </ul>
+        </body>
+
+2) horizental Navbar
+    ex) <style>
+            ul{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 25%;
+                background-color: white;
+                position: fixed;
+                height: 100%
+                overflow: auto;
+            }
+
+            li {
+                float: letf;
+                border-right: 1px solid darkgray;
+            }
+
+            li:last-child{              //li 엘리먼트의 가장 마지막 칸에 대한 CSS
+                border-right: none;
+            }
+
+            li a{
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active){    // :not(.action)    action class인 경우에는 적용x라는 명령어
+                background-color: black;
+                color: white;
+            }
+
+            .active{
+                background-color: green;
+            }
+        </style>
+        <body>
+            <ul>
+                <li><a class="active" href="링크1">Home</a></li>
+                <li><a class="active" href="링크2">News</a></li>
+                <li><a class="active" href="링크3">Contact</a></li>
+                <li style="float:right;"><a href="링크1">About</a></li>
+            </ul>
+        </body>
+
+dropdown
+- 특정 버튼(div, button 등을 누르면 선택할 수 있는 창이 뜨는 형태의 엘리먼트)
+    ex) <style>
+            .dropbtn{
+                ...
+            }
+
+            .dropdown{
+                ...
+                position: relative;
+                display: inline-block;
+                ...
+            }
+
+            /* 컨테이너 역할을 할 <div>는 dropdown의 요소들이 필요 */
+            .dropdown-content{
+                ...
+                display: none;
+                position: absolute;
+                ...
+            }
+
+            /* dropdown에 실제로 포함될 내용물(default = hidden) */
+            .dropdown-content a{
+                ...
+                display: block;
+                ...
+            }
+
+            /* dropdown 내부의 <a> */
+            .dropdown-content a:hover{
+                ...
+            }
+
+            .dropdown:hover .dropdown{
+                ...
+            }
+
+        </style>
+        <div class="dropdown">
+            <button class="dropdown">Dropdown</button>
+            <div class="dropdown-content">
+                <a href="링크">Link 1</a>
+                <a href="링크">Link 2</a>
+                <a href="링크">Link 3</a>
+            </div>
+        </div>
