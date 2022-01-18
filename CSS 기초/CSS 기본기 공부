@@ -419,3 +419,201 @@ dropdown
                 <a href="링크">Link 3</a>
             </div>
         </div>
+
+Attribut selector
+- 기능: Class 선언 시, 특정 HTML과 element 조합을 직접 지정
+- 종류:
+1) [attribute]selector
+    ex) <style>
+            a[target]{
+                background-color: yellow;
+            }
+        </style>
+
+2) [attribute="value"]selector  
+    ex) <style>
+            a[target="_blank"]{
+                background-color: yellow;
+            }
+        </style>
+    
+3) [attribute~="value"]
+    ex) <style>
+            [title~="flower"]{
+                border: 5px solid yellow;
+            }
+
+form
+- 활용: input[type="text"]    input[type="password"]    input[type="number"]    등을 활용할 수 있다.
+
+icon/img CSS로 적용하기
+    ex) <style>
+            input[type="text"]{
+                background-color: white;
+                backgorund-image: url('이미지링크') 또는 파일명;
+                backgorund-position: 10px 10px;
+                backgorund-repeat: no-repeat;
+                padding-left: 40px;
+            }
+        </style>
+
+animation 활용(크기 조절)
+    ex) <style>
+            input[type="text"]{
+                transition: width 0.4s ease-in-out;
+            }
+            input[type="text"]:focus{
+                width: 100%;
+            }
+        </style>
+
+website layout
+유형:  
+    1) 1-column :주로 모바일에 사용
+    2) 2-column :주로 태블릿/노트북에 사용
+    3) 3-column :컴퓨터 모니터에만 사용
+
+    ex) 동일하게 33.3:33.3:33.3으로 분할할 경우
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            *{                  /*모든 값(와일드카드) */
+                box-sizing: border-box;
+            }
+
+            body{
+                margin: 0;
+            }
+
+            .column{
+                float: left;
+                width: 33.33%;
+                padding: 15px;
+            }
+
+            .row:after{
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            @media screen and (max-width:600px){
+                .column{
+                    width: 100%;
+                }
+            }
+        </style>
+        <body>
+            <div="row">
+                <div clsss="column">
+                </div>
+                <div class="column">
+                </div>
+                <div class="column">
+                </div>
+            </div>
+        </body>        
+    
+    ex) 분할 비율이 다를 경우(25% 50% 25%로 분할)
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            *{                  /*모든 값(와일드카드) */
+                box-sizing: border-box;
+            }
+
+            body{
+                margin: 0;
+            }
+
+            .column{
+                float: left;
+                padding: 15px;
+            }
+
+            .column.side{
+                width: 25%;
+            }
+
+            .column.middle{
+                width:50%;
+            }
+
+            .row:after{
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            @media screen and (max-width:600px){
+                .column.side, .column.middle{
+                    width: 100%;
+                }
+            }
+        </style>
+        <body>
+            <div="row">
+                <div clsss="column side">
+                </div>
+                <div class="column middle">
+                </div>
+                <div class="column side">
+                </div>
+            </div>
+        </body>
+
+CSS units
+- 각 객체들은 모두 "크기(길이)"를 갖는다.
+    ex) 만약 0px; 0cm; 0%; 등으로 크기(길이)를 0으로 지정하면 해당 객체(엘리먼트)를 생략할 수 있다.
+
+- 길이의 종류:
+1) absolute lengths
+    cm	centimeters
+    mm	millimeters
+    in	inches (1in = 96px = 2.54cm)
+    px*	pixels (1px = 1/96th of 1in)
+    pt	points (1pt = 1/72 of 1in)
+    pc	picas (1pc = 12 pt)
+
+
+2) relative lengths
+    em     	font-size와 상대적으로 비례 (2em means 2 times the size of the current font)	
+    ex  	Relative to the x-height of the current font (rarely used)	
+    rem	    root 엘리먼트의 font-size와 상대적으로 비례	
+    vw	    viewport의 width의 1%에 상대적으로 비례	
+    vh	    viewport의 height의 1%에 상대적으로 비례		
+    vmin	viewport's의 부분 중 작은 요소에 상대적으로 비례 (여러 부분으로 화면을 분할할 때 사용)	
+    vmax	viewport's의 부분 중 큰 요소에 상대적으로 비례 (여러 부분으로 화면을 분할할 때 사용)	
+    %	    부모 엘리먼트의 크기에 상대적으로 비례
+
+CSS의 specificity hierarchy
+- CSS의 선언 시, HTML tag / class / id / tag + class / tag + id / class + id / tag + class + id 등 여러 형태의 구체적인 계층 조합이 나올 수 있다. 
+- 우선순위 정리
+    * 최소가 0이고 최대가 1,000이다.
+
+    
+    Selector	                Specificity Value	Calculation
+    p	                        1	                1
+    p.test	                    11	                1 + 10
+    p#demo	                    101	                1 + 100
+    <p style="color: pink;">	1000	            1000
+    #demo	                    100	                100
+    .test	                    10	                10
+    p.test1.test2	            21	                1 + 10 + 10
+    #navbar p#demo	            201	                100 + 1 + 100
+    *	                        0	                0 (the universal selector is ignored)
+
+!important
+- specificity hierarchy의 우선순위 공식을 모두 무시하고, 해당 CSS를 최우선 순위로 지정
+- 만약 여러 개의 !important가 사용되었다면, 마지막에 선언된 !important를 가진 CSS가 앞서 선언된 !important CSS를 override한다.
+    ex) <style>
+            p {
+                backgorund-color: red !important;
+            }
+        </style>
+
+CSS의 math functions
+- 종류와 기능
+    Function	Description
+    calc()	    () 안에 선언된 수끼리 사칙연산 후 결과를 반환 + - * / 수행가능
+    max()	    객체들 중 수치적으로 가장 큰 값을 반환
+    min()	    객체들 중 수치적으로 가장 작은 값을 반환
+
