@@ -1,0 +1,29 @@
+JS 기본적인 활용
+
+JS는 html과 연결될 때, class 단위가 아니라, 특정 HTML element에 적용할 때 주로 "getElementById("아이디 명")"의 형태로 "id"기준으로 HTML element를 호출한다.
+그러므로, head / body 어디에 JS코드가 위치하든 <script>  </script> 태그 사이에 코드들을 정의하고 getElementById("아이디 명")으로 HTML element와 연결한다.
+
+output
+- display할 수 있는 방법:
+    1) innerHTML        :HTML 엘리먼트 안에 특정 내용을 JS 코드로 직접 입력
+    2) document.write() :해당 코드가 위치한 곳에 JS 코드로 직접 입력 → <script> 가 body에 선언되었을 때도 사용할 수 있으며, 여러 HTML tag에 이어서 JS코드가 선언된 위치에 값을 바로 반환
+        * HTML 엘리먼트가 생성 된 후 document.write()을 사용하면 생성된 HTML 의 모든 엘리먼트가 삭제되고 JS코드로 작성한 내용만 표기된다.(ex : onclick 메서드와 같은 애트리뷰트 이용 시)
+
+    3) window.alert()   :브라우져의 "알림창"으로 JS코드로 입력된 값을 반환
+    4) console.log()    :브라우져의 "콘솔 창"으로 JS코드로 입력된 값을 반환
+
+* JS는 python, java, C등과 다르게 자체적인 "print()"메서드가 없다.
+    window.print() 는 웹 페이지를 인쇄한다는 명령어
+
+JS 주요 제어자
+    Keyword	    Description
+    var	        변수 재선언 가능, 재할당 가능(orriding 가능)
+    let	        변수 재선언 불가, 재할당 가능(orriding 가능)
+    const	    변수 재선언 불가, 재할당 불가능
+    if	        조건문
+    switch	    switch문
+    for	        반복문
+    function	함수 정의
+    return	    함수 종료 및 반환 값
+    try	        예외처리 블럭
+
