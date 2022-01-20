@@ -27,3 +27,193 @@ JS 주요 제어자
     return	    함수 종료 및 반환 값
     try	        예외처리 블럭
 
+variables
+* 블럭 선언 불가능
+재선언 가능
+    ex) var x = 5; var x = 6; 
+
+재할당 가능
+    ex) var x = 0; x =5;
+
+let
+* 블럭으로 선언가능 {} 사용가능
+재선언 불가능  
+    ex) let x = 6; let x = 7;      //Syntax error 발생
+
+재할당 가능
+    ex) let x = 0; x = 5;       
+
+const
+* 블럭으로 선언가능 {} 사용가능
+재선언 불가능
+재할당 불가능 
+* 처음 선언할 때의 형태 그대로만 사용가능
+
+연산자 및 증감자는 JAvA와 동일(축약 연산자도 동일)
+
+data types
+python처럼 변수의 데이터형을 프로그램이 알아서 해석
+
+주요 특징:
+    1) 타 언어와 마찬가지로, 숫자+String(문자/문자열) = 모두 문자열로 바꾸어 연산한다.
+    2) 연산에 순서가 존재(동일한 내용이더라도 순서가 다르면 결과가 달라질 수 있다.)
+        ex) 
+            경우1: let x = 16 + 4 + "Hello"     //"20Hello"
+            경우2: let x = "Hello" + 16 + 4     //"Hello164"
+        
+function
+1) 함수 자체로 선언하기
+    function myWorld(a, b){
+        ...
+        return 
+    }
+2) 변수에 함수 생성
+    const myWorld=(a, b) => {
+        ...
+        return
+    }
+
+object(객체)
+* 일반적으로 "객체" 선언 시에는 const를 사용한다.
+
+* 객체 내의 여러 값들을 지정할 경우 python의 dictionary와 유사하게 선언(python → car = {type: "Fiat", model: "500", color: "white"})
+자료형 변수명 = {name1:"value1", name2:"value2"...}
+ex) 
+    const car = {type: "Fiat", model: "500", color: "white"};
+
+accessing object properties에 접근하는 방법
+방법1:
+    objectName.propertyName
+
+방법2:
+    objectName["propertyName"]
+
+* 타 언어와 다른 점은 "객체(상수, 변수)"에 "함수"를 담을 수 있다는 점
+ex) 
+    cosnt oneMan={
+        firstName: "John",
+        lastName: "Joe",
+        id: 0523;
+        fullName : fuction(){
+            return this.firstName + " " + this.lastName;    // this를 통해서 해당 객체 내부에 선언된 변수를 재귀대명사처럼 지칭가능(Java의 this와 동일)
+        }
+    }
+
+accessing object methods
+방법:
+    objectName.methodName()         //타 언어와 동일
+
+* 주의:
+    String, Number, Boolean 등의 객체의 데이터형을 변수에 선언하기x → 프로그램의 실행속도가 늦어지게 만들 수 있다.
+    ex) x = new String(); // 이런식으로 선언x
+
+
+HTML event 사용하기
+HTML tag 내부에서 사용:
+    <element event = "JS 코드"> 형식으로 사용
+
+자주사용하는 HTML events
+    Event	            Description
+    onchange	        html 엘리먼트가 바뀌었을 때
+    onclick	            html 엘리먼트를 클릭했을 때
+    onmouseover	        html 엘리먼트에 마우스를 올렸을 때
+    onmouseout	        html 엘리먼트에 마우스를 댔다가 떼었을 때
+    onkeydown	        사용자가 키보드 자판을 눌렀을 때
+    onload	            브라우져가 로딩을 다 끝냈을 때(페이지 생성을 다 끝냈을 때)
+
+string
+""와 ''를 모두 사용가능
+    ex) let a = "It's a apple.";
+
+길이 메서드
+    string객체.length       //Java와 동일
+
+인용문자 표기
+    Code	Result	Description
+    \'	    '	    Single quote
+    \"	    "	    Double quote
+    \\	    \	    Backslash
+
+escape sequences
+* html에서는 사용x, 주로 백그라운드 프로그램의 연산, 함수에 이용
+    Code	Result
+    \b	    Backspace
+    \f  	Form Feed
+    \n	    New Line
+    \r	    Carriage Return
+    \t	    Horizontal Tabulator
+    \v	    Vertical Tabulator
+
+string methods
+1) extracting string parts(string의 일부를 추출)
+    slice(start, end)
+        시작~ 끝까지의 "문자열 index"를 입력
+    
+    substring(start, end)
+        시작~ 끝까지의 "문자"를 입력(부문자열 입력)
+
+    substr(start, length)
+        시작의 indext와 길이(index길이)를 입력
+    
+2) replacing string content(string를 수정)
+    string문자열.replace("변경의 대상", "변경할 대상")
+    * replace 메서드는 해당 string의 원형을 변경하지 않는다. 변경된 것을 반환만 한다. 그러므로 반환된 객체를 받을 변수가 필요하다.
+    * 소문자/대문자의 형태로 동일하게 맞춰야 한다.
+    ex)
+        let text = "We'll take yellow";
+        let newText = text.replace("yellow", "skyblue")
+    * 정규식을 통해 조건을 구체화할 수 있다.
+    ex) 
+        let text = "We'll take yellow!";
+        let newText = text.replace("/yellow/g", "skyblue")  // /ge  : 뒤에 문자가 더 있는 경우로 제한
+
+3) 대/소문자 변경
+    toUpperCase()   :대문자로 변경
+    toLowerCase()   :소문자로 변경
+
+4) 공백 없애기
+    trim()      :해당 string 내부의 공백을 없앤다
+
+5) extracting string charactors(문자만을 추출)  
+    charAt(indexNum)
+        해당 인덱스에 해당하는 문자를 반환 
+
+    charCodeAt(indexNum)
+        해당 인덱스에 해당하는 문자의 unicode를 반환
+
+6) string split(문자열을 구분하여 배열로 저장)  
+    문자열.split("구분할 방식")
+        ex)
+            let nums= "0, 1, 2, 3, 4, 5";
+            const numsArray= nums.split(", ");
+            console.log(numsArray[1]);          // 1 반환           
+    
+        ex)
+            let hello="Hello";
+            const helloArray= hello.split("");
+            console.log(helloArray[1]);          // e 반환
+
+string search
+1) indextOf()
+    입력받은 문자열(문자)가 대상 문자열에서 몇 번째 index인지, 시작하는 index number를 반환(동일한 text가 여러 개 있으면 첫번째 text만 반환)
+    * 만약 -1이 반환되면 해당 text를 찾을 수 없는 상태(not found)
+    ex)     
+        let str = "Please locate where 'locate' occurs!"
+        str.indexOf("locate");
+
+2) lastIndexOf()
+    입력받은 문자열(문자)가 대상 문자열에서 몇 번째 index인지, 시작하는 index number를 반환(동일한 text가 여러 개 있으면 마지막 text만 반환)
+    * 만약 -1이 반환되면 해당 text를 찾을 수 없는 상태(not found)
+
+3) search()
+    indexOf와 거의 동일한 역할 수행
+
+4) match()
+    입력받은 문자와 동일한 문자가 해당 문자에 있는 지 확인하고 존재하면 입력받은 문자들 배열의 형태로 반환
+    ex) 
+        let text = "The rain in SPAIN stays mainly in plain."
+        text.match(/ain/g);             // ain,ain,ain
+
+5) includes()
+    
+    

@@ -607,7 +607,7 @@ CSSÀÇ specificity hierarchy
     ex) <style>
             p {
                 backgorund-color: red !important;
-            }
+            }  
         </style>
 
 CSSÀÇ math functions
