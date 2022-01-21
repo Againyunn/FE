@@ -874,13 +874,66 @@ maps
     object처럼 dictionary자료형 역할을 할 수 있는 자료형
     개별 [key: value] 쌍으로 구성
     형식:
-        ex)
+        ex) 직접선언
         const fruits = new Map([
             ["apples", 500],
             ["bananas", 300],
             ["oranges", 200]
         ]);
+
+        ex) 이후 추가
+        const fruits = new Map();
+
+        fruits.set("apples", 500);
+        fruits.set("bananas", 300);
+        fruits.set("oranges", 200);
+
+    메서드 종류
+        Method	        Description
+        new Map()	    map 생성
+        set()	        map의 key값과 value값 생성
+        get()	        map의 특정 key값과 value값을 가져와서 반환
+        delete()	    특정 key값을 입력받아, 해당하는 원소를 map에서 제거(key와 value 동시에 제거)
+        has()	        특정 key값을 입력받아, 해당하는 원소가 map에 존재하는 지 여부 확인 후 true/false 반환
+        forEach()	    map의 각 원소들을 반환(이때, key와 value 모두 각 원소들을 순회하며 반환) → 세부적으로 key, value 중 필요한 값을 선택 가능
+        entries()	    각 원소들을 순회하며 key와 value 모두 동시에 반환
+
+        Property	    Description
+        size	        map의 원소 수를 반환
     
 
+* objects vs maps
+    
+    	            Object	                            Map
+        Iterable	Not directly iterable	            Directly iterable
+        Size	    Do not have a size property	        Have a size property
+        Key Types	Keys must be Strings (or Symbols)	Keys can be any datatype
+        Key Order	Keys are not well ordered	        Keys are ordered by insertion
+        Defaults	Have default keys	                Do not have default keys
 
+typeOf
+    1) 값을 담을 수 있는 자료형:
+        string
+        number
+        boolean
+        object
+        function
+    
+    2) 객체인 자료형:
+        Object
+        Date
+        Array
+        String
+        Number
+        Boolean
+    
+    3) 값을 가질 수 없는 자료형:
+        null
+        undefined
+    
+논리연산자
+    형태    의미
+    &&      and
+    ||      or
+    !       not
 
