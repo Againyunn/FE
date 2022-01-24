@@ -930,10 +930,485 @@ typeOf
     3) 값을 가질 수 없는 자료형:
         null
         undefined
+
+
+error
+    try         :시도해볼 코드
+    catch       :error을 만났을 때 대처할 코드
+    finally     :결과에 상관없이 코드를 실행
+    throw       :개발자가 의도된 에러를 만들 때 실행
+
+    형식:
+        try{
+            시도할 코드
+        }
+        catch(err){
+            에러에 대처할 코드
+        }
     
-논리연산자
-    형태    의미
-    &&      and
-    ||      or
-    !       not
+    throw 사용법:
+    * String,   Number, Boolean, Object형태로 선언가능
+        throw "Too Big.";
+        throw 500;
+    ex)
+        <html>
+        <body>
+
+            <h2>JavaScript try catch</h2>
+
+            <p>Please input a number between 5 and 10:</p>
+
+            <input id="root" type="text">
+            <button type="button" onclick="myFunction()">Test Input</button>
+            <p id="p01"></p>
+
+            <script>
+                function myFunction() {
+                    const message = document.getElementById("p01");
+                    message.innerHTML = "";
+                    let x = document.getElementById("root").value;
+                    try { 
+                        if(x == "")  throw "empty";         //상황에 맞게 custom error를 정의
+                        if(isNaN(x)) throw "not a number";
+                        x = Number(x);
+                        if(x < 5)  throw "too low";
+                        if(x > 10)   throw "too high";
+                    }
+                    catch(err) {
+                        message.innerHTML = "Input is " + err;  //해당 error를 html로 보내서 출력
+                    }
+                    finally{
+                        document.getElementById("root").value="";   //error 유무에 상관없이 실행할 코드 정의(조회수 기록, 연산 등 수행 목적으로 쓰일 것으로 보임)
+                    }
+                }
+            </script>
+
+        </body>
+        </html>
+
+block Scope
+    let변수는 { } 밖에서 사용 불가능
+    var변수는 { } 밖에서 사용 가능
+
+    function 내에 선언된 모든 변수는 function 내에서만 사용 가능  
+    ex)
+        function myFunction(){
+            let pizzaName = "Cheese";
+        }   //함수 밖에서 pizzaName 변수 사용 불가능
+
+
+hoisting
+
+    1) var  
+    * var변수에 한하여 hoisting가능하다
+    특징: 변수들이 선언되기 전에 사용될 수 있다.
+    * 변수를 우선 사용한 뒤, 선언가능
+    ex) 
+        // 선언 전에 변수를 선제 사용
+        x = 5;  
+        elements = document.getElementById("root");
+        element.innerHTML = x;
+        // 변수의 후 선언
+        var x;
+
+    * 단 var이 hoisting 될 때에는 var에 값이 지정된 상태일 때만 가능하다.
+
+    2) let, const
+    * let과 const 두 변수들은 hoisting 사용이 불가능하다.
+
+strict mode
+    *JS의 자유로움으로 인하여 예상치 못한 error가 발생하는 것을 방지하기 위한 방법
+    ex)
+        "use strict";
+        myFunction();
+
+        function myFunction() {
+            y = 3.14;   // strict mode로 인해 선언되지 않은 변수y는 hoisting을 허용하지 않는다.(타 언어들처럼 엄격한 규칙을 가지게 된다.)
+        }
+    
+
+    strict mode에서 허용하지 않는 것:
+        1) hoisting
+        2) 변수/객체/함수의 삭제  delete 명령어
+        3) 중복된 변수의 사용
+        4) 0이 첫번째 자리로 오는 숫자
+        5) escape charactors
+        등..
+        더 많은 내용은 링크 참고 (https://www.w3schools.com/js/js_strict.asp)
+    
+arrow function
+    함수 선언의 축약형
+    
+    사용법의 차이
+    ex) 일반적 함수 선언
+        hello = function() {
+            return "Hello World.";
+        }
+    ex) arrow function
+        hello = () =>{
+            return "Hello World.";
+        }
+    
+    this 메서드의 인식 차이
+    ex) 일반적 함수 선언
+        hello = function() {
+            document.getElementById("root").innerHTML += this;      //this는 함수를 담은 외부의 객체를 지칭
+        }
+    
+    ex) arrow function
+        hello = () => {
+            document.getElementById("root").innerHTML += this;      //this는 함수를 가지고 있는 객체를 지칭
+        }
+
+class
+    형식:
+        class ClassName{        //함수 선언
+            constructor(){      //생성자 선언
+                ...
+            }
+        }
+    
+    ex)
+        class Car {
+            constructor(name, year) {   //입력받은 인자인 name과 year을 지칭
+                this.name = name;
+                this.year = year;
+            }
+        }
+    
+    1) constructor
+    * 생성자는 반드시 constructor라는 정확한 이름으로 기재해야 한다.
+    * 생성자는 객체가 생성되면 자동으로 실행
+    * 객체(함수)에 모두 적용된다. → 함수에 사용될 class 내부의 전역 변수로서 개별 함수에서는 "인자(parameter)"로 쓰일 수 있다.
+    선언 형식:
+        class ClassName {
+            constructor() { ... }   //생성자는 1개 가장 상위에 위치
+            method_1() { ... }      //class의 개별 메소드들(클래스 소속 함수)
+            method_2() { ... }
+            method_3() { ... }
+        }
+
+    ex)
+        class Car {
+            constructor(name, year) {
+                this.name = name;
+                this.year = year;
+            }
+            age() {
+                let date = new Date();
+                return date.getFullYear() - this.year;
+            }
+        }
+
+        let myCar = new Car("Ford", 2014);
+        document.getElementById("demo").innerHTML =
+        "My car is " + myCar.age() + " years old.";
+    
+JSON
+    Java Script Object Notation
+    특징:
+        1) 가벼운 데이터에 대한 변환 포멧 존재
+        2) 독립적인 언어
+        3) 자기기술성이 있으며, 이해하기 쉬운 편
+    
+    JS의 프로그램이 JSON 데이터로 쉽게 변형될 수 있다.
+
+    기본 형식:
+        1) data는 이름/값(name/value)쌍이 맞아야 한다.
+        2) data는 ,로 구분된다.
+        3) 중괄호가 객체를 감싼다.
+        4) 대괄호가 전체 배열을 감싼다.
+    ex)
+        "employees":[
+            {"firstName":"John", "lastName":"Doe"},
+            {"firstName":"Anna", "lastName":"Smith"},
+            {"firstName":"Peter", "lastName":"Jones"}
+        ]
+    
+    JSON을 JS로 변환하기
+    1) 일반 객체를 활용해서 text 내의 employee라는 배열로 만들기
+        ex)
+            let text = '{ "employees" : [' +
+                '{ "firstName":"John" , "lastName":"Doe" },' +
+                '{ "firstName":"Anna" , "lastName":"Smith" },' +
+                '{ "firstName":"Peter" , "lastName":"Jones" } ]
+            }';
+    
+    2) JSON.parse를 활용해서 데이터의 형태를 string으로 바꾸기
+        ex)
+            const obj = JSON.parse(text);
+    
+     → obj.employee[1].firstname 을 호출하면 "Anna"가 반환된다.
+     만약 JSON.parse로 JSON의 데이터를 담은 JS변수를 string으로 변환하지 않으면 정상적으로 출력이 안된다.
+     (text.employee[1].firstname을 호출하면 아무런 결과도 반환되지 않는다.)
+
+debugging
+    1) console.log() 사용
+        JS의 코드를 web browser을 통해 보여준다.
+    
+    2) debugger; 키워드
+        debugg할 때 breakpoint를 지정
+        
+        ex)
+            let x = 15 * 5;
+            debugger;
+            document.getElementById("demo").innerHTML = x;
+
+JS 코드 짜는 Tip:
+    1) 코드를 짤 때 new, ==, eval()을 가급적 사용x
+    2) 변수를 가장 위에 한번에 명시하는 연습
+    3) 변수를 선언할 때 반드시 "초기화"하는 연습
+    4) 가능하면 변수를 const로 선언하며 데이터 형태가 의도치 않게 변형되는 것을 방지
+    5) 배열 선언 시 데이터형을 const로 선언하여 데이터 형태가 의도치 않게 변형되는 것을 방지
+    6) new 객체() 선언x → 속도가 느려질 수 있다.
+    7) == 대신에 데이터형까지도 체크하는 ===을 사용
+    8) 함수에 defualt parameter 부여하기
+        ex)
+            function (a=1, b=1) { /*function code*/ }
+    9)switch문의 마지막은 반드시 default값으로 넣기
+    10) Number, String, Boolean을 new 객체이름() 형식으로 선언해서 "객체화"하지 않기
+        ex)
+            let x = "John";             
+            let y = new String("John");
+            (x === y) // is false because x is a string and y is an object.
+    
+    11) 반복문 안에서 메서드 사용x, 외부에서 연산하여 반복문에서는 상수 위주로 사용하기 (속도 향상을 위해)
+        ex)
+            let l = arr.length;
+            for (let i = 0; i < l; i++) {   // i<arr.length를 반복문 구문 내에 호출하면 매 루프 때마다 length를 계산해야 하는 중복연산이 발생
+            }
+
+    12) DOM 접근을 최소화하기  
+        * DOM은 JS의 속도를 느리게 만드는 요인 중 하나
+        * 따라서 DOM을 사용할 때에도 DOM의 내부 코드를 최소화하기(DOM 활용 시 코드의 간소화 필요)
+
+        bad ex)
+            let fullName = firstName + " " + lastName;
+            document.getElementById("demo").innerHTML = fullName;
+        
+        good ex)
+            document.getElementById("demo").innerHTML = firstName + " " + lastName;
+    
+
+#JS Advance
+JS callbacks
+    콜백 사용 이유:
+        특정 기능을 선수행한 뒤, 결과값을 반환하는 것이 필요한 경우
+    
+    * 재귀함수와 유사한 개념으로, 재귀함수가 특정 조건 만족 시까지 연산을 반복수행하는 것과 달리, callback은 재귀연산을 1번만 수행한다.
+    함수1 내에 인자로써 함수2를 입력하는 경우에 사용된다.
+    이때 함수1의 인자 중 callback할 수 있는 인자의 자리에 함수2가 입력된다.
+    함수1의 실행결과 callback용 변수의 인자로 실행결과를 담으면 함수2의 인자로 함수1의 실행결과가 담긴 형태가 된다. 
+    
+    ex)
+        <html>
+        <body>
+
+            <h2>JavaScript Callbacks</h2>
+
+            <p>Do a calculation and then display the result.</p>
+
+            <p id="demo"></p>
+
+            <script>
+                function myDisplayer(something) {
+                    document.getElementById("demo").innerHTML = something;
+                }
+
+                function myCalculator(num1, num2, myCallback) {     //인자로 myCallback을 입력
+                    let sum = num1 + num2;
+                    myCallback(sum);        //함수의 실행결과로써 myCallback에 변수(값)를 담아 반환
+                                            //myCalculator의 myCallback인자로 myDisplayer라는 함수가 입력되었기에, 
+                                            //myCalculator함수의 실행 결과에 따른 myCallback의 인자로 sum이 입력된 것은 myDisplayer의 something인자로 sum이 입력된 것을 의미.
+                }
+
+                myCalculator(5, 5, myDisplayer); //myCalculator의 인자로 함수인 myDisplayer가 입력
+            </script>
+
+        </body>
+    </html>
+    
+asynchronous JS
+    현업에서 callback을 활용할 때, 여러 메서드와 함께 사용하여 callback될 시간을 정할 수 있다.
+    
+    1) setTimeout()
+    ex)
+        <html>
+        <body>
+            <h2>JavaScript Callback</h2>
+            <p>Wait 3 seconds (3000 milliseconds) for this page to change.</p>
+
+            <h1d="demo"></h1>
+
+            <script>
+                setTimeout(myFunction, 3000);       //setTimeout(대상, 초설정)  :설정한 초 뒤에 대상을 실행 (1회 실행)
+                                                    //일반적으로 "대상"으로 함수를 입력
+                function myFunction() {
+                    document.getElementById("demo").innerHTML = "I love You !!";
+                }
+            </script>
+        </body>
+        </html>
+
+    2) setInterval()
+    ex)
+        <html>
+        <body>
+
+            <h2>JavaScript setInterval()</h2>
+
+            <p>Using setInterval() to display the time every second (1000 milliseconds).</p>
+
+            <h1 id="demo"></h1>
+
+            <script>
+                setInterval(myFunction, 1000);      //setInterval(대상, 초설정) :설정한 초 간격으로 대상을 실행(지속적으로 실행)
+
+                function myFunction() {
+                    let d = new Date();
+                    document.getElementById("demo").innerHTML=
+                    d.getHours() + ":" +
+                    d.getMinutes() + ":" +
+                    d.getSeconds();
+                }
+            </script>
+
+        </body>
+        </html>
+    
+    3) 특정 파일이 loading될 때까지 기다리기
+        XMLHttpRequest() 객체를 활용
+            메서드:
+                open(데이터형식, 대상)
+                onload
+                status
+                responeText
+                send()
+        ex)
+            <html>
+            <body>
+                <h2>JavaScript Callbacks</h2>
+                <p id="demo"></p>
+
+                <script>
+                    function myDisplayer(some) {
+                        document.getElementById("demo").innerHTML = some;
+                    }
+
+                    function getFile(myCallback) {
+                        let req = new XMLHttpRequest();
+                        req.open('GET', "mycar.html");
+                        req.onload = function() {
+                            if (req.status == 200) {
+                                myCallback(this.responseText);
+                            } 
+                            else {
+                                myCallback("Error: " + req.status);
+                            }
+                        }
+                        req.send();
+                    }
+
+                    getFile(myDisplayer); 
+                </script>
+            </body>
+            </html>
+    
+HTML DOM 
+    Document Object model
+    DOM은 W3C(World Wide Web Consortium)의 표준으로, 언어중심 인터페이스로 프로그램과 script가 동적으로 접속하고 콘텐츠와 구조, 스타일을 최신화하는 것을 지원
+
+    3가지 부분:
+        1) Core DOM :모든 문서 형식에 대한 모델
+        2) XML DOM  :XML 문서에 대한 모델
+        3) HTML DOM :HTML문서에 대한 모델
+    
+    DOM Method: 동작
+    DOM Value:  값(setting이나 변경 가능)
+
+    ex)
+        <html>
+        <body>
+            <p id="demo"></p>
+            <script>
+                document.getElementById("demo").innerHTML = "Hello World!";     // getElementById는 method이고, innerHTML은 property이다.
+            </script>
+        </body>
+        </html>
+    
+    getElementById()    :HTML의 tag 속 id를 기준으로 해당 Element를 호출하여 script로 활용할 수 있는 메서드
+    innerHTML           :HTML element를 가져오고 변경할 수 있는 property(* property: method 내에 있는 멤버의 기능 수행)
+
+DOM Documents
+    1) HTML Element를 찾는 메서드:
+
+        Method	                                Description
+        document.getElementById(id)	            Find an element by element id
+        document.getElementsByTagName(name)	    Find elements by tag name
+        document.getElementsByClassName(name)	Find elements by class name
+
+        * 모두 id, name을 입력할 때 "내용물" 형태로 입력 
+            html 태그들도 <> 는 모두 없애고 <> 대신에 ""로 입력한다.
+
+        querySelectorAll() :
+            CSS selectors가 정해진 특정 값을 탐색할 경우
+
+            ex)
+                const x = document.querySelectorAll("p.intro");         //document의 메서드로 querySelectorAll("CSS Selector이름")
+                
+
+
+    2) HTML Element를 바꾸는 property/메서드:
+        Property	                                Description
+        element.innerHTML =  new html content	    Change the inner HTML of an element
+        element.attribute = new value	            Change the attribute value of an HTML element
+        element.style.property = new style	        Change the style of an HTML element
+
+        Method	                                    Description
+        element.setAttribute(attribute, value)	    Change the attribute value of an HTML element  
+        * element.attribute 와 동일한 기능을 수행
+    
+    3) HTML Element를 추가하고 삭제하는 메서드:
+
+        Method	                                Description
+        document.createElement(element)	        Create an HTML element
+        document.removeChild(element)	        Remove an HTML element
+        document.appendChild(element)	        Add an HTML element
+        document.replaceChild(new, old)	        Replace an HTML element
+        document.write(text)	                Write into the HTML output stream
+    
+    4) Event hendler 메서드:
+        * HTML Element를 클릭했을 때의 동작을 정의
+
+        Method	                                                    Description
+        document.getElementById(id).onclick = function(){code}	    Adding event handler code to an onclick event
+    
+    5) HTML Object에 대한 값을 JS로 반환하는 properties:
+
+        Property	                    Description
+        document.anchors	            Returns all <a> elements that have a name attribute	
+        document.applets	            Deprecated	
+        document.baseURI	            Returns the absolute base URI of the document	
+        document.body	                Returns the <body> element	
+        document.cookie	                Returns the document's cookie	
+        document.doctype	            Returns the document's doctype	
+        document.documentElement	    Returns the <html> element	
+        document.documentMode	        Returns the mode used by the browser	
+        document.documentURI	        Returns the URI of the document	
+        document.domain	                Returns the domain name of the document server	
+        document.domConfig	            Obsolete.	
+        document.embeds	                Returns all <embed> elements	
+        document.forms	                Returns all <form> elements	
+        document.head	                Returns the <head> elements
+        document.images	                Returns all <img> elements	
+        document.implementation	        Returns the DOM implementation	
+        document.inputEncoding	        Returns the document's encoding (character set)	
+        document.lastModified	        Returns the date and time the document was updated	
+        document.links	                Returns all <area> and <a> elements that have a href attribute	
+        document.readyState	            Returns the (loading) status of the document	
+        document.referrer	            Returns the URI of the referrer (the linking document)	
+        document.scripts	            Returns all <script> elements	
+        document.strictErrorChecking	Returns if error checking is enforced	
+        document.title	                Returns the <title> element	
+        document.URL	                Returns the complete URL of the document	
 
