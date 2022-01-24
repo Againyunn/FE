@@ -1347,6 +1347,8 @@ DOM Documents
         document.getElementsByTagName(name)	    Find elements by tag name
         document.getElementsByClassName(name)	Find elements by class name
 
+    
+        활용:
         * 모두 id, name을 입력할 때 "내용물" 형태로 입력 
             html 태그들도 <> 는 모두 없애고 <> 대신에 ""로 입력한다.
 
@@ -1355,19 +1357,52 @@ DOM Documents
 
             ex)
                 const x = document.querySelectorAll("p.intro");         //document의 메서드로 querySelectorAll("CSS Selector이름")
-                
-
+        
 
     2) HTML Element를 바꾸는 property/메서드:
         Property	                                Description
-        element.innerHTML =  new html content	    Change the inner HTML of an element
-        element.attribute = new value	            Change the attribute value of an HTML element
-        element.style.property = new style	        Change the style of an HTML element
+        element.innerHTML =  new html content	    Change the inner HTML of an element (HTML의 Child 값을 변경한다는 의미)
+        element.attribute = new value	            Change the attribute value of an HTML element(HTML 내부의 Attribute 값을 변경한다는 의미)
+        element.style.property = new style	        Change the style of an HTML element()
 
         Method	                                    Description
         element.setAttribute(attribute, value)	    Change the attribute value of an HTML element  
         * element.attribute 와 동일한 기능을 수행
     
+        활용:
+        element.attribute 예시
+            형식:   document.getElementById(id).attribute = new value       // attribute로는 HTML 내부의 attribut값을 변경한다는 의미
+
+            ex)
+                <html>
+                <body>
+                    <img id="myImage" src="smiley.gif">
+                    <script>
+                        document.getElementById("myImage").src = "landscape.jpg";
+                    </script>
+                </body>
+                </html>
+
+        element.innerHTML 을 활용하여 JS로 동적인 값을 넣어줄 수도 있다. (동기식 처리로 인해, 새로고침을 하지 않으면 반환된 값이 정지되어있다.)
+            ex)
+                <script>
+                    document.getElementById("myImage").src = "landscape.jpg";
+                </script>
+
+        document.write()
+            * HTML의 특정위치에 직접 값을 출력할 때 활용
+
+            ex)
+            <html>
+            <body>
+                <p>Bla bla bla</p>
+                <script>
+                    document.write(Date());     // Bla bla bla 사이에 Date() 값이 바로 찍힌다.
+                </script>
+                <p>Bla bla bla</p>
+            </body>
+            </html>
+                
     3) HTML Element를 추가하고 삭제하는 메서드:
 
         Method	                                Description
@@ -1412,3 +1447,152 @@ DOM Documents
         document.title	                Returns the <title> element	
         document.URL	                Returns the complete URL of the document	
 
+    6) form의 DOM 처리 방식
+    * 원래 html로 form을 처리할 경우, 모든 값의 확인을 백엔드의 서버에서 처리해야 하므로, 서버와 통신해야 하는 시간적, 리소스 비용이 발생
+    따라서 JS를 통해 html외부에서 특정 값의 유효성을 선제적으로 검사한 뒤에 적합한 값이 입력되었을 때 백엔드 서버로 값을 전송하는 방식으로 활용할 수 있다.
+
+    데이터의 유효성 검사를 프론트단에서 처리 가능
+
+    ex)
+        <html>
+        <body>
+            <h2>JavaScript Validation</h2>
+            <p>Please input a number between 1 and 10:</p>
+            <input id="numb">
+            <button type="button" onclick="myFunction()">Submit</button>
+            <p id="demo"></p>
+            <script>
+                function myFunction() {
+                    // html element 중에 id값이 "numb"인 element 내부의 값을 가져온다.
+                    let x = document.getElementById("numb").value;      // property "value"를 통해 해당 element의 값을 호출한다.
+
+                    let text;                           //text를 선언
+                    if (isNaN(x) || x < 1 || x > 10) {      //입력받은 값이 1<입력값 <10인지 확인하여 유효성 검사
+                        text = "Input not valid";           //실제 서비스에서는 값이 맞을 때, 백엔드 서버로 해당 값을 전달하는 방식으로 활용가능
+                    } else {
+                        text = "Input OK";
+                    }
+                    document.getElementById("demo").innerHTML = text;
+                }
+            </script>
+        </body>
+        </html> 
+    
+    7) DOM CSS 변경
+        형식:
+            document.getElementById(id).style.property = new style
+        
+        ex)
+            <html>
+            <body>
+                <p id="p2">Hello World!</p>
+
+                <script>
+                    document.getElementById("p2").style.color = "blue";
+                </script>
+            </body>
+            </html>
+
+        html의 특정 element 클릭 시 작동하도록 기능 추가
+        ex)
+            <h1 id="id1">My Heading 1</h1>
+            
+            // onclick 이벤트 발생 시 element id가 "id1"인 값의 색을 변경
+            <button type="button" onclick="document.getElementById('id1').style.color = 'red'"> 
+            Click Me!</button>
+    
+    8) DOM Animation
+        예시를 통해 사용법 습득 필요(적용 시 고려해야 할 부분 있음)
+
+        ex)
+            <html>
+                <style>
+                    #container {
+                        width: 400px;
+                        height: 400px;
+                        position: relative;
+                        background: yellow;
+                    }
+                    #animate {
+                        width: 50px;
+                        height: 50px;
+                        position: absolute;
+                        background-color: red;
+                    }
+                </style>
+            <body>
+                <p><button onclick="myMove()">Click Me</button></p> 
+
+                <div id ="container">
+                <div id ="animate"></div>
+                </div>
+
+                <script>
+                    function myMove() {
+                        let id = null;      //id 초기값 지정
+                        const elem = document.getElementById("animate");    //animate라는 id를 가진 element를 호출 하여 elem에 지정
+                        let pos = 0;                    // 위치 값pod의 초기화
+                        clearInterval(id);              // claerInterval:   Interval 함수의 즉시 종료
+                                                            // 값으로 id를 넣은 이유는 id 변수에 setInterval함수를 선언했기 때문
+        
+                        id = setInterval(frame, 5);     // 0.0005초 간격으로 frame을 실행
+
+                        function frame() {      
+                            if (pos == 350) {                   //350까지 이동하면 id값을 초기화(종착점)
+                                clearInterval(id);              // claerInterval:   Interval 함수의 즉시 종료
+                            } 
+                            else {                              //top과 left의 위치 값에 ++1 처리
+                                pos++; 
+                                elem.style.top = pos + "px"; 
+                                elem.style.left = pos + "px"; 
+                            }
+                        }
+                    }
+                </script>
+            </body>
+            </html>
+    
+    9) DOM Event
+        html의 attribute를 활용해서 JS값을 입력할 수 있다.
+
+        attribute 설정 방식:
+            JS의 event를 propetry활용
+                    Event	            Description
+                    onchange	        html 엘리먼트가 바뀌었을 때
+                    onclick	            html 엘리먼트를 클릭했을 때
+                    onmouseover	        html 엘리먼트에 마우스를 올렸을 때
+                    onmouseout	        html 엘리먼트에 마우스를 댔다가 떼었을 때
+                    onkeydown	        사용자가 키보드 자판을 눌렀을 때
+                    onload	            브라우져가 로딩을 다 끝냈을 때(페이지 생성을 다 끝냈을 때)
+
+            9-1) property이용
+            ex)
+                <h1 onclick="this.innerHTML = 'Ooops!'">Click on this text!</h1>
+            
+            9-2) method이용
+            ex)
+                <h1 onclick="changeText(this)">Click on this text!</h1>     // this를 통해 현재 attribute가 위치한 element의 값을 ChangeText의 인자로 입력
+
+                <script>
+                    function changeText(id) {
+                        id.innerHTML = "Ooops!";    //html child 값 지정
+                    }
+                </script>
+         
+            9-3) JS내부에서 처리
+            ex)
+                <body>
+                    <h2>JavaScript HTML Events</h2>
+
+                    <button id="myBtn">Try it</button>
+                    <p id="demo"></p>
+
+                    <script>
+                        document.getElementById("myBtn").onclick = displayDate;     //onclick attribute 자체에 값을 주입하는 방식으로 함수이지만 객체처럼 ()을 사용하지 않는다.
+                                                                                    // 애초에 html의 onclick attribite는 JS의 매서드이다.
+                        function displayDate() {
+                            document.getElementById("demo").innerHTML = Date();
+                        }
+                    </script>
+                </body>
+    
