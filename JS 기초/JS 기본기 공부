@@ -2110,6 +2110,4 @@ Web APIs
         
         실제 서비스에 반영할 경우 googlemap, navermap, kakaomap등 외부 map API를 활용해야 한다.
     
-AJAX
-    Asynchronous Javascript And XML
     
