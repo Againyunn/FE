@@ -947,6 +947,7 @@ error
         }
     
     throw 사용법:
+
     * String,   Number, Boolean, Object형태로 선언가능
         throw "Too Big.";
         throw 500;
@@ -1595,4 +1596,520 @@ DOM Documents
                         }
                     </script>
                 </body>
+
+        10) Event Listener
+
+        addEventListener()
+            존재하고 있는 element를 overwriting할 필요 없이 존재하는 event handler를 활용할 수 있다.
+            * 여러 Event를 하나의 element에 담아 실행할 수 있다.
+
+            형식:
+                element.addEventListener(event, function, useCapture)
+                * useCapture 값은 defualt = false로 일반적으로는 비활성화되어 있다.
+            
+            ex)
+                <html>
+                <body>
+                    <h2>JavaScript addEventListener()</h2>
+                    <p>This example uses the addEventListener() method to add many events on the same button.</p>
+                    <button id="myBtn">Try it</button>
+                    <p id="demo"></p>
+
+                    <script>
+                        var x = document.getElementById("myBtn");           //객체 x에 myBtn 아이디를 가진 element를 부여
+                        x.addEventListener("mouseover", myFunction);        //객체 x에 mouseover event를 추가
+                        x.addEventListener("click", mySecondFunction);      //객체 x에 click event를 추가
+                        x.addEventListener("mouseout", myThirdFunction);    //객체 x에 mouseout event를 추가
+
+                        function myFunction() {
+                            document.getElementById("demo").innerHTML += "Moused over!<br>";
+                        }
+                        function mySecondFunction() {
+                            document.getElementById("demo").innerHTML += "Clicked!<br>";
+                        }
+                        function myThirdFunction() {
+                            document.getElementById("demo").innerHTML += "Moused out!<br>";
+                        }
+                    </script>
+                </body>
+                </html>
+        
+        11) DOM Navigation
+
+            DOM 구조는 기본적으로 HTML Element 요소 간의 상속관계를 나타낸다.
+            즉, <html>   →  <head>      :root인 <html>의 firstChild
+                         →  <body>      :root인 <html>의 secondChild
+            
+            따라서 Navigation 역시 DOM 내부의 각 요소(element) 간의 연결관계를 나타낸 것이다.
+
+            동일한 element에 대해 접근하는 3가지 방법:
+                1) id를 호출하는 방식(상속관계 활용x)
+                    ex)
+                        <html>
+                        <body>
+                            <h1 id="id01">My First Page</h1>
+                            <p id="id02"></p>
+
+                            <script>
+                                document.getElementById("id02").innerHTML = document.getElementById("id01").innerHTML;
+                            </script>
+                        </body>
+                        </html>
+
+                2) property로 접근  :n번째Child.nodeValue 를 활용
+                    ex)
+                        <html>
+                        <body>
+                            <h1 id="id01">My First Page</h1>
+                            <p id="id02"></p>
+
+                            <script>
+                                document.getElementById("id02").innerHTML = document.getElementById("id01").firstChild.nodeValue;
+                            </script>
+                        </body>
+                        </html>
+                
+                3) 객체의 array index로 접근
+                    ex)
+                        <html>
+                        <body>
+                            <h1 id="id01">My First Page</h1>
+                            <p id="id02">Hello!</p>
+
+                            <script>
+                                document.getElementById("id02").innerHTML = document.getElementById("id01").childNodes[0].nodeValue;
+                            </script>
+                        </body>
+                        </html>
+
+                * nodeName  :
+                    property로써, 해당 node의 HTML Tag 이름을 반환
+                    즉, <p>HelloM</p> 의 nodeName을 호출할 경우 "p"가 반환
+
+                * nodeValue :
+                    property로써, 해당 node의 value(실제 값)을 반환
+                    즉, <p>HelloM</p> 의 nodeName을 호출할 경우 "Hello"가 반환
+
+        12) DOM Nodes
+            DOM의 구성요소인 Node를 추가하고 삭제하는 메서드
+
+            Node만들기:
+                * HTML Element만들기
+
+                ex)
+                <div id="div1">
+                    <p id="p1">This is a paragraph.</p>
+                    <p id="p2">This is another paragraph.</p>
+                </div>
+
+                <script>
+                    const para = document.createElement("p");                   //para 객체에 <p> HTML 태그를 생성하여 선언
+                    const node = document.createTextNode("This is new.");       //node 객체에 "This is new."라는 텍스트를 생성하여 선언
+                    para.appendChild(node);                                     //para에 node를 Child로 추가(현 시점의 para: <p>"This is new."</p>)
+
+                    const element = document.getElementById("div1");            //"div1"id를 가진 Element를 element 객체에 호출하여 선언
+                    element.appendChild(para);                                  //element 객체에 para를 Child로 추가(현 시점의 para: <p>"This is new."</p>)
+                </script>
+            
+            * appendChild만으로 HTML Tag의 내부에 값을 넣고, element 사이에 element를 넣을 수 있는 이유:
+                HTML에서 각 Element를 node로 간주하여 상호 간의 parent와 child가 있는 것처럼, Element와 내부의 value도 node로 보고 상호 간의 parent와 child가 있는 것으로 본다.
+                즉 모든 개체들이 parent - child 관계를 맺고 있다.
+            
+            Node 삭제하기:
+                * remove할 때도 각 Node간의 관계를 활용해서 특정 node만을 삭제할 수도 있다.
+
+                remove
+                ex)
+                    <div>
+                        <p id="p1">This is a paragraph.</p>
+                        <p id="p2">This is another paragraph.</p>
+                    </div>
+
+                    <script>
+                        const elmnt = document.getElementById("p1"); elmnt.remove();
+                    </script>
+
+
+
+                removeChild
+                ex)
+                    <div id="div1">
+                        <p id="p1">This is a paragraph.</p>
+                        <p id="p2">This is another paragraph.</p>
+                    </div>
+
+                    <script>
+                        const parent = document.getElementById("div1");     //객체 parent에 id가 "div1"인 element를 선언
+                        const child = document.getElementById("p1");        //객체 child에 id가 "p1"인 element를 선언
+                        parent.removeChild(child);                          //해당 객체의 child를 삭제
+                    </script>
+
+            Node 교체하기:
+
+                * parent node를 지정한 뒤, child를 교체하는 방식으로 node를 교체한다.
+                replaceChild(새로운 값, 바꿀child값)
+                ex)
+                    <div id="div1">
+                        <p id="p1">This is a paragraph.</p>
+                        <p id="p2">This is another paragraph.</p>
+                    </div>
+
+                    <script>
+                        const para = document.createElement("p");                   //para 객체에 <p> HTML 태그를 생성하여 선언
+                        const node = document.createTextNode("This is new.");       //node 객체에 "This is new."라는 텍스트를 생성하여 선언
+                        para.appendChild(node);                                     //para에 node를 Child로 추가(현 시점의 para: <p>"This is new."</p>)
+
+                        const parent = document.getElementById("div1");             //"div1"id를 가진 Element를 parent 객체에 호출하여 선언
+                        const child = document.getElementById("p1");                //child 객체에 id가 "p1"인 element를 호출하여 선언
+                        parent.replaceChild(para, child);                           //replaceChild의 인자로 각각 para(새로 넣을 값)  child(바뀔 대상)을 넣기
+                    </script>
+
+        13) DOM Collections
+
+            length 메서드:
+                해당 element의 child 값의 수를 반환
+                * 주로 반복문과 함께 쓰여, 해당 값의 child값(value)의 상태를 바꾸는 데에 활용한다.
+
+                ex)
+                    <html>
+                    <body>
+                        <h2>JavaScript HTML DOM</h2>
+
+                        <p>Hello World!</p>
+                        <p>Hello Norway!</p>
+                        <p>Click the button to change the color of all p elements.</p>
+
+                        <button onclick="myFunction()">Try it</button>
+
+                        <script>
+                            function myFunction() {
+                                const myCollection = document.getElementsByTagName("p");        
+                                for (let i = 0; i < myCollection.length; i++) {                 //myCollection에 담긴 <p>~</p>의 모든 child 값의 CSS 색이 red로 바뀐다.
+                                    myCollection[i].style.color = "red";                        //각 child의 문자 하나하나를 indexing하여 호출할 수 있다.
+                                }
+                            }
+                        </script>
+                    </body>
+                    </html>
+
+            * nodelist와 array는 조금 다르다.
+                array의 메서드들을 활용할 수 없다.(valueOf(), push(), pop(), join())
+
+BOM 
+    Browser Object Model
+
+    1) window object
+        브라우져의 윈도우 관련 기능 제공 객체
+        * 기본적으로 DOM은 BOM 위에서 구동된다고 볼 수 있다.
+
+        window.document.getElementById("header");
+        document.getElementById("header");
+
+        두 코드는 동일한 기능을 수행
+        * document가 애초에 window의 property라고 브라우져와 JS는 약속
+
+        1-1) window size
+            window.innerHeight  :윈도우 브라우져의 내부 높이 값을 수치로 반환(세로)
+            window.innerWidth  :윈도우 브라우져의 내부 길이 값을 수치로 반환(가로)
+
+        1-2) window.open()  :새로운 브라우져 창을 생성
+
+        1-3) window.close() :현재 브라우져 창을 닫기
+
+        1-4) window.moveTo() :현재 브라우져 창을 이동
+
+        1-5) window.resizeTo()  :현재 브라우져 창의 크기를 재조정
+
+    2) screen
+        사용자 기기의 창 크기를  px 단위의 수치로 반환(디스플레이 크기)
+
+        screen.width        :가로 길이
+        screen.height       :세로 길이
+        screen.availWidth   :window의 taskbar등 사용할 수 없는 부분을 제외하고 실제 디바이스 화면의 가로 값을 px로 반환
+        screen.availHeight  :window의 taskbar등 사용할 수 없는 부분을 제외하고 실제 디바이스 화면의 세로 값을 px로 반환
+        screen.colorDepth   :사용자 디바이스의 해상도 값을 반환(색채)
+        screen.pixelDepth   :사용자 디바이스의 해상도 값을 반환(해상도 자체)
+
+    
+    3) location
+        위치가 사용자 디바이스의 위치가 아니라, 브라우져 내에서의 "위치"를 의미
+
+        window.location.href    :현재 페이지(html문서)의 url을 반환
+        window.location.hostname    :domain 이름을 반환 *웹 프로토콜의 값은 제외하고 "도메인/ip값"만 반환
+        window.location.pathname    :html문서가 위치한 경로값(파일 경로값)을 반환
+        window.location.protocol    :해당 html문서(url)의 웹 프로토콜이 "http"인지 "https"인지를 반환
+        window.location.assign()    :새로운 문서(html)을 생성
+
+    4) history
+        웹 페이지의 이력에 대한 반환 값을 설정
+
+        history.back()  :이전 방문 페이지로 이동
+        history.forward()   :앞서 방문한 페이지로 이동
+    
+    5) popup box
+
+        5-1) alert()
+        팝업이 뜨는 형태
+
+        window.alert()
+        alert()
+        * window를 생략해도 동일한 기능 수행
+
+        ex)
+            alert("I am an alert box!");
+        
+        5-2) prompt box
+        팝업이 뜨며, 값을 사용자가 입력하여 html에 반영도 할 수 있는 기능
+
+        window.prompt("노출할 텍스트", "엽력받을 값의 기본값");
+
+        ex)
+            <body>
+                <button onclick="myFunction()">Try it</button>
+                <p id="demo"></p>
+
+                <script>
+                    function myFunction() {
+                        let text;
+                        let person = prompt("Please enter your name:", "gainyunn");    //초기 default값으로는 Againyunn
+
+                        if (person == null || person == "") {                           //값을 입력하지 않았을 경우
+                            text = "User cancelled the prompt.";                    
+                        } else {
+                            text = "Hello " + person + "! How are you today?";        
+                        }
+                        document.getElementById("demo").innerHTML = text;               //HTML DOM
+                    }
+                </script>
+            </body>
+
+        * line break(한줄 띄기)
+            \n  처리
+            ex)
+                alert("Hello\nHow are you?");
+        
+    6) Timing Event
+        window.setTimeout(객체, 밀리초)     //밀리초 이후에 객체를 1번 실행
+        window.setInterval(객체, 밀리초)    //밀리초 단위로 객체를 반복 실행
+
+        * window를 생략해도 정상 작동(앞선 JS 보충 부분에서 학습)
+    
+    7) cookies
+        웹 브라우져에 (사용자의) 정보를 기록
+
+        7-1) create cookies
+            document.cookie = "저장할 정보"활용
+
+            ex)
+                일반적인 쿠키 생성
+                document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";  //username이라는 정보에 John Doe 입력, 만료시각 설정
+
+                특정 페이지에 쿠키 생성
+                document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";       //username이라는 정보에 John Doe 입력, 만료시각, 해당 쿠키가 저장될 html파일 위치 설정
+        
+        7-2) read cookies
+            객체 = document.cookie;        //document.cookie 를 호출하면 객체가 반환
+
+        
+        7-3) change cookies
+            쿠키를 생성(7-1)과 동일하게 쿠키를 생성하듯 정보를 입력하면 자동으로 overwriting 된다.
+
+        7-4) delete cookie
+            쿠키 삭제 시에는 쿠키의 기한 만료 시각을 기록하면 된다.
+
+            ex)
+                document.cookie = "username=John Doe; expires=Thu, 01 Dec 2000 00:00:00 UTC";           //이미 지난 시점을 쿠키 만료일로 설정하면, 자동으로 쿠키가 삭제된다.
+
+Web APIs
+    API :Application Programming Interface
+        API를 통해 특정 웹 브라우져의 기능을 확장가능
+        API를 통해 특정 서버의 기능을 확장가능
+    
+
+    1) Form :API 사용 형식
+        checkValidity()     :입력받은 객체가 유효한 데이터를 가지고 있을 때 true를 반환
+        setCustomValidity() :입력받은 객체에 대한 유효성 검사 메시지 property를 설정
+
+        ex)
+        * 예시를 통해 사용방법 습득하기
+            <!DOCTYPE html>
+            <html>
+            <body>
+
+                <h2>JavaScript Validation</h2>
+
+                <p>Enter a number and click OK:</p>
+
+                <input id="id1" type="number" min="100" max="300" required>                 //input data에 대한 validity 설정(number, 100~300까지의 값만 허용)
+                <button onclick="myFunction()">OK</button>
+
+                <p>If the number is less than 100 or greater than 300, an error message will be displayed.</p>
+
+                <p id="demo"></p>
+
+                <script>
+                    function myFunction() {
+                        const inpObj = document.getElementById("id1");
+
+                        if (!inpObj.checkValidity()) {                                             //객체인 inpObj에 지정된 data validity를 검사했을 때 false값이 반환되는 경우
+                            document.getElementById("demo").innerHTML = inpObj.validationMessage;   //유효하지 않다는 메시지 전달
+                        } else {
+                            document.getElementById("demo").innerHTML = "Input OK";                 //입력받은 값이 올바름을 반환
+                        } 
+                    } 
+                </script>
+
+            </body>
+            </html>
+
+        유효성 DOM properties
+            
+            Property	            Description
+            validity	            입력받은 값에 대한 유효성을 검사하여 boolean값 반환
+            validationMessage	    유효성 검사 시 false값 반환 시 오류 메시지 반환
+            willValidate	        입력받은 값에 대한 유효성 검사별과를 타나낼 지 나타내는 값
+
+        유효성 properties
+            
+            Property	            Description
+            customError	            Set to true, if a custom validity message is set.
+            patternMismatch	        Set to true, if an element's value does not match its pattern attribute.
+            rangeOverflow	        Set to true, if an element's value is greater than its max attribute.
+            rangeUnderflow	        Set to true, if an element's value is less than its min attribute.
+            stepMismatch	        Set to true, if an element's value is invalid per its step attribute.
+            tooLong	                Set to true, if an element's value exceeds its maxLength attribute.
+            typeMismatch	        Set to true, if an element's value is invalid per its type attribute.
+            valueMissing	        Set to true, if an element (with a required attribute) has no value.
+            valid	                Set to true, if an element's value is valid.
+        
+            ex)
+                <html>
+                <body>
+
+                    <h2>JavaScript Validation</h2>
+
+                    <p>Enter a number and click OK:</p>
+
+                    <input id="id1" type="number" max="100">
+                    <button onclick="myFunction()">OK</button>
+
+                    <p>If the number is greater than 100 (the input's max attribute), an error message will be displayed.</p>
+
+                    <p id="demo"></p>
+
+                    <script>
+                        function myFunction() {
+                            let text;
+                            if (document.getElementById("id1").validity.rangeOverflow) {
+                                text = "Value too large";
+                            } else {
+                                text = "Input OK";
+                            } 
+                            document.getElementById("demo").innerHTML = text;
+                        }
+                    </script>
+
+                </body>
+                </html>
+
+    2) history API
+        Web history API를 통해 windows.history를 쉽게 활용가능
+
+        Property	    Description
+        length	        웹 방문 기록의 수를 반환
+
+        
+        Method	        Description
+        back()	        이전에 방문한 웹 사이트를 반환
+        forward()	    앞서 방문한 웹 사이트를 반환
+        go()	        웹 방문 기록 중 특정한 url로 이동(숫자를 인자로 받아서, history lists 중 index를 지정할 수 있다.)
+    
+
+            ex)
+                <button onclick="myFunction()">Go Back 2 Pages</button>
+
+                <script>
+                    function myFunction() {
+                        window.history.go(-2);
+                    }
+                </script>
+    
+    3) storage API
+
+        3-1) Local storage object       : 로컬 영역에 저장하므로 브라우져(창)이 닫혀도 데이터는 유지된다.(만료 기한x)
+            localStorage.setItem("key", "value")  : key와 value 쌍을 가진 객체를 localstorage에 생성 및 저장
+            
+            localStorage.getItem("key")     :key값에 해당하는 value 값을 반환
+
+            localStorage.removeItem("key")  :key값에 해당하는 객체를 삭제
+
+        
+        3-2) sessionStorage object      : 세션 형태로 저장하여, 브라우져(창)이 닫혔을 때, 데이터도 삭제된다.
+            sessionStorage.setItem("key", "value")  : key와 value 쌍을 가진 객체를 세션으로 생성 및 저장
+
+            sessionStorage.getItem("key")       :key값에 해당하는 value 값을 반환
+
+            sessionStorage.removeItem("key")  :key값에 해당하는 객체를 삭제
+        
+        3-3) properties와 methods
+
+            Property/Method	                Description
+            key(n)	                        Returns the name of the nth key in the storage
+            length	                        Returns the number of data items stored in the Storage object
+            getItem(keyname)	            Returns the value of the specified key name
+            setItem(keyname, value)	        Adds that key to the storage, or update that key's value if it already exists
+            removeItem(keyname)	            Removes that key from the storage
+            clear()	                        Empty all key out of the storage
+
+    4) Worker API
+        Web Worker:
+            HTML 페이지 외부에서 독립적으로 작동하는 JS파일 내의 동작
+            백엔드의 작업 일부가 JS에서 작동한다고 보면된다.
+
+            방법:
+                1. web worker file 생성
+                    이때, JS파일은 HTML 페이지 내부가 아닌, 새로운 JS형식의 파일을 생성하여 동작 로직을 구축한다.
+                    * 일반적으로 Worker로 작동하는 연산은 간단한 script 연산이 아닌, CPU를 사용하는 복잡한 연산일 경우에 사용한다.
+                      (백엔드의 연산을 JS로 분산하여 작업한다고 생각하면 편할 것으로 보인다.)
+                
+                2. HTML파일 내에서 worker 실행
+                    ex)
+                        if (typeof(w) == "undefined") {
+                            w = new Worker("worker파일 명.js");         //객체 w 에 Worker를 선언, 이때 worker의 대상인 JS파일의 경로 입력
+                        }
+                    
+                        w.workerMethod = function(event){               //객체 w의 메서드를 html 문서로 반환하는 함수, 인자로 event를 받고 이 event인자를 html 데이터로 반환
+                            document.getElementById("result").innerHTML = event.data;
+                        };
+
+                        w.terminate();          //객체 w의 동작을 정지
+                        w = undefined;          //객체 w를 undefined로 초기화(새로운 worker나 다른 값으로 활용할 수 있도록 초기화)
+                    
+    5) Geolocation API 
+        사용자의 현재 위치를 html에 반환하는 API
+
+        getCurrentPosition() 
+
+        ex)
+            <script>
+                const x = document.getElementById("demo");
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } 
+                    else {
+                        x.innerHTML = "Geolocation is not supported by this browser.";
+                    }
+                }
+
+                function showPosition(position) {
+                    x.innerHTML = "Latitude: " + position.coords.latitude +
+                    "<br>Longitude: " + position.coords.longitude;
+                }
+            </script>
+        
+        실제 서비스에 반영할 경우 googlemap, navermap, kakaomap등 외부 map API를 활용해야 한다.
+    
+AJAX
+    Asynchronous Javascript And XML
     
