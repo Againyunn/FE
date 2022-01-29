@@ -2148,25 +2148,350 @@ AJAX
 
         XMLHttpRequest 객체의 methods
 
-        Method	                            Description
-        new XMLHttpRequest()	            XMLHttpRequest 객체 생성
-        abort()	                            현재 request를 삭제(취소)
-        getAllResponseHeaders()	            header의 정보를 반환
-        getResponseHeader()	                특정한 header의 정보를 반환
+            Method	                            Description
+            new XMLHttpRequest()	            XMLHttpRequest 객체 생성
+            abort()	                            현재 request를 삭제(취소)
+            getAllResponseHeaders()	            header의 정보를 반환
+            getResponseHeader()	                특정한 header의 정보를 반환
+            
+            open(method, url, async, user, psw)	request를 구체화
+                                                method: request의 타입을 지정(GET / POST)
+                                                url: 파일의 위치(파일 저장 위치)
+                                                async: default는 true값 [ true (비동기식) or false (동기식)]
+                                                user: (선택)유저 이름 
+                                                psw: (선택)패스워드 
+
+            send()	                            GET을 통해 request를 server로 전달
+
+            send(string)	                    POST을 통해 request를 server로 전달
+
+            setRequestHeader()	                전송하는 Data의 header에 label/value를 header에 넣어 전달
+
+        XMLHttpRequest 객체의 Properties
+
+            Property	                        Description
+            onload	                            request를 load할 때 실행할 동작(함수)
+            onreadystatechange	                readyState가 변화함에 따라 동작할 기능을 함수로 지정
+
+            readyState	                        Holds the status of the XMLHttpRequest.
+                                                0: request가 초기화 되지 않음
+                                                1: server와 연결된 상태
+                                                2: request 수신 완료
+                                                3: request 처리중
+                                                4: request가 전달완료되었으며 response 도 준비된 경우
+
+            responseText	                    response를 string 형태로 반환
+            responseXML	                        response를 XML data형태로 반환
+            status	                            request의 상태를 숫자 형태로 반환
+                                                200: "OK"   (정상 수신)
+                                                403: "Forbidden"    (접근 불가)
+                                                404: "Not Found"    (페이지 삭제등의 문제로 찾을 수 없음)
+
+            statusText	                        request의 상태가 "string"으로 반환 (e.g. "OK" or "Not Found")
         
-        open(method, url, async, user, psw)	request를 구체화
-                                            method: request의 타입을 지정(GET / POST)
-                                            url: 파일의 위치(파일 저장 위치)
-                                            async: default는 true값 [ true (비동기식) or false (동기식)]
-                                            user: (선택)유저 이름 
-                                            psw: (선택)패스워드 
 
-        send()	                            GET을 통해 request를 server로 전달
+        1-4) onload Property
+            reponse받게 되면 실행할 동작(기능) 정의
 
-        send(string)	                    POST을 통해 request를 server로 전달
+            ex)
+                <script>
+                    xhttp.onload = function() {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                    xhttp.open("GET", "ajax_info.txt");
+                    xhttp.send();
+                </script>
 
-        setRequestHeader()	                전송하는 Data의 header에 label/value를 header에 넣어 전달
+        1-5) 여러 개의 callback함수 활용
+            html페이지에서 여러 번의 AJAX를 활용한 비동기식 데이터 송수신이 필요한 경우에, 
+            각각의 AJAX task에 callback함수들을 부여할 수 있다.
+
+            ex)
+                loadDoc("url-1", myFunction1);
+
+                loadDoc("url-2", myFunction2);
+
+                function loadDoc(url, cFunction) {          //callback 함수를 위한 실행 함수
+                    const xhttp = new XMLHttpRequest();
+
+                    xhttp.onload = function() {
+                            cFunction(this);
+                        }
+
+                    xhttp.open("GET", url);
+                    xhttp.send();
+                }
+
+                function myFunction1(xhttp) {
+                // action goes here
+                }
+
+                function myFunction2(xhttp) {
+                // action goes here
+                }
+
+        1-6) onreadystatechange Property
+
+            ex)
+                function loadDoc() {
+                    const xhttp = new XMLHttpRequest();
+
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("demo").innerHTML =
+                            this.responseText;
+                        }
+                    };
+
+                    xhttp.open("GET", "ajax_info.txt");
+                    xhttp.send();
+                }
+
+    2) XMLHttpRequest
+        GET과 POST의 사용 차이:
+            일반적으로 GET이 POST보다 "간편하고 빠르다"
+
+            POST만 사용하는 예외적인 상황:
+                1. server의 파일이나 DB를 수정해야 하는 경우
+                2. 많은 양의 데이터를 서버와 송수신해야 하는 경우(GET은 data의 용량 제한 존재, POST는 data의 용량제한x)
+                3. 사용자의 정보를 송수신하는 경우(GET은 url외부로 데이터가 노출되므로)
+            
+        2-1) GET    
+
+            ex) 일반적으로 GET을 활용할 때
+                xhttp.open("GET", "demo_get.asp");
+                xhttp.send();
+
+            ex) cashed 된 결과를 제외하는 결과(데이터)를 수신해야 하는 경우
+                * 매번의 requset 전송 때 독립적인 ID를 전송하는 url에 심는다.
+
+                xhttp.open("GET", "demo_get.asp?t=" + Math.random());   //Math.random() 메서드로 매번의 요청마다 새로운 ID를 생성하여 요청
+                xhttp.send();
+
+            ex) 특정한 정로를 request에 담아서 보내는 경우
+
+                xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford");
+                xhttp.send();
+            
+        2-2) POST
+
+            ex) 일반적으로  POST를 활용할 때
+                xhttp.open("POST", "demo_post.asp");
+                xhttp.send();
+            
+            ex) form 엘리먼트를 활용하여 입력받은 특정 정보를 전달할 때
+                xhttp.open("POST", "ajax_test.asp");
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");    //header를 추가할 수 있다. 
+                xhttp.send("fname=Henry&lname=Ford");   //전달하는 특정한 정보만을 지정할 수 있다.
+            
+            
+            Method	                            Description
+            setRequestHeader(header, value)	    request에 HTTP header를 추가
+                                                header: specifies the header name
+                                                value: specifies the header value
+    
+    3) Response
+        Responde의 유형:
+            responseText	response를 string 형태로 반환
+            responseXML	    response를 XML data형태로 반환
+
+        haeder info의 유형:
+            * header정보를 받아, HTML의 header에 정보를 담을 수 있다.         
+            Method	                    Description
+            getResponseHeader()	        서버로부터 특정한 header info를 반환
+            getAllResponseHeaders()	    서버로부터 모든 header info를 반환
+        
+    4) AJAX Database
+        DB로부터 AJAX를 통해 결과값을 반환
+
+        web framework의 백단에서 DB를 AJAX형태로 반환하는 코드를 통해 프론트로 받아올 수 있다.
+    
+JSON
+    JavaScript Object Notation
+    
+    특징:
+        data의 저장과 전송을위한 text format
+        computer 사이에 data를 주고 받을 때 사용
+        여러 프로그래밍 언어에서 인식(사용)될 수 있는 범용성 존재
+
+    자기기술성을 가지고 있으며, 이해하기 쉽다
+    * 자기기술성(DBMS로부터 데이터의 삽입과 삭제를 어떤 종속적 사항 없이 가능한 특성)
+
+    JSON의 string 예시:
+        '{"name":"John", "age":30, "car":null}'
+        위의 예시에서 다룬 3가지 properties:    name,   age,    car
+    
+    JSON형태의 SB string을 JS에서 아래와 같이 인식 및 처리할 수 있다.
+        let personName = obj.name;
+        let personAge = obj.age;
+
+    JSON과 JS 상호 간의 변환:
+        1. JSON을 JS의 객체로 변환하는 명령어
+            JSON.parse()
+        
+        2. JS를 JSON의 string으로 변환하는 명령어
+            JSON.stringfy()
+    
+    1) JSON Syntax:
+        기본 형식:
+            1. Data는 name/value의 쌍을 갖는다.
+            2. Data는 ,단위로 분리되어 있다.
+            3. Data의 "객체"를 중괄호 { }가 감싸고 있다.
+            4. 대괄호 [ ]가 배열들(객체들)을 감싸고 있다.
+
+        JSON이 가질 수 있는 값(value):
+            string
+            number
+            object
+            array
+            boolean
+            null
+
+        JSON이 XML보다 좋은 점:
+            - XML이 JSON보다 읽기 어렵다(인식하기 어렵다.)
+            - JSON은 JS의 객체로 사용하기 편리하다
+
+    2) Data 처리
+        JS에서 JSON의 data에 접근할 수 있는 방법:
+            ex) person = [{"name":Againyunn"},{"age":26}]
+
+            1) data의 인식:
+                person.name;
+
+                person["name"];
+
+            2) data의 변경:
+                person.name = "Lucas";
+
+                person["name"] = "Lucas";
 
 
+        JSON 객체 내부에서 array를 가지기:
+            ex)
+            person=[
+                {       
+                    "employees":["John", "Anna", "Peter"]       //person의 property로 array를 갖음 
+                                                                //employees[0] = "John", employee[1] = "Anna", employee[2] = "Peter"
+                },
+                {"eName":"John"},                               
+                {"eName":"Anna"},
+                {"eName":"Peter"}
+            ]
+    3) Parse 처리   : JSON →  JS 변환
+        
+        3-1) JSON을 JS의 객체(object)로 변환
+            ex) 
+            예시 JSON구문 '{"name":"John", "age":30, "city":"New York"}'
 
+            const obj = JSON.purse('{"name":"John", "age":30, "city":"New York"}');
+
+        3-2) JSON의 array를 JS의 array로 변환
+            ex)
+            예시 JSON구문 '["Apple","Banana","Orange"]'
+            const myArr = JSON.purse('["Apple","Banana","Orange"]');
+
+        * 예외 상황:
+            Dates형태의 데이터는 JSON에서 인식하지 못한다. 
+            따라서 JSON에서 "String"형태로 입력한 뒤, JS의 객체로 반환하면 Dates의 형태로 반환된다.
+
+            ex)
+                const text = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+                const obj = JSON.parse(text);               
+                  if (key == "birth") {
+                        return new Date(value);     //JS의 Dates 형태의 데이터로 정제하기 위하여, obj의 birth property를 Date형태로 변환
+                    } else {
+                        return value;
+                    }           
+                document.getElementById("demo").innerHTML = obj.name + ", " + obj.birth;
+
+    4) Stringfy 처리    : JS → JSON 변환
+
+        4-1) JS을 JSON으로 변환
+            ex)
+                const obj = {name: "John", age: 30, city: "New York"};
+                const myJSON = JSON.stringify(obj);        
+                                // [{"name":"John"},{"age":30},{"city":"New York"}]의 JSON으로 변환
+        
+        4-2) JS의 array를 JSON의 string형태의 array로 변환
+            ex)
+                const arr = ["John", "Peter", "Sally", "Jane"];
+                const myJSON = JSON.stringify(arr);
+        
+        * 예외 상황:
+            JSON은 date의 데이터 형식을 처리하지 못하기 때문에 date형태의 데이터 형식을 string으로 바꾸어 인식
+
+            ex)
+                const obj = {name: "John", today: new Date(), city : "New York"};
+                const myJSON = JSON.stringify(obj);
+    
+    5) JSON Objects
+        5-1) Objcet value(값) 호출
+            const myJSON = '{"name":"John", "age":30, "car":null}';
+            const myObj = JSON.parse(myJSON);
+            x = myObj.name;
+            y = myObj["name"];
+            //x와 y의 결과 값은 동일하다.
+        
+        5-2) Looping Objects
+            ex) name(key)값 반환
+                const myJSON = '{"name":"John", "age":30, "car":null}';
+                const myObj = JSON.parse(myJSON);
+
+                let text = "";
+                for (const x in myObj) {
+                    text += x + ", ";
+                }
+                //name, age, car
+
+            ex) value값 반환
+                const myJSON = '{"name":"John", "age":30, "car":null}';
+                const myObj = JSON.parse(myJSON);
+
+                let text = "";
+                for (const x in myObj) {
+                    text += myObj[x] + ", ";
+                }
+                //John, 30, null
+            
+    6) HTML Table
+        JSON의 결과를 HTML에 표시하는 방법
+            ex)
+                <html>
+                <body>
+
+                    <h2>Make a table based on the value of a drop down menu.</h2>
+
+                    <select id="myselect" onchange="change_myselect(this.value)">       //선택항목을 변경하면 해당 value에 해당 하는 값을 JS의 change_myselect 함수의 인자로 전달
+                        <option value="">Choose an option:</option>
+                        <option value="customers">Customers</option>
+                        <option value="products">Products</option>
+                        <option value="suppliers">Suppliers</option>
+                    </select>
+
+                    <p id="demo"></p>
+
+                    <script>
+                        function change_myselect(sel) {
+                            const dbParam = JSON.stringify({table:sel,limit:20});   //
+                            const xmlhttp = new XMLHttpRequest();                   //XMLHttpRequest 객체 생성
+                            xmlhttp.onload = function() {                           //response에 대한 동작 정의
+                                myObj = JSON.parse(this.responseText);              //response받은 data를 JS로 변환
+                                text = "<table border='1'>"
+                                for (x in myObj) {                                  //data의 "name(key)"값을 Loop돌며 반환
+                                    text += "<tr><td>" + myObj[x].name + "</td></tr>";
+                                }
+                                text += "</table>"    
+                                document.getElementById("demo").innerHTML = text;   //html로 출력
+                            }
+                            xmlhttp.open("POST", "json_demo_html_table.php", true);     //XMLHttpRequestf를 POST형태로 요청하여 "json_demo_html_table.php"파일을 오픈
+                            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //header의 정보도 수신받도록 지정
+                            xmlhttp.send("x=" + dbParam);                               //요청하는 POST형태의 정보값을 지정
+                        }
+                    </script>
+
+                </body>
+                </html>
+
+
+                    
 
