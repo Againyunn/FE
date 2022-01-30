@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- REACT Source -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- babel Source -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <p id="root1"></p>
+
+    <script type="text/babel">
+        function Welcome(props) {   //대문자로 시작
+
+            //입력받은 인자(props)의 property 중 name의 값을 html element에 반환
+            return <h1>Hello, {props.name}</h1>;
+        }
+
+        //중첩되게 component를 선언할 수 있다.
+        //중첩 component를 통해, React.JS 내부에서 여러 element를 생성한 뒤에 한번에 html로 반환 가능
+        function App() {        //대문자로 시작
+            return (
+
+                //Welcome Component의 props인자의 propery 중 name으로 각각의 값을 입력
+                <div>
+                    <Welcome name="Sara" />
+                    <Welcome name="Cahal" />
+                    <Welcome name="Edite" />
+                </div>
+            );
+        }
+
+        //실제로 ReactDOM을 활용해 render하는 대상은 App Component 하나를 id="root"에 넣는 것
+        //그러나 App 내부에 충첩 Component 선언을 통해 여러 elements을 한번에 구현
+        ReactDOM.render(<App />, document.getElementById('root1'));
+    </script>
+
+    <p id="root2"></p>
+    <script type="text/babel">
+        //일반화하여 재사용성 강화를 위해 author가 아닌, user로 바꾸어 propery를 명명
+        const Avatar = (props) => {
+            <img className="Avatar" src={props.user.avatarUrl} alt={props.user.name} />
+        }
+
+        const UserInfo = (props) => {
+            <div className="UserInfo">
+                <Avator user={props.user} />
+                <div className="UserInfo-name">
+                    {props.user.name}
+                </div>
+            </div>
+        }
+
+        function Comment(props) {
+            return (
+                <div className="Comment">
+                    <UserInfo user={author} />
+                    <div className="Comment-text">
+                        {props.text}
+                    </div>
+                    <div className="Comment-date">
+                        {formatDate(props.date)}
+                    </div>
+                </div>
+            );
+        }
+        ReactDOM.render(<Comment />, document.getElementById("root2"));
+    </script>
+
+</body>
+
+</html>
+<!-- 
+특징:
+component는 React.JS에서 자체적으로 만들어낸 element를 지칭
+component는 반드시 대문자로 시작(element와 혼동방지를 위해)
+html의 properies는 모두 camelcase형태로 사용 가능
+여러 개의 components를 통해 여러 html elements를 동시다발적으로 사용 가능
+props는 읽기 전용 → 입력받은 값을 변경x
+-->

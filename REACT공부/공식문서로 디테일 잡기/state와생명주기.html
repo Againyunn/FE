@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <!-- REACT Source -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- babel Source -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <p id="root1"></p>
+
+  <!-- class Component를 활용하는 경우 -->
+  <script type="text/babel">
+    class Clock extends React.Component {
+      constructor(props) {          //생성자
+        super(props);               //super : 생성자(constructor)로 전달받은 인자를 초기화하는 역할
+                                    //super은 JS에서 부모클래스의 props를 상속받는 형태의 메서드로, super 호출 전에는 this를 사용 불가능
+        this.state = { date: new Date() };  //초기화된 props 내의 this.state를 초기화
+      }
+
+      componentDidMount() {         //컴포넌트가 mount되면 가장 먼저 호출되는 메서드
+        this.timerID = setInterval(
+          () => this.tick(),        //객체로써 tick이라는 함수를 지정(함수를 직접 호출x, 상수에 함수를 선언하는 형식으로 호출)
+          1000
+        );
+      }
+
+      componentWillUnmount() {      //컴포넌트가 사라지기 직전에 불릴 메서드
+        clearInterval(this.timerID);
+      }
+
+      tick() {
+        this.setState({
+          date: new Date()
+        });
+      }
+
+      //함수형 component는 반드시 값을 run할 수 있는 render()가 필요하다.
+      render() {    
+        return (
+
+        //현 class 내부에 선언된 state를 지칭하므로 this.state를 활용
+          <div>
+            <h1>Hi, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <Clock />,
+      document.getElementById('root1')
+    );
+  </script>
+
+  <p id="root2"></p>
+  <!-- functional component를 활용하는 경우 -->
+  <script type="text/babel">
+
+    function FunctionalComponent() {
+      //state관리 → useState
+      const [date, setDate] = React.useState(() => {
+        return new Date();
+      });
+
+      //tick함수 정의
+      const tick = () => {
+        setDate(new Date());
+      };
+
+      //mount 되자마자 실행
+      React.useEffect(() => {
+        const interval = setInterval(() => tick(), 1000)
+
+        return () => {
+          clearInterval(interval);
+        }
+      }, [])
+
+      result= (
+        <>
+          <h1>Hello, world!</h1>
+          <h2>It is {date.toLocaleTimeString()}.</h2>
+        </>
+      );
+
+      ReactDOM.render(result, document.getElementById('root2'));
+    }
+    
+    FunctionalComponent();
+
+    
+
+  </script>
+
+</body>
+
+</html>
