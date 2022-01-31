@@ -1,25 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import ClassComponent from './component/2-6.LifeCycle/ClassComponent';
+import Event from './component/2-7.Event/Event';
+import ConditionalRendering from './component/2-8.ConditionalRendering/ConditionalRendering';
+import List from './component/2-9.List/List';
+import ControlledComponent from './component/2-10.Form/ControlledComponent';
+import UnControlledComponent from './component/2-10.Form/UnControlledComponent';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+      <div className='App'>
+        {/* <ClassComponent/> */}
+        {/* <Event/> */}
+        {/* <ConditionalRendering /> */}
+        {/* <List /> */}
+        <ControlledComponent/>
+        <br/>
+        <UnControlledComponent/>
+      </div>
+
+      );
 }
 
-export default App;
+      export default App;

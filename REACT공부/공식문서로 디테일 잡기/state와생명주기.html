@@ -54,46 +54,6 @@
     );
   </script>
 
-  <p id="root2"></p>
-  <!-- functional component를 활용하는 경우 -->
-  <script type="text/babel">
-
-    function FunctionalComponent() {
-      //state관리 → useState
-      const [date, setDate] = React.useState(() => {
-        return new Date();
-      });
-
-      //tick함수 정의
-      const tick = () => {
-        setDate(new Date());
-      };
-
-      //mount 되자마자 실행
-      React.useEffect(() => {
-        const interval = setInterval(() => tick(), 1000)
-
-        return () => {
-          clearInterval(interval);
-        }
-      }, [])
-
-      result= (
-        <>
-          <h1>Hello, world!</h1>
-          <h2>It is {date.toLocaleTimeString()}.</h2>
-        </>
-      );
-
-      ReactDOM.render(result, document.getElementById('root2'));
-    }
-    
-    FunctionalComponent();
-
-    
-
-  </script>
-
 </body>
 
 </html>
