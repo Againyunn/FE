@@ -110,3 +110,17 @@ export default function ControlledComponent() {
 //defaultValue, ref          기본값 / value 확인
 
 //props를 바꾸려면 직접 props를 바꾸는 것이 아니라, state를 활용해야 한다.
+
+// Hook
+// React의 class 구조 한계(단점)보완과 재사용성 증대를 위해 등장
+// Hook 사용 규칙 → 최상위 / 함수형 컴포넌트 / custom Hook
+// Class의 state는 과거에 Hook이 출시되기 전의 특성이 담겨있다 정도만 알아두기
+
+
+// JS의 배열구조 분해 활용
+// const [fruit, setFruit] = useState('banana');
+
+// 타 언어처럼 풀어서 표현하는 방법 
+// var fruitStateVariable = useState('banana'); // 두 개의 아이템이 있는 쌍을 반환
+// var fruit = fruitStateVariable[0]; // 첫 번째 아이템
+// var setFruit = fruitStateVariable[1]; // 두 번째 아이템

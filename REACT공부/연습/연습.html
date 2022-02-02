@@ -1,0 +1,166 @@
+<html>
+
+<head>
+    <!-- 리엑트 -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- 바벨 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <br>
+    <div id="counter"></div>
+    <br>
+    <div id="components"></div>
+    <!-- root의 script -->
+    <script type="text/babel">
+
+        //클래스 간의 다중 props composition 연습
+        //props 기본 값
+        //props의 조건 지정
+        class Codelab extends React.Component {
+            render() {
+
+                let text = "Hi I'm Colab";
+
+                let textStyle = {
+                    backgroundColor: 'aqua'
+                };
+
+                return (
+                    <>
+                        {/* ReactDom 안에서 주석처리 */}
+                        <h1>Hello {this.props.name}</h1>
+                        <p style={textStyle}>{text}</p>
+                        <p>{this.props.children}</p>
+                        <p>{this.props.score}</p>
+                    </>
+                )
+            };
+        };
+        Codelab.defaultProps = {
+            name: "Jaeyun Jung",
+            children: "the best Developer",
+            score: 100
+        };
+
+        // Codelab.propTypes = {
+        //     name: React.PropTypes.string,
+        //     children: React.PropTypes.any.isREquired,
+        //     score: React.PropTypes.number
+        // };
+
+        //클래스의 다중 props composition 연습
+        class App extends React.Component {
+            render() {
+                return (
+                    <Codelab name={this.props.name} score={this.props.score}>
+                        {this.props.children}
+                    </Codelab>
+                )
+            };
+        };
+
+        ReactDOM.render(<App name="aginyunn" />, document.getElementById("root"));
+    </script>
+
+    <!-- counter의 script -->
+    <script type="text/babel">
+
+        //클래스형 evnet처리
+        // class Counter extends React.Component{
+        //     constructor(props){
+        //         super(props);
+        //         this.state = {
+        //             value:0
+        //         };
+        //         this.handleClick = this.handleClick.bind(this);
+
+        //     }
+
+        //     handleClick(){
+        //         this.setState({
+        //             value:this.state.value+1
+        //         })
+        //     }
+
+        //     render(){
+        //         return (
+        //         <>
+        //             <h2>{this.state.value}</h2>
+        //             <button onClick={this.handleClick}>Press</button>
+        //         </>
+        //     );
+        //     }
+        // }
+
+        //함수형 event처리
+        function Counter() {
+
+            const [counter, counterSet] = React.useState(0);
+
+            function handleClick(event) {
+                counterSet(event.target.value++);
+            };
+
+            return (
+                <>
+                    <h2>{counter}</h2>
+                    <button onClick={handleClick}>Press</button>
+                </>
+            );
+        };
+
+        ReactDOM.render(<Counter />, document.getElementById("counter"));
+    </script>
+
+
+
+    <script type="text/babel">
+        class ContactInfo extends React.Component {
+            render() {
+                return (
+                    <>
+                        <div>{this.props.contact.name} {this.props.contact.phone} </div>
+                    </>
+                )
+            }
+        }
+
+        class Contact extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    contactData:[
+                        {name:'Abet', phone:'010-0000-0001'},
+                        {name:'Betty', phone:'010-0000-0002'},
+                        {name:'Cecila', phone:'010-0000-0003'},
+                        {name:'David', phone:'010-0000-0004'}
+                    ]
+                }
+            }
+
+            render() {
+
+                const mapToComponent = (data) =>{
+                    return data.map((contact,i) =>{
+                        return (<ContactInfo contact={contact} key={i}/>);
+                    })
+                };
+
+                return (
+                    <div>
+                        {mapToComponent(this.state.contactData)}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Contact />, document.getElementById("components"));
+    </script>
+
+</body>
+
+</html>
