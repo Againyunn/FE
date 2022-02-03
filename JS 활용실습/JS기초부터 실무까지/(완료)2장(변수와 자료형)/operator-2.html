@@ -29,12 +29,16 @@
 
 
         //정해지지 않은 개수의 여러 인자를 전달받아 처리하는 경우
-        const ThisList = (...props) => {
+        const ThisList = (props) => {
             const listLength = props.length;
-            const check = []
+            var check = ''
             for (var i = 0; i < listLength; i++) {
-                check.push(props[i])
+                check+=`<div style="text-align:center;">${props[i]}<div/>`;
                 // check.push(Show(props[i]));
+                if(i>= listLength){
+                    break;
+                }
+                check+=`<br/>`;
             }
             return check;
         }
@@ -42,7 +46,7 @@
 
 
         const Test1 = () => {
-            var list = ['안녕', '자바스크립트'] //문자열 타입
+            var list = ['안녕', '자바스크립트', '정재윤'] //문자열 타입
             var num = 10; //Number타입
             //복합대입 연산자를 통하여 list변수에 문자열을 누적하고 있다.
 
@@ -61,18 +65,17 @@
             // var targetList = thisList('안녕', '자바스크립트', '정재윤');
 
             return (
-                <>
-                    {ThisList('안녕', '자바스크립트', '정재윤')}
-                    {/* <Show props={'안녕', '자바스크립트', '정재윤'}/> */}
-                    <br />
-                    {num}
-                </>
+ 
+                    ThisList(list)
+                    +num
+
             )
         }
 
-        ReactDOM.render(<Test1 />, document.getElementById("test1"));
+        // ReactDOM.render(<Test1 />, document.getElementById("test1"));
+        document.getElementById("test1").innerHTML=Test1();
     </script>
-    <div id="test1">안녕</div>
+    <div id="test1"></div>
 </body>
 
 </html>

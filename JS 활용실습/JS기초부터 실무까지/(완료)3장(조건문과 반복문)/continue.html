@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>continue예제</title>
+</head>
+
+<body>
+    <!-- <script>
+        //2의 3의 공배수를 제외하고 다 출력하게끔 하는 코드
+        for (var i = 1; i <= 100; i++) {
+            //2와 3의 공배수인지 확인하는 코드
+            if (i % 2 == 0 && i % 3 == 0) {
+                //continue를 실행하게 되면 continue아래에 있는 실행코드를 
+                //무시하고 증감식으로 이동한다.
+                continue;
+            }
+            document.write(i + "<br/>");
+        }
+    </script> -->
+
+    <script type="text/babel">
+        // function Real() {
+        //     return (
+        //         <>
+        //             <ol>
+        //                 <App />
+        //             </ol>
+        //         </>
+        //     )
+        // }
+
+        function App() {
+            var tmp = '';
+
+            for (var i = 1; i <= 100; i++) {
+                //2와 3의 공배수인지 확인하는 코드
+                if (i % 2 == 0 && i % 3 == 0) {
+                    //continue를 실행하게 되면 continue아래에 있는 실행코드를 
+                    //무시하고 증감식으로 이동한다.
+                    continue;
+                }
+                tmp += `${i}<br/>`;
+            }
+            return (
+                tmp
+            )
+        }
+
+        document.getElementById("root").innerHTML=App()
+        // ReactDOM.render(<Real />, document.getElementById("root"));
+    </script>
+
+    <div id="root"></div>
+</body>
+
+</html>

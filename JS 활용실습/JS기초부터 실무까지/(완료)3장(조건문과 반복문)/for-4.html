@@ -9,8 +9,15 @@
     <script>
         //사용자로부터 입력받는 부분
         var data = prompt("어디까지 숫자를 출력할까요?", "숫자입력");
+
         //string -> number
         data = parseInt(data);
+
+        //number -> string
+        data2 = toString(data)
+
+        //특정 객체의 데이터 형을 반환
+        document.write(typeof(data2));
         
         for(var i=1; i<=data; i++){
             document.write(i + "<br>");

@@ -15,6 +15,8 @@
             var count = 0; //사용자의 시도 횟수
             low = 0;
             high = 99;
+
+            //floor 소수점 내림
             card = Math.floor(Math.random()*100);  //0~99까지의 난수를 발생
             alert("수를 결정하였습니다.맞춰 보세요.");
 
@@ -32,7 +34,7 @@
                     alert("값의 범위를 벗어났어요.");                    
                 }
                 else {  //정상적인 범위의 수가 입력된 경우
-                    if(n == card){
+                    if(n === card){
                         alert("정답입니다.짝짝짝!");
                         break;
                     }
@@ -48,9 +50,12 @@
             }
             alert("시도횟수는 " + count + "입니다.");
 
+
+            //confirm : "확인"(true) / "취소"(false) 값 중 선택할 수 있는 alert 창
             var con = confirm("다시 게임을 하시겠습니까?");
             //무한루프를 사용할 경우에는 반드시 빠져나갈 곳을 만들어 두어야 한다.
-            if(con == false){
+
+            if(con === false || con ==="아니오" || con ==="종료"){
                 break;
             }
         }
