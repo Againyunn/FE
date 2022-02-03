@@ -1,0 +1,31 @@
+body {
+    text-align: center;
+}
+.btn {
+    margin-top: 50px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #007bff;
+    
+    /* 글자의 가로 위치 */
+    text-align: center;
+    /* 글자의 세로 위치 */
+    vertical-align: center;
+    border: 1px solid blue;
+    
+    /* 버튼의 크기는 글자 기준으로 얼마나 여백이 있느냐로 결정된다. */
+    padding: 10px;       
+}
+.btn:hover {
+    color: #fff;
+    background-color: aquamarine;
+    border-color: aquamarine;
+}
+.show {
+    margin-top: 50px;
+    padding: 20px 30px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+

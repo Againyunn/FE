@@ -6,7 +6,11 @@ export default function Dialog(props) {
 
     return (
         <>
-            <button onClick={() => setIsOpen(true)}>Open</button>
+            <button style={{
+                position:"absolute",
+                left:100,
+            }}
+            onClick={() => setIsOpen(true)}>Open</button>
 
             {/* isOpen이 true이면 아래의 구문을 확인할 수 있다. */}
             {isOpen ? <div

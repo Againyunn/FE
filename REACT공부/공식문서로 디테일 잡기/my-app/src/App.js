@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-// import Example from './component/3-11.Portal/Example';
-import Example from './component/3-10.Context/Example';
+import Example from './component/3-11.Portal/Example';
+// import Example from './component/3-10.Context/Example';
 // import ClassComponent from './component/2-6.LifeCycle/ClassComponent';
 // import Event from './component/2-7.Event/Event';
 // import ConditionalRendering from './component/2-8.ConditionalRendering/ConditionalRendering';
@@ -50,9 +50,9 @@ function App() {
         <ButtonHOC /> */}
       {/* <Memorization /> */}
       {/* <br /> */}
+      {/* <Example />
+      <br/> */}
       <Example />
-      <br/>
-      {/* <Example /> */}
     </div>
 
   );

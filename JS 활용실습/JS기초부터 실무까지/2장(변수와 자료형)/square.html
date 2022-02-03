@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>사각형의 너비</title>
+</head>
+<body>
+    <script type="text/babel">
+        var width = prompt("사각형의 너비 값 : ");
+        var height = prompt("사각형의 높이 값 : ");
+        var square = width * height;
+
+        alert("주어진 사각형의 너비 : " + square);
+
+        const App=(props)=>{
+            return(
+                <>
+                <div style={{textAlign: 'center'}}>
+                    <div style={{display:'inline-block' ,width :`${props.thisWidth}px`, height: `${props.thisHeight}px`, backgroundColor: 'skyblue'}}>
+                        <p style={{display:'inline-block', textAlign: 'center'}}>square{square}</p>
+                        </div>
+
+                </div>    
+                </>
+            )
+        }
+
+        ReactDOM.hydrate(<App thisHeight={height} thisWidth={width}/>, document.getElementById("root"));
+
+    </script>
+    <div id="root"></div>
+    
+</body>
+</html>
