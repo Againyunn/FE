@@ -1,0 +1,77 @@
+공식문서의 효용
+    1. 제작 의도 파악(언어, 프로그램의 핵심적 기능 파악) 가능
+    2. 사용법에 대한 안내
+
+node.js를 설치하면 자동으로 npm, npx가 설치되며, react를 구동할 수 있는 조건이 갖춰지게 된다.
+
+JSX → React.creatElement의 간편식
+        (동일한 기능 수행)
+
+Hooks
+    Hooks의 등장 → class의 단점 보완 / 재사용성 강화(효율성 강화를 위한 목적)
+    Hook 사용 규칙 → 최상위(조건적으로 나타나거나, 반복적으로 나타나면 에러가 발생→ 조건문, 반복문 내에서 사용x)/ 함수형 컴포넌트/ custom Hook
+    Class의 state → function을 활용한 Hook으로 대체 가능 만약 class 내에서 특정함수를 custom 하여 사용할 경우 반드시 constructor에 this.함수명.bind를 통해 정의 필요
+    useEffect → 데이터 fetch/ 구독/ Dom 수정
+    clean up → 구독과 구독해지를 동시에 수행(원래 class component에서는 didMount와 unmount로 나누어서 각각 구독과 구독해지를 설계해야 했다면, function component에서는 effect를 통해 동시에 제어 버그의 소지를 줄일 수 있다.)
+    dependency array → 필요한 변경이 있을 때만 effect 실행 useEffect를 특정한 상황에만 동작하도록 제어할 수 있다.
+    custom Hook → 컴포넌트들의 반복되는 Hooks를 묶어서 한번에 사용
+    다양한 Hooks → 필요한 타이밍에 참고하여 사용 가능(useState, useEffect, useContext 등... )
+
+Composition 
+    Composition → 컴포넌트에 컴포넌트를 담기(다중 컴포넌트 구현)
+    담는 방법 → props의 Children(기본)으로 전달 가능 / Custom하여 특정한 값을 지정하여 원하는 컴포넌트들을 제어 가능
+    typeof → 해당 객체의 type을 검사
+    확장성 → 다양한 상황을 품을 수 있도록 확장성 지원(react가 composition을 지원하는 이유)
+
+HOC
+    HOC → 함수를 받아서 함수를 리턴(Higher Order Component)하는 것으로 with 표현식 사용(횡적으로, 같은 기능을 하는 컴포넌트를 모아서 기능이 더 붙은 컴포넌트를 리턴)
+
+Memoization
+    React.memo → HOC/ Props 비교하여 메모 (컴포넌트를 주입하면 Memoization된 컴포넌트를 리턴하는 방식) → props가 같으면 다시 그리지 않는다.
+    Profiler → 리엑트 성능 분석 도구
+    callback → useCallback 기존의 함수에 함수를 입력받을 때 props가 조금이라도 달라지면 전체 함수를 다시 그리는 문제 발생 → 해결을 위해서 함수 안에 함수를 선언하여 callback하는 형식 활용
+    value → useMemo (컴포넌트 안에 특정 값을 저장해야 하는 상태라면 useMemo로 값 저장 가능 )
+
+Context
+    컴포넌트 트리 제약 → Props drilling의 한계 해소(상속의 문제 해결 : 컴포넌트가 연속해서 트리를 형성하며 자식노드가 증가할 때, 모든 props를 꼐속 자식노드에 전달해야 하는 문제 해결을 위해 등장) → Provider로만 감싸져 있다면, 해당 노드의 자식이 Context의 값에 도달가능 및 수정가능한 방법
+    재사용성 → Context를 사용하면 재사용하기 어려운 문제 발생 → Context의 dependency가 생겨서 재사용하기 어려울 수 있다.(단점으로 발생)
+    API → createContext : context를 만드는 함수, 가장 가까운 부모노드에 provider가 없다면 default값을 지정하여 허용/ provider : context의 변경을 자식노드 및 부모노드에 알려주는 역할/ Consumer : Provider의 안에서 이미 제공되는 값(props)들을 토대로 수정 및 생성할 수 있게 해주는 기능(component를 쉽게 생성가능)/ contextType : 해당 context에 허용되는 데이터의 형태 지정가능
+    useContext → useContext라는 Hook을 활용하여 Consumer 대체
+
+Portals
+    createPortal → 부모 컴포넌트 DOM 트리로부터 벗어나기
+    이벤트 → Portal에 있더라도 Event는 트리로 전파(버블링을 통해 부모 컴포넌트에서 portal을 이용해 벗어난 자식노드 내에 발생한 이벤트도 부모노드로 전달 가능)
+
+RenderProps : 트리 구조 상 횡적으로 동일한 기능을 renderprops로 분리하여 수행
+    render props → 무엇을 렌더링할 지 알려주는 함수(컴포넌트의 consumer와 유사한 기능 수행) → 전달하는 값을 토대로 재사용성을 획득
+    render일 필요 → 없음, children도 되고 다른 것도 가능
+    PureComponent → props, state 비교하여 성능을 최적화
+
+PropTypes
+    개발 모드에서만 동작 → 유효하지 않은 prop에 대한 경고(실제 배포 시에는 작동x이므로 제거 필요)
+    custom → RegExp(공식문서에서 제공된 함수 틀 사용 가능) 등으로 사용자 정의 가능
+    children 제한 → 원래 제약 없던 children의 개수 제약 가능 → 일반적으로 Typescript와 같은 기능을 주는 것으로 JS에서 type의 혼용으로 발생할 수 있는 버그 최소화 가능
+
+Reconciliation
+    루트부터 비교 → 무엇을 렌더링할 지 알려주는 함수의 작동 방식
+    트리를 파괴 → 부모가 바뀌면 트리를 파괴하고 새롭게 생성
+    Keys → 자식 노드의 재귀 처리 시 효율성 확보(자식노드의 DOM도 지속적으로 비교 알고리즘이 작동하는데, 이때 자식 노드에 Keys = "특정 값"을 부여하여 동일한 Keys끼리는 비교하지 않도록하여 재귀 처리에 따른 효율성 확보가능)
+    virtual DOM → 실제 DOM과 동기화할 가상표현
+    재조정 → 실제 DOM과 virtual DOM의 동기화
+    React Fiber → 스택 reconciler를 대체한 재조정 엔진(React 16부터 적용)
+
+React Dev Tools
+    개발자 도구 확장 → React에서 확인하고 싶은 것들을 브라우저의 확장팩으로 깔고, 개발자모드에서 각 컴포넌트 별로 직접 조회 가능
+    성능 측정 → Profiler를 활용
+
+React의 사고 패턴(주요한 아이디어와 구현, 설계 방식)
+    공식문서 참고: https://ko.reactjs.org/docs/thinking-in-react.html
+    1단계: UI를 컴포넌트 계층 구조로 나누기
+    2단계: React로 정적인 버전 만들기
+    3단계: UI state에 대한 최소한의 (하지만 완전한) 표현 찾아내기
+    4단계: State가 어디에 있어야 할 지 찾기
+    5단계: 역방향 데이터 흐름 추가하기
+
+공식문서를 보고 라이브러리를 익히기 위해서는 반복/ 연습을 통해 숙달해야 한다.
+20여개의 라이브러리를 보면서 반복/ 연습 필요
+
