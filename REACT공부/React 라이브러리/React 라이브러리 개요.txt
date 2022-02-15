@@ -23,5 +23,7 @@
 다룰 라이브러리 공식문서 주소:
     1. moment :
         https://momentjs.com/
-    
-    
+
+        라이브러리 패키지 설치
+        npm install moment
+        npm install moment-timezone
