@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>자기소개서</title>
+</head>
+<body>
+
+    <h1>자기소개서</h2>
+    <hr>
+
+    <!-- 목차 -->
+    <div>
+        <h2>목차</h2>
+        <ol>
+            <li><a href="#personalInfo">개인정보</a></li>
+            <li><a href="#careerPortfolio">경력 및 포트폴리오</a></li>
+            <li><a href="#timetable">22년도 1학기 시간표</a></li>
+            <li><a href="#favoriteSong">좋아하는 가수</a></li>
+        </ol>
+    </div>
+    <br>
+
+    <!-- 본문 -->
+    <!-- 1. 개인정보 -->
+    <div id="personalInfo">
+        <h2>개인정보</h2>
+        <p>
+            <table width="100%">
+                <tbody>
+                    <tr>
+                        <th>이름:</th>
+                        <td>정재윤</td>
+                        <!-- 이미지1 -->
+                        <td colspan="4" rowspan="9">
+                            <img src="media/정재윤.jpg" alt="프로필 사진" height="200px">
+                        </td>
+                    </tr>
+
+                    <!-- 생년월일 -->
+                    <tr>
+                        <th>생년월일:</th>
+                        <td colspan="2">1997.05.23</td>
+                    </tr>
+
+                    <tr>
+                        <th>이메일:</th>
+                        <td>rangyun36@gmail.com</td>
+                    </tr>
+
+                    <!-- 대학 -->
+                    <tr>
+                        <th rowspan="3" >대학:</th>
+                        <td colspan="3">한국외국어대학교</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">1전공: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GBT학부</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">이중전공: &nbsp;컴퓨터전자시스템공학부</td>
+                    </tr>
+                    
+                    <tr>
+                        <th>특기:</th>
+                        <td colspan="3">그림그리기, 공예품 만들기</td>
+                    </tr>
+
+                    <tr>
+                        <th>취미:</th>
+                        <td colspan="3">노래듣기, 노래부르기</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+    </div>
+
+    <!-- 2. 경력 및 포트폴리오 -->
+    <div id="careerPortfolio">
+        <h2 id="career">경력</h2>
+        <ul>
+            <li>클루커스 기술지원팀</li>
+            <li>위메프/위메프오 지원팀</li>
+            <li>miso 영업팀</li>
+        </ul>
+
+
+        <h2 id="portfolio">포트폴리오</h2>
+        <p>
+            프로그래밍 관련 프로젝트는 GitHub에 업로드되어 있습니다.
+            <br>
+            <!-- 링크4 : 깃허브링크 -->
+            <a href="https://github.com/Againyunn" target="blank">GitHub link</a>
+        </p>
+    </div>
+
+    <!-- 3. 22-1 시간표 -->
+    <div id="timetable">
+        <!-- table 사용 -->
+        <!-- 각 수업은 rowspan사용 -->
+        <table border="1" width="100%" >
+            <caption><h2>2022년 1학기 시간표</h2></caption>
+
+            <thead>
+                <tr>
+                    <th width="3%"></th>
+                    <th width="19%">월</th>
+                    <th width="20%">화</th>
+                    <th width="19%">수</th>
+                    <th width="20%">목</th>
+                    <th width="19%">금</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td rowspan="3">웹프로그래밍</td>
+                    <td rowspan="2">컴퓨터구조</td>
+                    <td rowspan="3">컴퓨터네트워크</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+
+
+
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+
+                    <td>시스템프로그래밍</td>
+
+                    <td rowspan="2">시스템프로그래밍</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td rowspan="3">종합설계</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 4. 좋아하는 가수-->
+    <div id="favoriteSong">
+
+        <!-- 좋아하는 가수 -->
+        <h2>좋아하는 가수</h2>
+		<p>* 가수의 이미지를 누르면 해당 가수의 "VIBE"프로필로 이동할 수 있어요!</p>
+
+        <!-- 목록 사용 -->
+        <table>
+            <thead>
+                <tr>
+                    <td><b>가수명</b></td>
+                    <td><b>사진</b></td>
+                    <td><b>뮤직비디오</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>아이유(IU)</td>
+                    <td><a href="https://vibe.naver.com/artist/112579" target="blank"><img src="media/아이유.jpg" alt="아이유 사진" height="315"></a></td>
+                    <td><iframe width="560" height="315" src="http://www.youtube.com/embed/3Ke5QfaB-vk"></iframe></td>
+                </tr>
+                <tr>
+                    <td>로이킴(RoyKim)</td>
+                    <td><a href="https://vibe.naver.com/artist/234404" target="blank"><img src="media/로이킴.jpg" alt="로이킴 사진" height="315"></a></td>
+                    <td><iframe width="560" height="315" src="http://www.youtube.com/embed/k3-BDy55tq4"></iframe></td>
+                </tr>
+            </tbody>
+        
+        </table>
+
+        <!-- <iframe src="//www.naver.com" width="100%" height="20%"></iframe> -->
+        <!-- 이미지2 아이유 -->
+        <!-- 링크2 아이유 -->
+
+        <!-- 이미지3 로이킴 -->
+        <!-- 링크3 로이킴 -->
+
+        <!-- iframe활용 -->
+        <!-- 유튜브 동영상 첨부 -->
+    </div>    
+</body>
+</html>
