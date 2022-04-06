@@ -2,15 +2,15 @@
 <html>
 <head>
     <title>자기소개서</title>
+    <link rel="stylesheet" href="./정재윤-스타일.css" type="text/css" >
 </head>
 <body>
-
     <h1>자기소개서</h2>
     <hr>
 
     <!-- 목차 -->
-    <div>
-        <h2>목차</h2>
+    <div id="index">
+        <h2 class="title1">목차</h2>
         <ol>
             <li><a href="#personalInfo">개인정보</a></li>
             <li><a href="#careerPortfolio">경력 및 포트폴리오</a></li>
@@ -23,16 +23,17 @@
     <!-- 본문 -->
     <!-- 1. 개인정보 -->
     <div id="personalInfo">
-        <h2>개인정보</h2>
+        <h2 class="title2">개인정보</h2>
         <p>
-            <table width="100%">
+            간략한 프로필을 담았습니다.
+            <table width="100%" >
                 <tbody>
                     <tr>
                         <th>이름:</th>
                         <td>정재윤</td>
                         <!-- 이미지1 -->
                         <td colspan="4" rowspan="9">
-                            <img src="media/정재윤.jpg" alt="프로필 사진" height="200px">
+                            <img class="imgStyle" src="media/정재윤.jpg" alt="프로필 사진" height="200px">
                         </td>
                     </tr>
 
@@ -76,7 +77,8 @@
 
     <!-- 2. 경력 및 포트폴리오 -->
     <div id="careerPortfolio">
-        <h2 id="career">경력</h2>
+        <h2 class="title3" id="career">경력</h2>
+        <p>IT회사 관련 경력만 간략히 적었습니다.</p>
         <ul>
             <li>클루커스 기술지원팀</li>
             <li>위메프/위메프오 지원팀</li>
@@ -84,7 +86,7 @@
         </ul>
 
 
-        <h2 id="portfolio">포트폴리오</h2>
+        <h2 class="title4" id="portfolio">포트폴리오</h2>
         <p>
             프로그래밍 관련 프로젝트는 GitHub에 업로드되어 있습니다.
             <br>
@@ -102,26 +104,26 @@
 
             <thead>
                 <tr>
-                    <th width="3%"></th>
-                    <th width="19%">월</th>
-                    <th width="20%">화</th>
-                    <th width="19%">수</th>
-                    <th width="20%">목</th>
-                    <th width="19%">금</th>
+                    <th class="timeTable" width="3%"></th>
+                    <th class="timeTable" width="19%">월</th>
+                    <th class="timeTable" width="20%">화</th>
+                    <th class="timeTable" width="19%">수</th>
+                    <th class="timeTable" width="20%">목</th>
+                    <th class="timeTable" width="19%">금</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td rowspan="3">웹프로그래밍</td>
-                    <td rowspan="2">컴퓨터구조</td>
-                    <td rowspan="3">컴퓨터네트워크</td>
+                    <td class="timeTable" >1</td>
+                    <td class="lecture1"  rowspan="3">웹프로그래밍</td>
+                    <td class="lecture2"  rowspan="2">컴퓨터구조</td>
+                    <td class="lecture3"  rowspan="3">컴퓨터네트워크</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>2</td>
+                    <td class="timeTable" >2</td>
 
 
 
@@ -129,55 +131,55 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>3</td>
+                    <td class="timeTable" >3</td>
 
-                    <td>시스템프로그래밍</td>
+                    <td class="lecture4" >시스템프로그래밍</td>
 
-                    <td rowspan="2">시스템프로그래밍</td>
+                    <td class="lecture4"  rowspan="2">시스템프로그래밍</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>4</td>
+                    <td class="timeTable" >4</td>
                     <td></td>
                     <td></td>
                     <td></td>
-
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td rowspan="3">종합설계</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>8</td>
 
                     <td></td>
+                </tr>
+                <tr>
+                    <td class="timeTable" >5</td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>9</td>
+                    <td class="timeTable" >6</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="timeTable" >7</td>
+                    <td class="lecture5"  rowspan="3">종합설계</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="timeTable" >8</td>
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="timeTable" >9</td>
 
                     <td></td>
                     <td></td>
@@ -192,7 +194,8 @@
     <div id="favoriteSong">
 
         <!-- 좋아하는 가수 -->
-        <h2>좋아하는 가수</h2>
+        <h2 class="title5">좋아하는 가수</h2>
+        <p>좋아하는 남/녀 가수 1명씩만 선정하였습니다. </p>
 		<p>* 가수의 이미지를 누르면 해당 가수의 "VIBE"프로필로 이동할 수 있어요!</p>
 
         <!-- 목록 사용 -->
@@ -207,12 +210,12 @@
             <tbody>
                 <tr>
                     <td>아이유(IU)</td>
-                    <td><a href="https://vibe.naver.com/artist/112579" target="blank"><img src="media/아이유.jpg" alt="아이유 사진" height="315"></a></td>
+                    <td><a href="https://vibe.naver.com/artist/112579" target="blank"><img class="imgStyle" src="media/아이유.jpg" alt="아이유 사진" height="315" width="315"></a></td>
                     <td><iframe width="560" height="315" src="http://www.youtube.com/embed/3Ke5QfaB-vk"></iframe></td>
                 </tr>
                 <tr>
                     <td>로이킴(RoyKim)</td>
-                    <td><a href="https://vibe.naver.com/artist/234404" target="blank"><img src="media/로이킴.jpg" alt="로이킴 사진" height="315"></a></td>
+                    <td><a href="https://vibe.naver.com/artist/234404" target="blank"><img class="imgStyle" src="media/로이킴.jpg" alt="로이킴 사진" height="315" width="315"></a></td>
                     <td><iframe width="560" height="315" src="http://www.youtube.com/embed/k3-BDy55tq4"></iframe></td>
                 </tr>
             </tbody>

@@ -1,0 +1,81 @@
+/* body{
+    background-image: ;
+} */
+/*여기어때 '잘난체' 웹 폰트 적용*/
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*배경 및 콘텐츠 배경 지정*/
+body{
+    background-image: url('./media/죠르디이미지.jpg');
+    background-repeat: repeat;
+}
+#index{
+    background-color: white;
+    width:40%;
+}
+#personalInfo, #careerPortfolio, #timetable, #favoriteSong{
+    background-color: white;
+}
+
+/*제목별 디자인 서식*/
+h1,h2{
+    font-family: 'yg-jalnan', Times, serif;
+    font-weight: bold;
+}
+.title1{
+    color: #00F5FF	;
+}
+.title2{
+    color: #0D7CFD;
+}
+.title3{
+    color: #2819FA;
+}
+.title4{
+    color: #A00DFD;
+}
+.title5{
+    color: #8282FF;
+}
+
+/*문단 첫 글자 강조*/
+p:first-letter{
+    color: red;
+    font-size: 1.5em;
+}
+
+/*이미지 디자인 서식*/
+.imgStyle{
+    /* blur-radius: 5px; */
+    border: 10px groove gray;
+    box-shadow: 2px 3px 10px black;
+}
+
+/*시간표 디자인 서식*/
+th,td{
+    height:3em;
+}
+.timeTable{
+    background-color: yellow;
+}
+.lecture1{
+    background-color: #FA9995;
+}
+.lecture2{
+    background-color: #B09AE6;
+}
+.lecture3{
+    background-color: #98F8FA;
+}
+.lecture4{
+    background-color: #ABE681;
+}
+.lecture5{
+    background-color: #FFDE99;
+}
+
