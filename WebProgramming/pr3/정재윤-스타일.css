@@ -1,6 +1,4 @@
-/* body{
-    background-image: ;
-} */
+
 /*여기어때 '잘난체' 웹 폰트 적용*/
 @font-face {
     font-family: 'yg-jalnan';
@@ -11,16 +9,10 @@
 
 /*배경 및 콘텐츠 배경 지정*/
 body{
-    background-image: url('./media/죠르디이미지.jpg');
+    background-image: url('./media/벚꽃.jpg');
     background-repeat: repeat;
 }
-#index{
-    background-color: white;
-    width:40%;
-}
-#personalInfo, #careerPortfolio, #timetable, #favoriteSong{
-    background-color: white;
-}
+
 
 /*제목별 디자인 서식*/
 h1,h2{
@@ -51,7 +43,6 @@ p:first-letter{
 
 /*이미지 디자인 서식*/
 .imgStyle{
-    /* blur-radius: 5px; */
     border: 10px groove gray;
     box-shadow: 2px 3px 10px black;
 }
