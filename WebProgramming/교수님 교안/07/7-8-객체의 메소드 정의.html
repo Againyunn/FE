@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Method</title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<script type="text/javascript">
+		function display_book() {
+			document.write("Title: "+ this.title + "<br/>");
+			document.write("Publisher: "+ this.publisher + "<br/>");
+			document.write("Author: "+ this.author + "<br/><br/>");
+		}
+		
+		function Book (title_value, publisher_value, author_value) {
+			this.title = title_value;
+			this.publisher = publisher_value;
+			this.author = author_value;
+			this.display = display_book; 
+		}
+
+		var book_obj1 = new Book("HTML5 입문", "파란출판사", "홍길동");
+		book_obj1.display(); 
+		var book_obj2 = new Book("JavaScript", "노란출판사", "임꺽정");
+		book_obj2.display();
+	</script>
+</body>
+</html>

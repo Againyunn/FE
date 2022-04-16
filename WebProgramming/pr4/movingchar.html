@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>움직이는 글자</title>
+    <style>
+        body{
+            height: 100%;
+            width: 100%;
+        }
+
+        /*전체 DIV의 스타일 지정*/
+        div{
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-radius: 50px;
+            font-weight: bold;
+            
+        }
+
+        /*개별 객체 스타일 지정*/
+        /*www*/
+        .www{
+            background-color: black;
+
+            /*시작 위치*/
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            
+            /*애니메이션 설정*/
+            animation-name: wwwAnimation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+
+            /*hover의 애니메이션 제어용*/
+            transition: transform 2s;
+        }
+
+        @keyframes wwwAnimation{
+            from{
+                top: 0px;
+                left: 0px;
+                height:15px;
+                width: 40px;
+                font-size: 12px;
+            }
+
+            to{
+                top: 0px;
+                left: 40vw;
+                height:70px;
+                width: 200px;
+                font-size: 50px;
+            }
+        }
+
+        .www:hover{
+            transform: rotate(180deg);
+        }
+
+        /*html5*/
+        .html5{
+            background-color: red;
+
+            /*시작 위치*/
+            position: fixed;
+            top: 0px;
+            right: 0px;
+
+            /*애니메이션 설정*/
+            animation-name: html5Animation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+
+            /*hover의 애니메이션 제어용*/
+            transition: transform 2s;
+
+        }
+
+        @keyframes html5Animation{
+            from{
+                top: 0px;
+                right: 0px;
+                height:15px;
+                width: 40px;
+                font-size: 12px;
+            }
+
+            to{
+                top: 47vh;
+                right: 0;
+                height:70px;
+                width: 200px;
+                font-size: 50px;
+            }
+        }
+
+        .html5:hover{
+            transform: rotate(180deg);
+        }
+
+        /*js*/
+        .js{
+            background-color: blue;
+
+            /*시작 위치*/
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+
+            /*애니메이션 설정*/
+            animation-name: jsAnimation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+
+            /*hover의 애니메이션 제어용*/
+            transition: transform 2s;
+        }
+
+        @keyframes jsAnimation{
+            from{
+                bottom: 0px;
+                left: 0px;
+                height:15px;
+                width: 60px;
+                font-size: 12px;
+            }
+
+            to{
+                bottom: 47vh;
+                left: 0px;
+                height:70px;
+                width: 280px;
+                font-size: 50px;
+            }
+        }
+
+        .js:hover{
+            transform: rotate(180deg);
+        }
+
+        /*css3*/
+        .css3{
+            background-color: green;
+
+            /*시작 위치*/
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+
+            /*애니메이션 설정*/
+            animation-name: css3Animation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+
+            /*hover의 애니메이션 제어용*/
+            transition: transform 2s;
+        }
+
+        @keyframes css3Animation{
+            0%{
+                bottom: 0px;
+                right: 0px;
+                height:15px;
+                width: 40px;
+                font-size: 12px;
+            }
+
+            100%{
+                bottom: 0px;
+                right: 40vw;
+                height:70px;
+                width: 200px;
+                font-size: 50px;
+            }
+        }
+
+        .css3:hover{
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="www" id="www">WWW</div>
+    <div class="html5">HTML5</div>
+    <div class="js">JavaScript</div>
+    <div class="css3">CSS3</div>
+</body>
+</html>

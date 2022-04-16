@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Stopwatch </title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<script type="text/javascript">
+		var stopped;
+		function start() {
+			dom = document.getElementById("sec");
+			dom.value = parseInt(dom.value) + 1;
+			if (!stopped) setTimeout(start,1000);
+		}
+	</script>
+
+	<h2> Stopwatch </h2>
+	<form action="">
+		<input type="button" value="시작" onclick="stopped=false; setTimeout(start,1000);" />
+		<input type="button" value="정지" onclick="stopped=true;" />
+		<input type="reset" /> <br><br>
+		<input id="sec" type="text" value="0" size="2" /> seconds
+	</form>
+</body>
+</html>

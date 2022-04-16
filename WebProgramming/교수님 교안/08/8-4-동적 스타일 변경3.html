@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>스타일 변경 예제</title>
+</head>
+<body>
+	<div id="outerBox" style="background: blue; width: 430px; height:240px;" />
+		<div id="innerBox" style="background: yellow; width: 380px; height:190px;
+			position: absolute; left: 30px; top: 30px;" />
+			<img id="img1" src="둘리.jpg" width="100px"
+				style="position: absolute; left: 20px; top: 20px; visibility: visible;" />
+			<img id="img2" src="둘리.jpg" width="100px"
+				style="position: absolute; left: 140px; top: 20px; visibility: visible;" />
+			<img id="img3" src="둘리.jpg" width="100px"
+				style="position: absolute; left: 260px; top: 20px; visibility: visible;" />
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function toggleVisibility(id) {
+			var dom = document.getElementById(id);
+			if (dom.style.visibility == "visible")
+			  dom.style.visibility = "hidden";
+			else
+			  dom.style.visibility = "visible";
+		}
+	</script>
+
+	Toggle Visibility:
+	<button onclick = "toggleVisibility('img1');">Image 1</button>
+	<button onclick = "toggleVisibility('img2');">Image 2</button>
+	<button onclick = "toggleVisibility('img3');">Image 3</button>
+	
+	<script type = "text/javascript">
+		function changeColor(id, color) {
+			document.getElementById(id).
+				style.background = color;
+		}
+	</script>
+ 
+	<br/>
+	Outer Box:
+	<button onclick = "changeColor('outerBox', 'red');">Red</button>
+	<button onclick = "changeColor('outerBox', 'green');">Green</button>
+	<button onclick = "changeColor('outerBox', 'blue');">Blue</button>
+	<br/>
+	Inner Box:
+	<button onclick = "changeColor('innerBox', 'red');">Red</button>
+	<button onclick = "changeColor('innerBox', 'green');">Green</button>
+	<button onclick = "changeColor('innerBox', 'blue');">Blue</button>
+	
+	<script type = "text/javascript">
+		function changePositions() {
+			for(i = 1; i <= 3; i++) {
+			  var top = document.getElementById(
+				"top" + i).value;
+			  document.getElementById("img" + i).
+				style.top = top + "px";
+			}
+		}
+	</script>
+ 
+	<form>
+		Image1: Top <input id = "top1" size = "2" type = "text"/> <br/>
+		Image2: Top <input id = "top2" size = "2" type = "text"/> <br/>
+		Image3: Top <input id = "top3" size = "2" type = "text"/>
+		<input type = "button" value = "Move All" onclick = "changePositions();"/>
+	</form>
+</body>
+</html>

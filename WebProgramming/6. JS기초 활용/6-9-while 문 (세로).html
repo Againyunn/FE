@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- An example for JavaScript Control/Loop Statements -->
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title> Control & Loop Statements </title>
+</head>
+<body>
+
+<table border="1">
+	<script type="text/javascript">
+		document.write("<tr><td> Value </td></tr>");
+
+		fib1 = 1;
+		fib2 = 1;
+		while (fib2 < 1000) {
+			document.write("<tr><td>");
+			document.write(fib2);
+			document.write("</td></tr>");
+			tmp = fib1 + fib2;
+			fib1 = fib2;
+			fib2 = tmp;
+		}	
+	</script>
+</table>
+
+</body>
+</html>

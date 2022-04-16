@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- An example for JavaScript Control/Loop Statements -->
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title> Control & Loop Statements </title>
+</head>
+<body>
+
+<table border="1">
+<script type="text/javascript">
+	document.write("<tr><th> 제목 </th></tr>");
+ 
+	var book1 = "IT: 컴퓨터와 IT기술의 이해";
+	var book2 = "SNS: 소셜미디어의 이해와 활용";
+	var book3 = "Multimedia: 멀티미디어 배움터 2.0";
+	
+	var book_list = book1 + "\n" + book2 + "\n" + book3;
+	var choice = prompt("키워드를 입력하세요...\n" + book_list, "");
+
+	switch (choice) {
+	case "IT":
+		title = book1; break;
+	case "SNS":
+		title = book2; break;
+	case "Multimedia":
+		title = book3; break;
+	default:
+		alert("리스트에 없는 책을 선택하셨습니다.");
+		title = "";
+	}
+ 
+	document.write("<tr><td>" + title + "</td></tr>");
+</script>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> DOM Example </title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<form action="">
+			이름: <span id="username"> 사용자 이름 </span>
+			<input type="button" value="수정" onclick="modify();"/>
+		</form> 
+		<script type="text/javascript">
+			function modify() {
+				var nameObj = document.getElementById("username");
+				var newName = prompt("새 이름을 입력하세요.", nameObj.innerText);
+				nameObj.innerText = newName;
+			}
+		</script>
+	</body>
+</html>

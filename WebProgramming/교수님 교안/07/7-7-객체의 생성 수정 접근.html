@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- An example for JavaScript Objects -->
+<html>
+<head>
+	<title> Using Objects </title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+
+<table border="1">
+	<caption>서적 정보</caption>
+	<tr><th>항목 (속성: property)</th><th>내용 (값: value)</td></tr>
+
+<script type="text/javascript">
+	var book = new Object();
+	book.title = "HTML5 입문";
+	book.publisher = "파란출판사";
+	book.author = "홍길동";
+
+	book.info = new Object();
+	book.info.pages = 512;
+	book.info.size = "188mm*254mm";
+
+    for (var p in book) {
+		if (typeof(book[p]) != "object") {
+			document.write("<tr><td> book." + p + "</td>");
+			document.write("<td> " + book[p] + "</td></tr>");
+		}
+		else {
+			for (var q in book[p]) {
+			document.write("<tr><td> book." + p + "." + q + "</td>");
+			document.write("<td> " + book[p][q] + " </td></tr>");
+			}
+		}
+    }
+</script>
+
+</table>
+
+</body>
+</html>
