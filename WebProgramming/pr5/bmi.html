@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>비만도 판정</title>
+</head>
+<body>
+    <table border="1">
+        <script type="text/javascript">
+            //변수 정의
+            var name, height, weight, userBMI, userResult;
+
+            //함수 정의
+            //표만들기
+            function makeTable(type, value, BMI){ //입력값 유형, 사용자의 값
+                //변수설정
+                var unitType = ''
+
+                //default 폰트 지정
+                var thisColor = "black";
+                var thisFontSize = "medium";
+
+                document.write("<tr> <th> "+type+" </td> ");
+                
+                if(type === "키")
+                    unitType = "cm";
+                
+                else if(type === "몸무게")
+                    unitType = "kg";
+
+                //비만도인지 식별
+                if(BMI){
+                    thisFontSize = "200%";
+
+                    console.log("thisFontSize", thisFontSize);
+
+                    if(value === "저체중"){
+                        thisColor = "blue";
+                    }
+
+                    else if(value === "과체중"){
+                        thisColor = "orange";
+                    }
+                    else if(value === "비만"){
+                        thisColor = "red";
+                    }
+                }
+                
+                document.write('<td style="color:'+thisColor+'; font-size:'+thisFontSize+';" >'+value+unitType+'</td> </tr>');
+                return;
+            }
+
+            //BMI연산
+            function calBMI(height, weight){//키, 몸무게
+                //변수 정의
+                var BMI, height;
+
+                height /= 100;
+                BMI = Math.round((weight / Math.pow(height, 2))*10)/10;
+
+                return BMI;
+            }
+
+            //비만도 판정
+            function result(userBMI){//사용자의 bmi입력
+                //저체중
+                if(userBMI < 18.5)
+                    return "저체중";
+                
+                //정상
+                else if(18.5 <= userBMI && userBMI < 25)
+                    return "정상";
+                
+                //과체중
+                else if(25 <= userBMI && userBMI < 30)
+                    return "과체중";
+                
+                //비만
+                else //30이상
+                    return "비만";
+            }
+
+            //이름 입력받기
+            name = prompt("이름을 입력하세요...");
+
+            //키 입력받기
+            height = prompt(name+"님의 키를 입력하세요...");
+
+            //몸무게 입력받기
+            weight = prompt(name+"님의 몸무게를 입력하세요...");
+
+            //BMI평가
+            userBMI = calBMI(height, weight);
+
+            userResult = result(userBMI);
+            console.log("userResult", userResult);
+            
+            
+            //화면에 랜더링
+            makeTable("이름",name, false);
+            makeTable("키",height, false);
+            makeTable("몸무게",weight, false);
+            makeTable("BMI",userBMI,false);
+            makeTable("비만도",userResult, true);
+
+        </script>
+    </table>
+</body>
+</html>
