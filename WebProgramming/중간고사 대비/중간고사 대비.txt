@@ -1,0 +1,332 @@
+이번 수업으로 알게 된 포인트 정리:
+
+<2장>
+- html 유효성 검사 사이트
+https://html5.validator.nu
+
+-툴팁기능
+<html 태그 title = “tooltip으로 넣을 내용” >  …
+* title 속성으로 툴팁의 기능을 간단히 구현가능
+
+
+- < 와 > 출력항법
+< : &lt;
+> : &gt;
+
+- 수평선
+<hr>
+
+- 빈칸
+&nbsp;
+
+- " 와 ' 표현
+" : &quot;
+' : &apos;
+
+- 개발자가 입력한 글자 그대로 출력(띄어쓰기, 줄바꿈도 모두 반영)
+<pre>태그
+
+- 선 긋기
+중앙선 : <del></del>
+밑줄 : <ins></ins>
+하이라이팅 : <mark></mark>
+
+- 공통적인 url 주소 지정방법(공통 url은 하나로 미리 지정하여 처리하기)
+<head>
+    <base href="url 주소/">
+</head>
+<a href="math.html">수학</a>   → 실제로 의미하는 주소는 "url 주소/math.html" 이 된다.
+
+- 외부 자원(파일)과 연결하는 방법
+<head>
+    <link type="text/css" rel="stylesheet" href="파일주소/파일명.파일형식">
+</head>
+
+- meta태그 활용법
+웹 페이지 제작자 표시 <meta name = "author" content= "홍길동">
+웹 페이지 내용 설명 <meta name = "description" content="웹 페이지에 대한 설명">
+웹 페이지의 속성 지정 <meta charset = "UTF-8">
+
+- 리스트 생성(종류)
+순서가 있는 리스트 <ol></ol>
+순서가 없는 리스트 <ul></ul>
+정의 리스트 <dl></dl>
+
+- 리스트 아이템
+<li></li>
+
+
+- 표 만들기
+표 컨테이너     <table>
+표 제목         <caption> 
+헤딩 셀 그룹    <thead>
+바닥 셀 그룹    <tfoot>
+데이터 셀 그룹  <tbody>
+행              <tr>
+열              <th>
+데이터(열)      <td>
+
+- 셀 합치기
+행(위아래로) 합치기 <td rowspan = "숫자"></td>
+열(좌우로) 합치기<tf colspan = "숫자"></td>
+
+- 링크의 target 속성 활용
+target = "_black"
+target = "_self"
+target = "_parent"
+target = "_top"
+
+- iframe
+target = "frame1"
+target = "_blank"
+target = "_self"
+target = "_parent"
+target = "_top"
+
+<3장>
+semantic web: 웹 문서를 구조화하여 의미 있는 내용 탐색이 용이한 웹
+
+- 시맨틱 태그
+<header>
+<nav>
+<section>
+<article>
+<aside>
+<footer>
+
+- 시맨틱 블록 태그
+<figure>
+<details>
+<summary>
+
+- 시맨틱 인라인 태그
+<mark>
+<time>
+<meter>
+<progress>
+
+- form의 텍스트 입력
+<input type = "text">
+<input type = "password">
+<textarea>
+
+- data 목록을 가진 텍스트 입력창
+<input type="text list="리스트이름">
+<datalist id="리스트이름">
+    <option value = "값1">
+    ...
+</datalist>
+
+- 이미지 버튼
+<input type = "image" src = "파일경로/파일명.파일형식" alt = "이미지 버튼">
+<button type = "button">
+
+- 체크박스 만들기
+랜더링 시 옵션 선택 checked
+
+
+- 콤보박스(select)
+multiple 속성을 통해 다중입력이 가능하게 할 수 있다.
+
+- label의 id활용해서 form의 캡션 만들기
+<label for = "대상아이디"> ID </label>
+<input type = "text" id="대상 아이디">
+
+
+- 색 입력 form
+<input type = "color" value = "숫자"> value값을 통해 초기 색상을 지정할 수 있다.
+
+- 스핀버튼으로 수치 조절
+<input type = "number" min = "최소 값" max = "최대 값" step = "간격으로 지정할 숫자">
+
+- 슬라이드로 수치 조절
+<input type = "range" min = "최소 값" max = "최대 값" list = "리스트이름">
+<datalist id="리트스 이름">
+    <option value = "수치1" label="최소 값">
+    <option value = "수치2" label="중간 값">    
+    <option value = "수치3" label="최대 값">
+</datalist>
+
+
+- 사용자 서식 텍스트(입력 규칙 지정)
+이메일: <input type = "email"/>
+URL: <input type = "url"/>
+검색창: <input type = "search"/>
+전화번호: <input type = "tel" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"/>
+
+- 폼 요소의 그룹핑
+<fieldset>
+    <legend>폼 이름</legend>
+    <label>이름<input type="text"></label>
+    ...
+</fieldset>
+
+
+CSS3 태그 불러오는 2가지 방법
+1. <link>태그 이용
+<head>
+    <link href="css파일명.css" type="text/css" rel="stylesheet">
+</head>
+
+2. @import 사용
+<style>
+    @import url(css파일명.css);
+</style>
+
+CSS의 셀럭터 지정
+1. 클래스 
+.클래스명 {
+    css코드
+}
+
+2. id
+#아이디명{
+    css코드
+}
+
+자식 셀렉터
+div > strong{
+    css코드
+}
+
+자손 셀렉터
+div strong{
+    css코드
+}
+
+전체 셀렉터(와일드 문자*)
+*{
+    css코드
+}
+
+속성셀렉터(지정한 태그의 속성에 css 값 부여)
+input[type=text]{
+    css코드
+}
+
+가상 클래스 셀렉터
+1) 마우스 제어
+:hover
+:active
+
+2) 폼 요소
+:focus
+
+3) 링크
+:link
+:visited
+
+4) 블록
+:first-letter
+:first-line
+
+5) 구조
+:nth-child(even)
+:nth-child(odd)
+:nth-child(숫자)
+
+폰트 제어
+font-family
+font-size
+font-style
+font-weight
+
+배경이미지
+background-color
+background-image
+background-position
+background-size
+background-repeat
+
+텍스트 그림자
+text-shadow
+
+박스 그림자
+box-shadow
+
+박스의 유형 제어
+display: block
+display: inline
+display: inline-block
+
+박스의 배치
+position: static(디폴트 값)
+position: relative
+position: absolute
+position: fixed
+float: left
+float: right
+
+박스의 순서 제어
+z-index: 숫자
+(숫자가 높을 수록 더 위쪽에 쌓이는 형태)
+
+텍스트 숨기기
+visibility: hidden
+visibility: visible
+visibility: collapse  → 해당 태그가 차지하는 공간도 없앤 것처럼 처리할 때 사용자
+
+
+내용물(텍스트)가 넘치는 지 체크
+overflow: hidden   //넘치면 숨김
+overflow: visible  //넘쳐도 그대로 노출
+overflow: scroll   //넘치면 스크롤을 내려서 확인할 수 있도록
+
+리스트 꾸미기
+list-style-position: inside|outside;   //outside가 디폴트 값
+list-style-image: url("파일경로/이미지파일명.이미지유형")
+
+표 테두리 제어(중복된 테두리 합치기) 
+border-collapse: collapse //이중 테두리는 하나로 합치기
+
+가상클래스 활용
+tbody tr:nth-child(odd):hover { /* 마우스가 올라오면 pink 배경 */
+    background : skyblue;	
+}
+// 여러 가상 클래스 중첩 사용 가능하다
+
+
+애니메이션 만들기
+@keyframes 애니메이션이름{
+    from{
+        css코드
+    }
+    to{
+        css코드
+    }
+}
+
+@keyframes 애니메이션이름{
+    0%{
+        css코드
+    }
+    50%{
+        css코드
+    }
+    100%{
+        css코드
+    }
+}
+
+애니메이션 스타일 시트 작성
+animation-name: 애니메이션이름;
+animation-duration: 5s;
+animation-iteration-count: infinite; //무한반복
+
+전환
+transition: 전환프로퍼티 전환시간;
+
+
+변환
+회전:   transform: rotate(숫자deg);
+기울임: skew(시작deg, 결과deg);
+이동:   transform: translate(x축이동정도, y축이동정도)
+        transform: translateY(숫자px); //숫자 만큼 위.아래로 이동
+        transform: translateX(숫자px); //숫자 만큼 좌.우로 이동
+확대/축소: transform: scale(x축확대정도, y축확대정도)
+
+
+
+
+
+
