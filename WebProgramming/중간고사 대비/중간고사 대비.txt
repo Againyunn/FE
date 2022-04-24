@@ -5,7 +5,7 @@
 https://html5.validator.nu
 
 -툴팁기능
-<html 태그 title = “tooltip으로 넣을 내용” >  …
+<html 태그 title = “tooltip으로 넣을 내용” >  … </태그 닫기>
 * title 속성으로 툴팁의 기능을 간단히 구현가능
 
 
@@ -66,15 +66,24 @@ https://html5.validator.nu
 열              <th>
 데이터(열)      <td>
 
+* thead, tbody, tfoot은 <tr>태그로 행/열까지 정의되었을 때 정상 작동한다.
+
 - 셀 합치기
 행(위아래로) 합치기 <td rowspan = "숫자"></td>
-열(좌우로) 합치기<tf colspan = "숫자"></td>
+열(좌우로) 합치기<td colspan = "숫자"></td>
 
 - 링크의 target 속성 활용
-target = "_black"
-target = "_self"
-target = "_parent"
-target = "_top"
+target = "_blank"   :새 창
+target = "_self"    :현재 창
+target = "_parent"  :현재 문서의 부모 창
+target = "_top"     :브라우저 윈도우
+
+- id속성으로 앵커 만들기
+<a id="앵커이름"> 내용 </a>                 :이동할 타겟
+<a href="#앵커이름"> 내용으로 이동 </a>     :링크가 걸린 태그
+
+- 파일 다운로드 링크 생성
+<a href="경로/실제 파일" download>파일 다운로드</a>      :해당 경로에 위치한 파일을 실제로 사용자가 다운로드 받을 수 있는 태그
 
 - iframe
 target = "frame1"
