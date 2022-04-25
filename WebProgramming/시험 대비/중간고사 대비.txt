@@ -127,12 +127,11 @@ semantic web: 웹 문서를 구조화하여 의미 있는 내용 탐색이 용�
 </datalist>
 
 - 이미지 버튼
-<input type = "image" src = "파일경로/파일명.파일형식" alt = "이미지 버튼">
-<button type = "button">
+<input type = "image" src = "파일경로/파일명.파일형식" alt = "이미지 버튼">     :지정한 이미지가 버튼의 기능 수행
+<button type = "button">        : 버튼 안의 텍스트 영역이 이미지로 대체된다.
 
 - 체크박스 만들기
-랜더링 시 옵션 선택 checked
-
+랜더링 시 옵션 선택 checked  속성을 부여하면, 화면에 기본적으로 체크한 것으로 표기된다.
 
 - 콤보박스(select)
 multiple 속성을 통해 다중입력이 가능하게 할 수 있다.
@@ -144,6 +143,10 @@ multiple 속성을 통해 다중입력이 가능하게 할 수 있다.
 
 - 색 입력 form
 <input type = "color" value = "숫자"> value값을 통해 초기 색상을 지정할 수 있다.
+value="색" 은 초기 기본 색으로 설정할 색을 지정하는 것
+
+- 현지 시각으로 설정
+<input type= "datetime-local"> 사용
 
 - 스핀버튼으로 수치 조절
 <input type = "number" min = "최소 값" max = "최대 값" step = "간격으로 지정할 숫자">
@@ -163,7 +166,7 @@ URL: <input type = "url"/>
 검색창: <input type = "search"/>
 전화번호: <input type = "tel" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"/>
 
-- 폼 요소의 그룹핑
+- 폼 요소의 그룹핑(박스모양 테두리 만들고 폼 이름 넣기)
 <fieldset>
     <legend>폼 이름</legend>
     <label>이름<input type="text"></label>
@@ -193,12 +196,12 @@ CSS의 셀럭터 지정
     css코드
 }
 
-자식 셀렉터
+자식 셀렉터(직계 자식)
 div > strong{
     css코드
 }
 
-자손 셀렉터
+자손 셀렉터(자손이면 ok)
 div strong{
     css코드
 }
@@ -215,35 +218,39 @@ input[type=text]{
 
 가상 클래스 셀렉터
 1) 마우스 제어
-:hover
-:active
+:hover      :마우스가 올라갈 때 스타일 적용
+:active     :마우스로 누르고 있는 상황에서 스타일 적용
 
 2) 폼 요소
-:focus
+:focus      :폼 요소가 키보드나 마우스 클릭으로 포커스를 받을 때 스타일 적용
 
 3) 링크
-:link
-:visited
+:link       :방문 x인 링크에 적용
+:visited    :방문한 링크에 적용
 
 4) 블록
-:first-letter
-:first-line
+:first-letter   :블록형 태그의 첫 글자에 스타일 적용 but <span>과 같은 inline tag에는 적용x
+:first-line     :  :first-letter과 동일한 기능
 
 5) 구조
-:nth-child(even)
-:nth-child(odd)
-:nth-child(숫자)
+:nth-child(even)    :짝수번째 모든 자식 태그에 스타일 적용
+:nth-child(odd)     :홀수번째 모든 자식 태그에 스타일 적용
+:nth-child(숫자)    :숫자 번째 자식 태그에 스타일 적용
 
 폰트 제어
-font-family
-font-size
-font-style
-font-weight
+font-family     :3순위 폰트까지 지정가능 
+font-size       
+font-style      
+font-weight     :굵기
+
+테두리 제어
+border-radius: 11시 1시 5시 7시   (시간형태의 방향)
+
 
 배경이미지
 background-color
-background-image
-background-position
+background-image : url("파일경로/파일이름")
+background-position: center center
 background-size
 background-repeat
 
@@ -254,15 +261,15 @@ text-shadow
 box-shadow
 
 박스의 유형 제어
-display: block
-display: inline
-display: inline-block
+display: block          :공간을 모두 차지, 크기조절 가능
+display: inline         :내부 공간만 차지하지만, 크기 조절 x
+display: inline-block   :내부 공간에 배치되지만, 크기 조절 가능
 
 박스의 배치
 position: static(디폴트 값)
-position: relative
-position: absolute
-position: fixed
+position: relative  :static값 기준으로 위치 지정 (static 기준으로 입력된 left, top, bottom, right속성만큼 위치 이동)
+position: absolute  :상위레벨 태그의 최상단 좌표 기준위치 지정(브라우저 크기 변화에 상관x)
+position: fixed     :브라우저 창 기준으로 위치 지정(스크롤 무시)
 float: left
 float: right
 
@@ -271,8 +278,8 @@ z-index: 숫자
 (숫자가 높을 수록 더 위쪽에 쌓이는 형태)
 
 텍스트 숨기기
-visibility: hidden
-visibility: visible
+visibility: hidden          숨기기
+visibility: visible         표시하기
 visibility: collapse  → 해당 태그가 차지하는 공간도 없앤 것처럼 처리할 때 사용자
 
 
@@ -282,11 +289,11 @@ overflow: visible  //넘쳐도 그대로 노출
 overflow: scroll   //넘치면 스크롤을 내려서 확인할 수 있도록
 
 리스트 꾸미기
-list-style-position: inside|outside;   //outside가 디폴트 값
+list-style-position: inside 또는 outside;   //outside가 디폴트 값 , 리스트 마커의 위치 변경
 list-style-image: url("파일경로/이미지파일명.이미지유형")
 
 표 테두리 제어(중복된 테두리 합치기) 
-border-collapse: collapse //이중 테두리는 하나로 합치기
+border-collapse: collapse //이중 테두리는 하나로 합치기   -> table 태그의 css로 사용
 
 가상클래스 활용
 tbody tr:nth-child(odd):hover { /* 마우스가 올라오면 pink 배경 */
@@ -316,6 +323,9 @@ tbody tr:nth-child(odd):hover { /* 마우스가 올라오면 pink 배경 */
         css코드
     }
 }
+
+//하나의 클래스나 아이디에 여러 keyframes는 적용 불가능
+//transition과 나누어서 적용하기
 
 애니메이션 스타일 시트 작성
 animation-name: 애니메이션이름;
