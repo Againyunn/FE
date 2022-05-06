@@ -14,17 +14,70 @@ function setUserName(thisId){
     }
 }
 
-/**영화리스트 생성 함수 */
-function createMovieList(movieName){
+/**영화리스트 */
+//영화리스트 생성 함수
+function createMovieList(movieList){
     //표 시작
     document.write(`
         <table id="movieTable">
     `);
 
-        //표 종료
+    for(var i = 0; i < movieList.length; i++){
         document.write(`
+            <tr>
+                <div class="movieList" id="${movieList[i].name}" onclick="selectMovie(this.id)">
+                    <span id="movieTitle">
+                        ${movieList[i].name}
+                    </span>
+                </div>
+            </tr>
+        `)
+    }
+
+    //표 종료
+    document.write(`
         </table>
     `);
+}
+
+//영화 선택 함수
+function selectMovie(thisId){
+    let selectedSeatId = document.getElementById(thisId);
+
+    console.log("selectMovie:",thisId);
+
+    let movieList = [
+        {
+            name:"닥터스트레인지2"
+        },
+        {
+            name:"신기한동물사전3"
+        }
+    ];
+
+    
+    
+    //클릭한 좌석이 선택되었는 지 확인
+    if(localStorage.getItem(`movie`) === `${thisId}`){
+        //기존에 선택했던 좌석을 다시 클릭 -> 해당 좌석 선택 해제
+        selectedSeatId.style.backgroundColor = '#FFFFFF';
+        selectedSeatId.style.color = 'black';
+
+        localStorage.removeItem(`movie`);
+    }
+
+    
+    else{
+        for(var i = 0; i < movieList.length; i++){
+            document.getElementById(movieList[i].name).style.backgroundColor = '#FFFFFF';
+            document.getElementById(movieList[i].name).style.color = 'black';
+        }
+        //새롭게 선택한 좌석인 경우
+        selectedSeatId.style.backgroundColor = '#00B594';
+        selectedSeatId.style.color = 'white';
+        localStorage.setItem(`movie`,`${thisId}`);
+
+    }
 }
 
 
