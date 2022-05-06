@@ -15,15 +15,68 @@ nav > table{
     height: 30px;
     background-color: #00B594;
     text-align: center;
+    align-items: center;
 
     color: #FFFFFF;
     font-weight: bold;
 }
 
-td > a{
+section{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    padding-right: 200px;
+}
+
+#anchor{
     text-decoration: none;
     color: #FFFFFF;
+}
 
+#main_font{
+    color:#00B594;
+}
+
+#black_font{
+    color:black;
+}
+
+#ticket_unchecked{
+    width: 200px;
+}
+
+#ticket_checked{
+    width: 200px;
+}   
+
+#ticket_unchecked_box{
+
+    height: 150%;
+}
+
+#ticket_checked_box{
+
+    height: 150%;
+}
+
+#ticket_unchecked_box:hover{
+    box-shadow: 0 1em 1em #D2D2D2;
+}
+
+#ticket_checked_box:hover{
+    box-shadow: 0 1em 1em #D2D2D2;
+}
+
+.seat{
+    opacity: 0.5;
+}
+
+.seat:hover{
+    opacity: 1;
+}
+
+.seat:active{
+    opacity: 1;
 }
 
 
@@ -44,3 +97,4 @@ footer{
     flex-basis: 500px;
     flex-grow: 0;
 }
+

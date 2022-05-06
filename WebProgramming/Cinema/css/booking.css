@@ -1,0 +1,50 @@
+/*날짜 선택*/
+.reserveMonth{
+    font-size: 25px;
+    font-weight: bold;
+
+}
+
+.reserveDate{
+    font-size: 20px;
+}
+
+.reserveDate:hover{
+    font-weight: bold;
+}
+
+.reserveDate .day0{
+    color: red;
+}
+
+.reserveDate .day6{
+    color: blue;
+}
+
+
+/*시간선택*/
+.movieFrame{
+    border: 2px solid #A2A2A2;
+}
+
+.movieFrame:hover{
+    background-color: #A2A2A2;
+    opacity: 0.9;
+}
+
+
+
+
+/*좌석 선택*/
+.seat{
+    opacity: 0.5;
+}
+
+.seat:hover{
+    opacity: 1;
+}
+
+.seat:active{
+    opacity: 1;
+}
+
