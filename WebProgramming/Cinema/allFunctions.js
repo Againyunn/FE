@@ -1,3 +1,34 @@
+/**간단한 로그인 기능 */
+function setUserName(thisId){
+    let selectedSeatId = document.getElementById(thisId);
+
+    //입력받은 유저 아이디(이름) 받아오기
+    let userName = selectedSeatId.value;
+
+    //유저 아이디를 쿠키로 저장
+    if(localStorage['userName'] !== undefined){
+        localStorage['userName'] = userName;
+    }
+    else{
+        localStorage.setItem('userName', userName);
+    }
+}
+
+/**영화리스트 생성 함수 */
+function createMovieList(movieName){
+    //표 시작
+    document.write(`
+        <table id="movieTable">
+    `);
+
+        //표 종료
+        document.write(`
+        </table>
+    `);
+}
+
+
+
 /**날짜 생성 함수*/
 function createDate(start, days){
 
@@ -139,16 +170,19 @@ function selectDate(thisId){
 
     //기존에 선택한 날짜가 있는 경우
     if(localStorage.getItem(`thisYear`)!== undefined){
-        thisYear = localStorage['thisYear'];
-        thisMonth = localStorage['thisMonth'];
-        thisDate = localStorage['thisDate'];
-
-        selectedSeatId = document.getElementById(`${thisYear},${thisMonth},${thisDate}`);
-
-        selectedSeatId.style.fontWeight = "normal";
-        localStorage.removeItem(`thisYear`);
-        localStorage.removeItem(`thisMonth`);
-        localStorage.removeItem(`thisDate`);
+        if(localStorage.getItem(`thisYear`)!== null){
+            console.log(localStorage.getItem(`thisYear`));
+            thisYear = localStorage['thisYear'];
+            thisMonth = localStorage['thisMonth'];
+            thisDate = localStorage['thisDate'];
+    
+            selectedSeatId = document.getElementById(`${thisYear},${thisMonth},${thisDate}`);
+    
+            selectedSeatId.style.fontWeight = "normal";
+            localStorage.removeItem(`thisYear`);
+            localStorage.removeItem(`thisMonth`);
+            localStorage.removeItem(`thisDate`);
+        }
     }
     //현재 선택된 날짜로 값 변경
     selectedSeatId = document.getElementById(thisId);
@@ -230,7 +264,7 @@ function createSeat(type, rows, cols){ //type은 생성할 좌석의 라인 위�
             `);
 
             //기존에 선택된 좌석이라면 선택되었다는 표시 css적용
-            if(localStorage.getItem(`seat${i*10+j}`)===`${i*10+j}`){
+            if(localStorage.getItem(`seat${i*10+j}`)!==undefined & localStorage.getItem(`seat${i*10+j}`)!==null){
                 document.getElementById(`${i*10+j}`).style.opacity = 1;
             }
         
@@ -250,16 +284,21 @@ function createSeat(type, rows, cols){ //type은 생성할 좌석의 라인 위�
 //좌석 선택함수
 function selectSeat(thisId) {//thisId: 선택된 좌석id 받기
     let selectedSeatId = document.getElementById(thisId);
+    let thisUserName = localStorage['userName'];
 
     //클릭한 좌석이 선택되었는 지 확인
-    if(localStorage.getItem(`seat${thisId}`) === thisId){
-        //기존에 선택했던 좌석을 다시 클릭 -> 해당 좌석 선택 해제
-        selectedSeatId.style.opacity = 0.5;
-        localStorage.removeItem(`seat${thisId}`);
+    if(localStorage.getItem(`seat${thisId}`) !== undefined & localStorage.getItem(`seat${thisId}`) !== null  ){
+        
+        if(localStorage.getItem(`seat${thisId}`) === `${thisId},${thisUserName}`){
+            //기존에 선택했던 좌석을 다시 클릭 -> 해당 좌석 선택 해제
+            selectedSeatId.style.opacity = 0.2;
+            localStorage.removeItem(`seat${thisId}`);
+        }
+
     }
     else{
         //새롭게 선택한 좌석인 경우
         selectedSeatId.style.opacity = 1;
-        localStorage.setItem(`seat${thisId}`,thisId)
+        localStorage.setItem(`seat${thisId}`,`${thisId},${thisUserName}`)
     }
 }

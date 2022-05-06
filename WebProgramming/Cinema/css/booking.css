@@ -37,7 +37,7 @@
 
 /*좌석 선택*/
 .seat{
-    opacity: 0.5;
+    opacity: 0.2;
 }
 
 .seat:hover{

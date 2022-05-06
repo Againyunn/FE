@@ -67,18 +67,6 @@ section{
     box-shadow: 0 1em 1em #D2D2D2;
 }
 
-.seat{
-    opacity: 0.5;
-}
-
-.seat:hover{
-    opacity: 1;
-}
-
-.seat:active{
-    opacity: 1;
-}
-
 
 footer{
     background-color: #F2F2F2;
