@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>윤동주 시집</title>
+
+    <style>
+        /*poem block의 기본 설정*/
+        .poemFrame{
+            border-radius: 10px;
+            background-color: yellow;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 200px;
+            height: 50px;
+            margin-right: 5px;
+        }
+
+        .poemFrame:hover{
+            background-color: skyblue;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        //전역변수 설정
+        let content = [];
+
+        let checkedPoem1 = false;
+        let checkedPoem2 = false;
+        let checkedPoem3 = false;
+
+        // let visibilityPoem1 = document.getElementById("resultPoem1").style.visibility;
+        // let visibilityPoem2 = document.getElementById("resultPoem2").style.visibility;
+        // let visibilityPoem3 = document.getElementById("resultPoem3").style.visibility;
+
+        let visibilityPoem1 = `
+        <div id="resultPoem1">
+            <h3>서시, 윤동주</h3>
+
+            <span>
+                죽는 날까지 하늘을 우러러<br/>
+                한 점 부끄럼이 없기를,<br/>
+                잎새에 이는 바람에도<br/>
+                나는 괴로워했다.<br/>
+                별을 노래하는 마음으로<br/>
+                모든 죽어가는 것을 사랑해야지.<br/>
+                그리고 나한테 주어진 길을<br/>
+                걸어가야겠다.
+            </span>
+        </div>
+        `
+
+        let visibilityPoem2 =`
+        <div id="resultPoem2">
+            <h3>쉽게 쓰여진 시, 윤동주</h3>
+
+
+            <span>
+                인생은 살기 어렵다는데<br/>
+                시가 이렇게 쉽게 씌어지는 것은<br/>
+                부끄러운 일이다<br/>
+                육첩방은 남의 나라<br/>
+                창밖에 밤비가 속살거리는데,<br/>
+                등불을 밝혀 어둠을 조금 내몰고<br/>
+                시대처럼 올 아침을 기다리는 최후의 나.
+            </span>
+        </div>
+        `
+
+        let visibilityPoem3 =`
+        <div  id="resultPoem3">
+            <h3>별 헤는 밤, 윤동주</h3>
+
+
+            <span>
+                계절로 지나가는 하늘에는<br/>
+                가을로 가득 차 있습니다.<br/>
+                나는 아무 걱정도 없이<br/>
+                가을 속의 별들을 다 헤일 듯 합니다.<br/>
+                가슴속에 하나 둘 새겨지는 별을<br/>
+                이제 다 못 헤는 것은<br/>
+                쉬이 아침이 오는 까닭이요,<br/>
+                내일 밤이 남은 까닭이요,<br/>
+                아직 나의 청춘이 다 하지 않은 까닭입니다.
+            </span>
+        </div>
+        `
+
+
+
+        //선택된 poem을 기록하는 함수
+        function poemClicked(checkedId){
+
+            console.log("checkedId",checkedId);
+
+         
+
+            //각 선택된 id에 따라 상태값 변경
+            if(checkedId === 'poem1'){
+                if(checkedPoem1 === true){
+                    checkedPoem1 = false;
+                    delete content['poem1'];
+                    changeBackgroundColor(checkedId, checkedPoem1);
+                }
+                else{
+                    checkedPoem1 = true;
+                    content.poem1 = visibilityPoem1;
+                    changeBackgroundColor(checkedId, checkedPoem1);
+                }  
+            }
+
+            else if(checkedId === 'poem2'){
+                if(checkedPoem2 === true){
+                    checkedPoem2 = false;
+                    delete content['poem2'];
+                    changeBackgroundColor(checkedId, checkedPoem2);
+                }
+                else{
+                    checkedPoem2 = true;
+                    content.poem2 = visibilityPoem2;
+                    changeBackgroundColor(checkedId, checkedPoem2);
+                }  
+            }
+
+            else if(checkedId === 'poem3'){
+                if(checkedPoem3 === true){
+                    checkedPoem3 = false;
+                    delete content['poem3'];
+                    changeBackgroundColor(checkedId, checkedPoem3);
+                }
+                else{
+                    checkedPoem3 = true;
+                    content.poem3 = visibilityPoem3;
+                    changeBackgroundColor(checkedId, checkedPoem3);
+                }  
+            }
+
+            //각 시의 상태값에 따라 노출 설정
+
+            // location.reload()
+            console.log("content:", content);
+            // document.getElementById("result").innerHTML = content;
+            printPoems(content);
+            
+        }
+
+        function printPoems(content){
+
+            document.getElementById("result").innerHTML = '';
+
+            for(var i in content){
+                console.log(`${i}:`,i.value);
+                document.getElementById("result").innerHTML += content[i];
+            }
+        }
+
+        function changeBackgroundColor(id, type){
+            if(type)
+                document.getElementById(id).style.backgroundColor = "skyblue";
+            else
+            document.getElementById(id).style.backgroundColor = "yellow";
+        }
+        
+
+
+
+    </script>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div class="poemFrame" id="poem1" onclick="poemClicked(this.id)">
+                    <span>서시<br/>
+                        윤동주
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div class="poemFrame" id="poem2" onclick="poemClicked(this.id)">
+                    <span>쉽게 쓰여진 시<br/>
+                        윤동주
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div class="poemFrame" id="poem3" onclick="poemClicked(this.id)">
+                    <span>별 헤는 밤<br/>
+                        윤동주
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <div id="result">
+
+    </div>
+
+    <!-- 숨김, 노출 조절
+    <div id="resultPoem1">
+        <h3>서시, 윤동주</h3>
+
+        <span>
+            죽는 날까지 하늘을 우러러<br/>
+            한 점 부끄럼이 없기를,<br/>
+            잎새에 이는 바람에도<br/>
+            나는 괴로워했다.<br/>
+            별을 노래하는 마음으로<br/>
+            모든 죽어가는 것을 사랑해야지.<br/>
+            그리고 나한테 주어진 길을<br/>
+            걸어가야겠다.
+        </span>
+    </div>
+
+    <div id="resultPoem2">
+        <h3>쉽게 쓰여진 시, 윤동주</h3>
+
+
+        <span>
+            인생은 살기 어렵다는데<br/>
+            시가 이렇게 쉽게 씌어지는 것은<br/>
+            부끄러운 일이다<br/>
+            육첩방은 남의 나라<br/>
+            창밖에 밤비가 속살거리는데,<br/>
+            등불을 밝혀 어둠을 조금 내몰고<br/>
+            시대처럼 올 아침을 기다리는 최후의 나.
+        </span>
+    </div>
+
+    <div  id="resultPoem3">
+        <h3>별 헤는 밤, 윤동주</h3>
+
+
+        <span>
+            계절로 지나가는 하늘에는<br/>
+            가을로 가득 차 있습니다.<br/>
+            나는 아무 걱정도 없이<br/>
+            가을 속의 별들을 다 헤일 듯 합니다.<br/>
+            가슴속에 하나 둘 새겨지는 별을<br/>
+            이제 다 못 헤는 것은<br/>
+            쉬이 아침이 오는 까닭이요,<br/>
+            내일 밤이 남은 까닭이요,<br/>
+            아직 나의 청춘이 다 하지 않은 까닭입니다.
+        </span>
+    </div> -->
+
+
+</body>
+</html>
