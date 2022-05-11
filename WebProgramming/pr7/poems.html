@@ -12,27 +12,23 @@
             padding-top: 20px;
             padding-bottom: 20px;
             width: 200px;
-            height: 50px;
+            height: 40px;
             margin-right: 5px;
         }
 
         .poemFrame:hover{
-            background-color: skyblue;
+            background-color: aqua;
         }
 
     </style>
 
     <script type="text/javascript">
-        //전역변수 설정
+        //변수 초기화
         let content = [];
 
         let checkedPoem1 = false;
         let checkedPoem2 = false;
         let checkedPoem3 = false;
-
-        // let visibilityPoem1 = document.getElementById("resultPoem1").style.visibility;
-        // let visibilityPoem2 = document.getElementById("resultPoem2").style.visibility;
-        // let visibilityPoem3 = document.getElementById("resultPoem3").style.visibility;
 
         let visibilityPoem1 = `
         <div id="resultPoem1">
@@ -55,7 +51,6 @@
         <div id="resultPoem2">
             <h3>쉽게 쓰여진 시, 윤동주</h3>
 
-
             <span>
                 인생은 살기 어렵다는데<br/>
                 시가 이렇게 쉽게 씌어지는 것은<br/>
@@ -72,7 +67,6 @@
         <div  id="resultPoem3">
             <h3>별 헤는 밤, 윤동주</h3>
 
-
             <span>
                 계절로 지나가는 하늘에는<br/>
                 가을로 가득 차 있습니다.<br/>
@@ -87,14 +81,8 @@
         </div>
         `
 
-
-
         //선택된 poem을 기록하는 함수
         function poemClicked(checkedId){
-
-            console.log("checkedId",checkedId);
-
-         
 
             //각 선택된 id에 따라 상태값 변경
             if(checkedId === 'poem1'){
@@ -137,34 +125,30 @@
             }
 
             //각 시의 상태값에 따라 노출 설정
-
-            // location.reload()
-            console.log("content:", content);
-            // document.getElementById("result").innerHTML = content;
+            //console.log("content:", content);
             printPoems(content);
             
         }
 
+        //선택된 시 출력
         function printPoems(content){
-
+            //result의 값 초기화
             document.getElementById("result").innerHTML = '';
 
+            //result에 선택된 값 채워넣기
             for(var i in content){
                 console.log(`${i}:`,i.value);
                 document.getElementById("result").innerHTML += content[i];
             }
         }
 
+        //선택된 시의 블록 색 선택/해제
         function changeBackgroundColor(id, type){
             if(type)
-                document.getElementById(id).style.backgroundColor = "skyblue";
+                document.getElementById(id).style.backgroundColor = "aqua";
             else
             document.getElementById(id).style.backgroundColor = "yellow";
         }
-        
-
-
-
     </script>
 
 </head>
@@ -197,57 +181,7 @@
     <br/>
 
     <div id="result">
-
     </div>
-
-    <!-- 숨김, 노출 조절
-    <div id="resultPoem1">
-        <h3>서시, 윤동주</h3>
-
-        <span>
-            죽는 날까지 하늘을 우러러<br/>
-            한 점 부끄럼이 없기를,<br/>
-            잎새에 이는 바람에도<br/>
-            나는 괴로워했다.<br/>
-            별을 노래하는 마음으로<br/>
-            모든 죽어가는 것을 사랑해야지.<br/>
-            그리고 나한테 주어진 길을<br/>
-            걸어가야겠다.
-        </span>
-    </div>
-
-    <div id="resultPoem2">
-        <h3>쉽게 쓰여진 시, 윤동주</h3>
-
-
-        <span>
-            인생은 살기 어렵다는데<br/>
-            시가 이렇게 쉽게 씌어지는 것은<br/>
-            부끄러운 일이다<br/>
-            육첩방은 남의 나라<br/>
-            창밖에 밤비가 속살거리는데,<br/>
-            등불을 밝혀 어둠을 조금 내몰고<br/>
-            시대처럼 올 아침을 기다리는 최후의 나.
-        </span>
-    </div>
-
-    <div  id="resultPoem3">
-        <h3>별 헤는 밤, 윤동주</h3>
-
-
-        <span>
-            계절로 지나가는 하늘에는<br/>
-            가을로 가득 차 있습니다.<br/>
-            나는 아무 걱정도 없이<br/>
-            가을 속의 별들을 다 헤일 듯 합니다.<br/>
-            가슴속에 하나 둘 새겨지는 별을<br/>
-            이제 다 못 헤는 것은<br/>
-            쉬이 아침이 오는 까닭이요,<br/>
-            내일 밤이 남은 까닭이요,<br/>
-            아직 나의 청춘이 다 하지 않은 까닭입니다.
-        </span>
-    </div> -->
-
 
 </body>
 </html>

@@ -23,9 +23,10 @@ function createMovieList(movieList){
     `);
 
     for(var i = 0; i < movieList.length; i++){
+
         document.write(`
             <tr>
-                <div class="movieList" id="${movieList[i].name}" onclick="selectMovie(this.id)">
+                <div class="movieList" id="${movieList[i].name}" onclick="selectMovie(this.id, movieList)">
                     <span id="movieTitle">
                         ${movieList[i].name}
                     </span>
@@ -40,23 +41,23 @@ function createMovieList(movieList){
     `);
 }
 
+
 //영화 선택 함수
-function selectMovie(thisId){
+function selectMovie(thisId, movieList){
     let selectedSeatId = document.getElementById(thisId);
 
     console.log("selectMovie:",thisId);
 
-    let movieList = [
-        {
-            name:"닥터스트레인지2"
-        },
-        {
-            name:"신기한동물사전3"
-        }
-    ];
+    // let movieList = [
+    //     {
+    //         name:"닥터스트레인지2"
+    //     },
+    //     {
+    //         name:"신기한동물사전3"
+    //     }
+    // ];
 
 
-    
     //클릭한 영화가 선택되었는 지 확인
     if(localStorage.getItem(`movie`) === `${thisId}`){
         //기존에 선택했던 영화를 다시 클릭 -> 해당 영화 선택 해제
@@ -78,6 +79,9 @@ function selectMovie(thisId){
         localStorage.setItem(`movie`,`${thisId}`);
 
     }
+
+    //선택 변경시 상태값 적용 → rerendering
+    checkedObject();
 }
 
 
@@ -127,7 +131,7 @@ function createDate(start, days){
         document.write(`
             <tr>
                 <div class="reserveDate">
-                    <div class="day${thisDay}" id="${year},${month},${thisDate}" onclick="selectDate(this.id)">
+                    <div class="day${thisDay}" id="${year},${month},${thisDate},${thisDay}" onclick="selectDate(this.id)">
                         ${date + i}일
                     </div>
                 </div>
@@ -222,54 +226,101 @@ function selectDate(thisId){
     let selectedSeatId, thisYear, thisMonth, thisDate = null;
     let thisUser = localStorage.getItem('userName');
     let thisMovie = localStorage.getItem('movie');
+    thisDate = `thisDate,${thisMovie},${thisUser}`;
+
+    selectedSeatId = document.getElementById(thisId);
 
     //기존에 선택한 날짜가 있는 경우
-    if(localStorage.getItem(`thisDate,${thisMovie},${thisUser}`)!== undefined){
-        if(localStorage.getItem(`thisDate,${thisMovie},${thisUser}`)!== null){
-            thisDate = localStorage[`thisDate,${thisMovie},${thisUser}`];
+    if(localStorage.getItem(thisDate)!== undefined){
+        if(localStorage.getItem(thisDate)!== null){
+            //thisDate = localStorage[thisDate];
     
-            selectedSeatId = document.getElementById(thisDate);
-    
-            selectedSeatId.style.fontWeight = "normal";
-            localStorage.removeItem(`thisDate,${thisMovie},${thisUser}`);
+            selectedSeatId = document.getElementById(localStorage[thisDate]);
+            
+            selectedSeatId.style.backgroundColor = "#FFFFFF";
+
+            //날짜 선택 해제 후 요일에 맞게 css 색 서식 복구
+            if(localStorage.getItem(thisDate).split(',')[3] == 0){
+                selectedSeatId.style.color = "red";
+            }
+            else if(localStorage.getItem(thisDate).split(',')[3] == 6){
+                selectedSeatId.style.color = "blue";
+            }
+            else{
+                selectedSeatId.style.color = "black";
+            }
+            
+            localStorage.removeItem(thisDate);
         }
     }
-    //현재 선택된 날짜로 값 변경
-    selectedSeatId = document.getElementById(thisId);
-    selectedSeatId.style.fontWeight = "bold";
+    //현재 선택한 날짜 css 표시
+    else{
+        selectedSeatId.style.backgroundColor = "#00B594";
+        selectedSeatId.style.color = "white";
+    }
 
     //예매 날짜 정보 쿠키 저장
-    localStorage.setItem(`thisDate,${thisMovie},${thisUser}`, thisId);
+    localStorage.setItem(thisDate, thisId);
+    
+    //선택 변경시 상태값 적용 → rerendering
+    checkedObject();
 
 }
 
 
 /**영화시간 선택 */
 //1개 상영시간 블럭 생성
-function createTime(startTime, endTime){//name: 영화이름, startTime: 시작시간, runtime: 상영시간
-
+function createTime(movieList){//name: 영화이름, startTime: 시작시간, runtime: 상영시간
+    //현재 영화 제목 받아오기
+    let thisUser = localStorage.getItem('userName');
     let thisMovie = localStorage.getItem('movie');
+    let thisTimes;
+    let reserveStartTime;
+    let reserveEndTime;
 
-    //영화 시작 일시 정보 디코딩
-    let reserveStartTime = startTime.split(':');
-    startHour = reserveStartTime[0]
-    startMinute = reserveStartTime[1]
+    //예매 날짜의 요일 정보 받아오기
+    let reserveDay = localStorage.getItem(`thisDate,${thisMovie},${thisUser}`)
 
-    //영화 종료 일시 정보 디코딩
-    let reserveEndTime = endTime.split(':');
-    endHour = reserveEndTime[0]
-    endMinute = reserveEndTime[1]
+    for(var j = 0; j < movieList.length; j++){
+        console.log("j:",j,"movieList:",movieList[j].name);
+        if(movieList[j].name === thisMovie){
+            thisTimes = movieList[j].time.split('*');
+            console.log("thisTimes:",thisTimes);
+            for(var i = 0; i < thisTimes.length; i++){
+
+                reserveStartTime = thisTimes[i].split('/');
+                console.log("reserveStartTime",reserveStartTime);
+
+                if(reserveDay !== null && reserveDay.split(',')[3] == reserveStartTime[0]){
+                    //영화 시작 일시 정보 디코딩
+                    startTime = reserveStartTime[1].split(':');
+                    startHour = startTime[0]
+                    startMinute = startTime[1]
+
+                    //영화 종료 일시 정보 디코딩
+                    endTime = reserveStartTime[2].split(':');
+                    endHour = endTime[0]
+                    endMinute = endTime[1]
+
+                    console.log("startHour:",startHour);
+                    console.log("startMinute:",startMinute);
+                    console.log("endHour:",endHour);
+                    console.log("endMinute:",endMinute);
 
 
-    document.write(`
-        <div class="movieFrame" id="${startTime}" onclick="selectTime(this.id)">
-            <span>${thisMovie}</span>
-            <br/>
-            <span>시작시간: ${startHour}시 ${startMinute}분 </span>
-            <br/>
-            <span>종료시간: ${endHour}시 ${endMinute}분</span>
-        </div>
-    `)
+                    document.write(`
+                        <div class="movieFrame" id="${startTime}" onclick="selectTime(this.id)">
+                            <span>${thisMovie}</span>
+                            <br/>
+                            <span>시작시간: ${startHour}시 ${startMinute}분 </span>
+                            <br/>
+                            <span>종료시간: ${endHour}시 ${endMinute}분</span>
+                        </div>
+                    `)
+                }
+            }
+        }
+    }
 }
 
 //상영시간 선택함수
@@ -280,18 +331,27 @@ function selectTime(thisId){
     let thisMovie = localStorage.getItem('movie');
     let thisDate = localStorage[`thisDate,${thisMovie},${thisUser}`];
 
+    let thisTime = `time,${thisDate},${thisMovie},${thisUser}`;
 
     //클릭한 시간이 선택되었는 지 확인
-    if(localStorage.getItem(`time,${thisDate},${thisMovie},${thisUser}`) === thisId){
+    if(localStorage.getItem(thisTime) === thisId){
         //기존에 선택했던 시간을 다시 클릭 -> 해당 시간 선택 해제
-        selectedSeatId.style.opacity = 0.5;
-        localStorage.removeItem(`time,${thisDate},${thisMovie},${thisUser}`);
+        document.getElementById(thisId).style.backgroundColor = '#FFFFFF';
+        document.getElementById(thisId).style.color = 'black';
+        // selectedSeatId.style.opacity = 0.5;
+        localStorage.removeItem(thisTime);
     }
     else{
         //새롭게 선택한 시간인 경우
-        selectedSeatId.style.opacity = 1;
-        localStorage.setItem(`time,${thisDate},${thisMovie},${thisUser}`,thisId)
+        document.getElementById(thisId).style.backgroundColor = '#00B594';
+        document.getElementById(thisId).style.color = 'white';
+        // selectedSeatId.style.opacity = 1;
+        localStorage.setItem(thisTime, thisId);
     }
+
+    
+    //선택 변경시 상태값 적용 → rerendering
+    checkedObject();
 }
 
 /**좌석 선택관련 함수 모음*/
@@ -299,6 +359,9 @@ function selectTime(thisId){
 
 //좌석 생성 함수
 function createSeat(type, rows, cols){ //type은 생성할 좌석의 라인 위치
+
+    let seatRows = ['A','B','C','D','E','F','G','H','I','J','K','L']; //최대 12열까지 가능
+
             
     if(cols >= 10){
         console.log("seat cols의 범위를 초과했습니다.");
@@ -317,17 +380,19 @@ function createSeat(type, rows, cols){ //type은 생성할 좌석의 라인 위�
         `);
         for(var j = 0; j < cols; j++){
 
+            let tmp = seatRows[i]+j;
+
             document.write(`
                 <td> 
-                    <div class="seat" id="${i*10+j}" onclick="selectSeat(this.id)" >
+                    <div class="seat" id="${tmp}" onclick="selectSeat(this.id)" >
                         <img src="./media/component/seat_checked.jpg" alt="좌석" width="40px">
                     </div>
                 </td>
             `);
 
             //기존에 선택된 좌석이라면 선택되었다는 표시 css적용
-            if(localStorage.getItem(`seat${i*10+j}`)!==undefined & localStorage.getItem(`seat${i*10+j}`)!==null){
-                document.getElementById(`${i*10+j}`).style.opacity = 1;
+            if(localStorage.getItem(`seat${tmp}`)!==undefined & localStorage.getItem(`seat${tmp}`)!==null){
+                document.getElementById(`${tmp}`).style.opacity = 1;
             }
         
         }
@@ -382,6 +447,9 @@ function selectSeat(thisId) {//thisId: 선택된 좌석id 받기
             localStorage[`seat,${thisUser}`] = thisCount + 1; 
         }
     }
+
+    //선택 변경시 상태값 적용 → rerendering
+    checkedObject();
 }
 
 
@@ -390,6 +458,32 @@ function setReserve(){
     let thisUser, thisMovie, thisDate, thisTime, seatRow, seatCol, peopleCount = null;
     let seatInfo =[];
 
+    let seatRows = ['A','B','C','D','E','F','G','H','I','J','K','L']; //최대 12열까지 가능
+
+    let blockTop =`
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">예매 확인</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        
+        <!-- 예매정보출력 -->
+    `;
+
+    let blockBottom = `
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">변경하기</button>
+        <button type="button" class="btn btn-success">예매하기</button>
+        </div>
+    `;
+
+    let blockError = `
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+        </div>
+    `
 
     //각 정보 쿠키에서 받아오기
     thisUser = localStorage['userName'];
@@ -397,19 +491,81 @@ function setReserve(){
     thisDate = localStorage[`thisDate,${thisMovie},${thisUser}`];
     thisTime = localStorage[`time,${thisDate},${thisMovie},${thisUser}`];
 
+    console.log("thisUser:",thisUser);
+    //필수 값 선택여부 확인
+    if(!thisUser){
+        document.getElementById("reservationResult").innerHTML=`
+            ${blockTop}
+            <div>
+                예매자 성명을 입력해주세요.
+            </div>
+            ${blockError}
+        `
+        return;
+    }
+    if(!thisMovie){
+        document.getElementById("reservationResult").innerHTML=`
+            ${blockTop}
+            <div>
+                영화를 선택해주세요.
+            </div>
+            ${blockError}
+        `
+        return;
+    }
+    if(!thisDate){
+        document.getElementById("reservationResult").innerHTML=`
+            ${blockTop}
+            <div>
+                관람 날짜를 선택해주세요.
+            </div>
+            ${blockError}
+        `
+        return;
+    }
+    if(!thisTime){
+        document.getElementById("reservationResult").innerHTML=`
+            ${blockTop}
+            <div>
+                관람 시간을 선택해주세요.
+            </div>
+            ${blockError}
+        `
+        return;
+    }
+
     //좌석 정보 받아오기
-    for(var i = 0; i < 100; i++){ //1관 당최대 100석까지만 허용할 것이므로 
-        tmp = localStorage[`seat${i}`];
-        if(tmp !== null & tmp !== undefined){
-            tmp = tmp.split(',');
-            console.log('tmp:',tmp);
-            if(tmp[6] === thisUser){
-                seatInfo.push(tmp[0]);
+    
+    for(var i = 0; i < 10; i++){ //1관 당최대 100석까지만 허용할 것이므로 
+        for(var j = 0; j < 10; j++){
+            let seatTmp = seatRows[i]+j
+
+            tmp = localStorage[`seat${seatTmp}`];
+            if(tmp !== null & tmp !== undefined){
+                tmp = tmp.split(',');
+                console.log('tmp:',tmp);
+                if(tmp[8] === thisUser){
+                    seatInfo.push(tmp[0]);
+                }
             }
         }
     }
 
+    //좌석정보 에러처리
+    if(seatInfo.length === 0){
+        document.getElementById("reservationResult").innerHTML=`
+            ${blockTop}
+            <div>
+                좌석을 선택해주세요.
+            </div>
+            ${blockError}
+        `
+    return;
+    }
+
     peopleCount = seatInfo.length;
+
+    console.log("thisTime:", thisTime);
 
     //예매 날짜 정보 디코딩
     let reserveDate = thisDate.split(',');
@@ -418,17 +574,94 @@ function setReserve(){
     thisDate = reserveDate[2]
 
     //예매 시간 정보 디코딩
-    let reserveTime = thisTime.split(':');
+    let reserveTime = thisTime.split(',');
     thisHour = reserveTime[0]
     thisMinute = reserveTime[1]
 
-    alert(
-        `${thisUser}\n영화:${thisMovie}\n날짜:${thisYear}년 ${thisMonth}월 ${thisDate}일\n시각:${thisHour}시 ${thisMinute}분\n인원 수:${peopleCount}명 `
-    );
-    
+    //좌석 정보 디코딩
+    let thisSeat = []
 
+    seatInfo.map(element => (
+        
+        thisSeat.push(element)
+    ));
+
+
+
+
+    document.getElementById("reservationResult").innerHTML=`
+
+        ${blockTop}
+        <div>예매 정보를 확인해주세요 :)</div>
+        <table>
+            <tr>
+                <td><b>예매자 명: </b></td>
+                <td>${thisUser}</td>
+            </tr>
+            <tr>
+                <td><b>영화 제목: </b></td>
+                <td>${thisMovie}</td>
+            </tr>
+            <tr>
+                <td><b>예매 일시: </b></td>
+                <td>${thisYear}년${thisMonth}월${thisDate}일 ${thisHour}:${thisMinute}</td>
+            </tr>
+            <tr>
+                <td><b>인원 수: </b></td>
+                <td>${peopleCount}명</td>
+            </tr>
+            <tr>
+                <td><b>좌석: </b></td>
+            ${
+                seatInfo.map(seat => (
+                    `<td>
+                        ${seat}석
+                    </td>
+                    `
+                ))
+            }
+            </tr>
+
+        </table>
+        ${blockBottom}
+    `
 
     // tmp = localStorage['/seat\d{0,3}'];
+}
 
+
+
+//선택된 항목 검사 후 화면에 표시
+function checkedObject(){
+    //현재 접속한 유저 정보 받아오기
+    let thisUser = localStorage.getItem(`userName`);
+    
+    //영화제목 선택
+    let checkedMovie = localStorage.getItem(`movie`);
+    console.log("checkedMovie:", checkedMovie);
+
+    if(checkedMovie !== null && (checkedMovie!==undefined || checkedMovie!==null)){
+        document.getElementById(checkedMovie).style.backgroundColor = '#00B594';
+        document.getElementById(checkedMovie).style.color = 'white';
+    }
+
+    //날짜 선택
+    let checkedDate = localStorage.getItem(`thisDate,${checkedMovie},${thisUser}`);
+    console.log("checkedDate:", checkedDate);
+
+    if(checkedDate !== null && (checkedDate !== undefined || checkedDate !== null)){
+        document.getElementById(checkedDate).style.backgroundColor = '#00B594';
+        document.getElementById(checkedDate).style.color = 'white';
+    }
+
+    //시간 선택
+    let checkedTime = localStorage.getItem(`time,${checkedDate},${checkedMovie},${thisUser}`);
+
+    console.log("checkedTime:", checkedTime);
+
+    if(checkedTime !== null && (checkedTime !== undefined || checkedTime !== null)){
+        document.getElementById(checkedTime).style.backgroundColor = '#00B594';
+        document.getElementById(checkedTime).style.color = 'white';
+    }
 
 }
