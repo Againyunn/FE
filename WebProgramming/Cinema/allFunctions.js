@@ -881,4 +881,68 @@ function goHome(){
 //상세 영화시간 선택 및 영화 좌석 선택
 
 
+/**캐러셀 출력 */
 /************************************************** */
+function printCarousel(){
+    let topBlock = `
+    
+        <div class="carouselContainer">
+            <div class="carouselItem">
+            <!-- 캐러셀 사용(bootstrap) -->
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+    `
+
+    let bottomBlock = `
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `
+
+    let content = `
+    <div class="carousel-item active">
+        <img src="${movieList[0].img}" class="d-block w-100" alt="...">
+    </div>
+    `
+
+    //모든 movieList의 내용 담기
+    for(var i = 1; i < movieList.length; i++){
+        content += `
+            <div class="carousel-item">
+                <img src="${movieList[i].img}" class="d-block w-100" alt="...">
+            </div>
+        `
+    }
+
+    document.getElementById("carousel").innerHTML = `
+        ${topBlock}${content}${bottomBlock}
+    `;
+
+}
+
+
+/**예매확인 */
+
+
+
+/**예매취소 */
+
+
+
+/**현재상영작 안내 */
+
+
+
+/**개봉예정작 안내 */
+
+
+
