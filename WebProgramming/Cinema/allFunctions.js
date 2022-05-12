@@ -550,7 +550,7 @@ function selectSeat(thisId) {//thisId: 선택된 좌석id 받기
     else{
         //새롭게 선택한 좌석인 경우
         selectedSeatId.style.opacity = 1;
-        localStorage.setItem(`seat${thisId}/${allData[0]}/${allData[1]}/${allData[2]}`,thisUser);
+        //localStorage.setItem(`seat${thisId}/${allData[0]}/${allData[1]}/${allData[2]}`,thisUser);
 
         //좌석정보 업데이트
         var updatedData= `${allData[0]}`;
@@ -715,24 +715,6 @@ function setReserve(){
         thisSeat.push(element)
     ));
 
-    
-    /**최종 예매정보 기록*/
-    //기존의 예매 내역이 없을 경우
-    if(!localStorage.getItem(`booked/${thisUser}`)){
-        localStorage.setItem(`booked/${thisUser}`, `{${thisMovie},${thisYear}년,${thisMonth}월,${thisDate}일,${thisHour}:,${thisMinute},${peopleCount}명,${seatInfo}}`);
-    }
-
-    //기존의 예매 내역이 있는 경우
-    else{
-        let existReservation = JSON.parse(localStorage.getItem(`booked/${thisUser}`));
-        console.log("existReservation:", existReservation);
-        existReservation.push(`[${thisMovie},${thisYear}년,${thisMonth}월,${thisDate}일,${thisHour}:,${thisMinute},${peopleCount}명,${seatInfo}]`);
-        // localStorage[`${thisUser}`] = existReservation;
-        localStorage.setItem(`booked/${thisUser}`, JSON.stringify(existReservations));
-    }
-    
-
-
     document.getElementById("reservationResult").innerHTML=`
 
         ${blockTop}
@@ -779,63 +761,111 @@ function setReserve(){
 function checkedObject(){
     //현재 접속한 유저 정보 받아오기
     let thisUser = localStorage.getItem(`userName`);
+    let allData;
 
     //현재 저장된 정보 확인
     /**`tmp${thisUser}`: 영화이름/년,월,일,요일/시,분/좌석번호...*/
     let getData = localStorage.getItem(`tmp${thisUser}`);
-    let allData = getData.split('/');
-
-
-    if(thisUser !== null && (thisUser !== undefined || thisUser !== null)){
-        document.getElementById("userName").value = thisUser;
-        console.log("testInputName2:",thisUser);
-    }
+    if(getData !== null && getData !== undefined){
+        allData = getData.split('/');
+        if(thisUser !== null && thisUser !== undefined ){
+            document.getElementById("userName").value = thisUser;
+            console.log("testInputName2:",thisUser);
+        }
+        
+        //영화제목 선택
+        let checkedMovie = allData[0];
+        console.log("checkedMovie:", checkedMovie);
     
-    //영화제목 선택
-    let checkedMovie = allData[0];
-    console.log("checkedMovie:", checkedMovie);
-
-    if(checkedMovie !== null && (checkedMovie!==undefined || checkedMovie!==null)){
-        document.getElementById(checkedMovie).style.backgroundColor = '#00B594';
-        document.getElementById(checkedMovie).style.color = 'white';
+        if(checkedMovie !== null && checkedMovie!==undefined ){
+            document.getElementById(checkedMovie).style.backgroundColor = '#00B594';
+            document.getElementById(checkedMovie).style.color = 'white';
+        }
+    
+        //날짜 선택
+        let checkedDate = allData[1];
+        console.log("checkedDate:", checkedDate);
+    
+        if(checkedDate !== null && checkedDate !== undefined ){
+            document.getElementById(checkedDate).style.backgroundColor = '#00B594';
+            document.getElementById(checkedDate).style.color = 'white';
+        }
+    
+        //시간 선택
+        let checkedTime = allData[2];
+    
+        console.log("checkedTime:", checkedTime);
+    
+        if(checkedTime !== null && checkedTime !== undefined ){
+            document.getElementById(checkedTime).style.backgroundColor = '#00B594';
+            document.getElementById(checkedTime).style.color = 'white';
+        }
     }
-
-    //날짜 선택
-    let checkedDate = allData[1];
-    console.log("checkedDate:", checkedDate);
-
-    if(checkedDate !== null && (checkedDate !== undefined || checkedDate !== null)){
-        document.getElementById(checkedDate).style.backgroundColor = '#00B594';
-        document.getElementById(checkedDate).style.color = 'white';
-    }
-
-    //시간 선택
-    let checkedTime = allData[2];
-
-    console.log("checkedTime:", checkedTime);
-
-    if(checkedTime !== null && checkedTime !== undefined ){
-        document.getElementById(checkedTime).style.backgroundColor = '#00B594';
-        document.getElementById(checkedTime).style.color = 'white';
-    }
-
 }
 
 //예매확정
 function confirmReservation(){
-    location.href="./bookingSuccess.html"
+    
 
+    //예매 정보 쿠키에서 받아오기
+    let thisUser = localStorage['userName'];
+    let getData = localStorage.getItem(`tmp${thisUser}`);
+
+    //예매 정보 디코딩
+    /**`tmp${thisUser}`: 영화이름/년,월,일,요일/시,분/좌석번호...*/
+    let allData = getData.split('/');
+    let seatInfo = [];
+
+    for(var i = 0; i < allData.length; i++){
+        if(i >= 3){
+            seatInfo.push(`${allData[i]}`)//좌석정보
+        }
+        else{
+            thisMovie = allData[0]; //영화제목
+            thisDate = allData[1];  //관람일자
+            thisTime = allData[2];  //관람시각
+        }
+    }
+
+    
+    //예매 날짜 정보 디코딩
+    let reserveDate = thisDate.split(',');
+    thisYear = reserveDate[0]
+    thisMonth = reserveDate[1]
+    thisDate = reserveDate[2]
+
+    //예매 시간 정보 디코딩
+    let reserveTime = thisTime.split(',');
+    thisHour = reserveTime[0]
+    thisMinute = reserveTime[1]
+
+    peopleCount = seatInfo.length;
+
+    /**최종 예매정보 기록*/
+    //기존의 예매 내역이 없을 경우
+    if(localStorage.getItem(`booked/${thisUser}`) === null || localStorage.getItem(`booked/${thisUser}`) === undefined){
+        localStorage.setItem(`booked/${thisUser}`, `[${thisMovie},${thisYear}년,${thisMonth}월,${thisDate}일,${thisHour}:,${thisMinute},${peopleCount}명,${seatInfo}]`);
+    }
+
+    //기존의 예매 내역이 있는 경우
+    else{
+        let existReservation = [];
+        existReservation.push(localStorage.getItem(`booked/${thisUser}`));
+        console.log("existReservation:", existReservation);
+        existReservation.push(`[${thisMovie},${thisYear}년,${thisMonth}월,${thisDate}일,${thisHour}:,${thisMinute},${peopleCount}명,${seatInfo}]`);
+        // localStorage[`${thisUser}`] = existReservation;
+        localStorage.setItem(`booked/${thisUser}`, JSON.stringify(existReservation));
+    }
+
+    //에매좌석 정보 기록
+    for(var i = 0; i < seatInfo.length; i++){
+        localStorage.setItem(`seat${seatInfo[i]}/${allData[0]}/${allData[1]}/${allData[2]}`,thisUser)
+    }
 
     //각 예매 항목별 임시 저장기록 삭제
-    let thisUser = localStorage['userName'];
-    let thisMovie = localStorage['movie'];
-    let thisDate = localStorage[`thisDate,${thisMovie},${thisUser}`];
-    let thisTime = localStorage[`time,${thisDate},${thisMovie},${thisUser}`];
+    localStorage.removeItem(`tmp${thisUser}`);
 
-    localStorage.removeItem('movie');
-    localStorage.removeItem(`thisDate,${thisMovie},${thisUser}`);
-    localStorage.removeItem(`time,${thisDate},${thisMovie},${thisUser}`);
-
+    location.href="./bookingSuccess.html"
 }
 
 /************************************************** */
