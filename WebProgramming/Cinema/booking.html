@@ -37,84 +37,30 @@
     </div>
     <span>*예매자 이름을 기억해주세요:)</span>
 
-    <h1>전</h1>
-
+    <h3>영화</h3>
     <script type="text/javascript">
-        
-        //구분방식:     
-        //name:"이름"
-        //time:"요일번호/시작/종료*요일번호/시작/종료"
-        // let movieList = [
-        //     {
-        //         name:"닥터스트레인지2",
-        //         time:"0/10:20/12:10*5/11:15/13:00",
-        //         img:"./media/현재상영작/닥스.jpg"
-        //     },
-        //     {
-        //         name:"신기한동물사전3",
-        //         time:"1/09:10/10:30*",
-        //         img:"./media/현재상영작/신동사.jpg"
-        //     },
-        //     {
-        //         name:"니 부모 얼굴이 보고싶다",
-        //         time:"",
-        //         img:"./media/현재상영작/니 부모 얼굴이 보고싶다.jpg"
-        //     },
-        //     {
-        //         name:"공기살인",
-        //         time:"",
-        //         img:"./media/현재상영작/공기살인.jpg"
-        //     },
-        //     {
-        //         name:"로스트 시티",
-        //         time:"",
-        //         img:"./media/현재상영작/로스트 시티.jpg"
-        //     },
-        //     {
-        //         name:"범죄도시2",
-        //         time:"",
-        //         img:"./media/현재상영작/범죄도시2.jpg"
-        //     },
-        //     {
-        //         name:"뜨거운 피",
-        //         time:"",
-        //         img:"./media/현재상영작/뜨거운 피.jpg"
-        //     },
-        //     {
-        //         name:"앵커",
-        //         time:"",
-        //         img:"./media/현재상영작/앵커.jpg"
-        //     },
-        //     {
-        //         name:"언차티드",
-        //         time:"",
-        //         img:"./media/현재상영작/언차티드.jpg"
-        //     },
-        //     {
-        //         name:"엠뷸런스",
-        //         time:"",
-        //         img:"./media/현재상영작/엠뷸런스.jpg"
-        //     }
-        // ];
-
-        console.log(movieList);
-
         createMovieList(movieList);
-        
-
-        createDate('today',7);
-        createTime(movieList);
     </script>
 
+    <h3>날짜</h3>
+    <script type="text/javascript">
+        createDate('today',7);
+    </script>
 
+    <h3>시간</h3>
+    <script type="text/javascript">
+        createTime(movieList);    
+    </script>
+
+    <h3>좌석</h3>
     <script type="text/javascript">
         //좌석 생성
         createSeat(1, 10, 8);
 
+        
         //현재 값들 검증
         checkedObject();
     </script>
-
 
     <br>
 
@@ -139,7 +85,7 @@
     </div>
     
     <script type="text/javascript">
-        checkedObject();
+        //checkedObject();
     </script>
 </body>
 </html>
