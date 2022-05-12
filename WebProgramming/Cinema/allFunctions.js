@@ -1,3 +1,7 @@
+/**현재상영하고 있는 영화 데이터 불러오기 */
+document.write("<script src='./data/currentMovie.js'></script>");
+// const movieList = getMovieList();
+
 
 
 /**예매 기능 */
@@ -270,6 +274,7 @@ function selectDate(thisId){
     //선택 변경시 상태값 적용 → rerendering
     checkedObject();
 
+    location.reload();
 }
 
 
@@ -640,6 +645,12 @@ function setReserve(){
 function checkedObject(){
     //현재 접속한 유저 정보 받아오기
     let thisUser = localStorage.getItem(`userName`);
+    console.log("testInputName:",thisUser);
+
+    if(thisUser !== null && (thisUser !== undefined || thisUser !== null)){
+        document.getElementById("userName").value = thisUser;
+        console.log("testInputName2:",thisUser);
+    }
     
     //영화제목 선택
     let checkedMovie = localStorage.getItem(`movie`);
@@ -679,8 +690,14 @@ function confirmReservation(){
 /************************************************** */
 
 
-
+/**페이지 이동 관련 함수 */
+/************************************************** */
 //홈화면으로
 function goHome(){
     location.href="./main.html"
 }
+
+//상세 영화시간 선택 및 영화 좌석 선택
+
+
+/************************************************** */
