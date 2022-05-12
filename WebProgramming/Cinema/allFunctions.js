@@ -1,3 +1,8 @@
+
+
+/**예매 기능 */
+/************************************************** */
+
 /**간단한 로그인 기능 */
 function setUserName(thisId){
     let selectedSeatId = document.getElementById(thisId);
@@ -474,7 +479,7 @@ function setReserve(){
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">변경하기</button>
-        <button type="button" class="btn btn-success">예매하기</button>
+        <button type="button" class="btn btn-success" onclick="confirmReservation()">예매하기</button>
         </div>
     `;
 
@@ -664,4 +669,18 @@ function checkedObject(){
         document.getElementById(checkedTime).style.color = 'white';
     }
 
+}
+
+//예매확정
+function confirmReservation(){
+    location.href="./bookingSuccess.html"
+}
+
+/************************************************** */
+
+
+
+//홈화면으로
+function goHome(){
+    location.href="./main.html"
 }

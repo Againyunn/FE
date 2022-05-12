@@ -16,6 +16,7 @@
             margin-right: 5px;
         }
 
+        /*실습의 예시로 제공된 파일의 하늘색 색상이 skyblue가 아니라, aqua인 것 같아 aqua로 색을 지정하였습니다.*/
         .poemFrame:hover{
             background-color: aqua;
         }
@@ -135,10 +136,16 @@
             //result의 값 초기화
             document.getElementById("result").innerHTML = '';
 
+            //객체를 key기준으로 정렬
+            let orderedContent = {};
+            Object.keys(content).sort().forEach(function(key) {
+                orderedContent[key] = content[key];
+            })
+
             //result에 선택된 값 채워넣기
-            for(var i in content){
+            for(var i in orderedContent){
                 console.log(`${i}:`,i.value);
-                document.getElementById("result").innerHTML += content[i];
+                document.getElementById("result").innerHTML += orderedContent[i];
             }
         }
 
