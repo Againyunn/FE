@@ -814,11 +814,14 @@ function confirmReservation(){
     //예매 정보 디코딩
     /**`tmp${thisUser}`: 영화이름/년,월,일,요일/시,분/좌석번호...*/
     let allData = getData.split('/');
-    let seatInfo = [];
+    let seatInfo = "";
 
     for(var i = 0; i < allData.length; i++){
-        if(i >= 3){
-            seatInfo.push(`${allData[i]}`)//좌석정보
+        if(i == 3){
+            seatInfo += `${allData[i]}`//좌석정보
+        }
+        else if( i >3){
+            seatInfo += `/${allData[i]}`//좌석정보
         }
         else{
             thisMovie = allData[0]; //영화제목
@@ -839,12 +842,13 @@ function confirmReservation(){
     thisHour = reserveTime[0]
     thisMinute = reserveTime[1]
 
-    peopleCount = seatInfo.length;
+    let seatArray = seatInfo.split("/");
+    peopleCount = seatArray.length;
 
     /**최종 예매정보 기록*/
     //기존의 예매 내역이 없을 경우
     if(localStorage.getItem(`booked/${thisUser}`) === null || localStorage.getItem(`booked/${thisUser}`) === undefined){
-        localStorage.setItem(`booked/${thisUser}`, `[${thisMovie},${thisYear}년,${thisMonth}월,${thisDate}일,${thisHour}:,${thisMinute},${peopleCount}명,${seatInfo}]`);
+        localStorage.setItem(`booked/${thisUser}`, `${thisMovie}/${thisYear}년/${thisMonth}월/${thisDate}일/${thisHour}:/${thisMinute}/${peopleCount}명/${seatInfo}`);
     }
 
     //기존의 예매 내역이 있는 경우
@@ -852,14 +856,14 @@ function confirmReservation(){
         let existReservation = [];
         existReservation.push(localStorage.getItem(`booked/${thisUser}`));
         console.log("existReservation:", existReservation);
-        existReservation.push(`[${thisMovie},${thisYear}년,${thisMonth}월,${thisDate}일,${thisHour}:,${thisMinute},${peopleCount}명,${seatInfo}]`);
+        existReservation.push(`${thisMovie}/${thisYear}년/${thisMonth}월/${thisDate}일/${thisHour}:/${thisMinute}/${peopleCount}명/${seatInfo}`);
         // localStorage[`${thisUser}`] = existReservation;
-        localStorage.setItem(`booked/${thisUser}`, JSON.stringify(existReservation));
+        localStorage.setItem(`booked/${thisUser}`, existReservation);
     }
 
     //에매좌석 정보 기록
-    for(var i = 0; i < seatInfo.length; i++){
-        localStorage.setItem(`seat${seatInfo[i]}/${allData[0]}/${allData[1]}/${allData[2]}`,thisUser)
+    for(var i = 0; i < seatArray.length; i++){
+        localStorage.setItem(`seat${seatArray[i]}/${allData[0]}/${allData[1]}/${allData[2]}`,thisUser)
     }
 
     //각 예매 항목별 임시 저장기록 삭제
@@ -931,18 +935,155 @@ function printCarousel(){
 
 
 /**예매확인 */
+function getBookedList(){
+    let thisUser = localStorage.getItem("userName");
 
+    let getData = localStorage.getItem(`booked/${thisUser}`);
+    if(getData === null && getData === undefined){
+        returnError("영화예매를 해주세요:)");
+        return;
+    }
+    
+    console.log("getData:",getData);
+
+    //배열로 변환
+    let allData = getData.split(",");
+
+    console.log("allData:",allData);
+
+    let bookedMovieList = [];
+    //영화정보
+    let reservedName = '';
+    let reservedDate = ''; 
+    let reservedTime = ''; 
+    let reservedPeopleCount = '';
+    let reservedSeat = [];
+
+    //출력할 화면 정보
+    let printBookedBlock = '';
+
+    //유저에 해당하는 영화리스트 디코딩
+    for(var i = 0; i < allData.length; i++){
+        
+        var thisData = allData[i].split("/");
+
+        console.log(`thisData${i}:`, thisData);
+        //getData[i] = JSON.parse(getData[i]);
+        //한번 예약할 때 저장된 값 단위대로 디코딩
+        for(var j = 0; j <thisData.length; j++){
+            if(j == 0){
+                reservedName = thisData[j];
+            }
+            else if(1 <= j && j <= 3){
+                reservedDate += `${thisData[j]}`;
+            }
+            else if(4 <= j && j <= 5){
+                reservedTime += `${thisData[j]}`;
+            }
+            else if(j == 6){
+                reservedPeopleCount = `${thisData[j]}`;
+            }
+            else{
+                reservedSeat.push(`${thisData[j]}`);
+            }
+
+            console.log("test:",thisData[j])
+        }
+
+            //예매 내역 화면에 랜더링
+            printBookedBlock += `
+                <div class="bookedBlock" id="booked/${allData[i]}">
+                    <button type="button" class="btn btn-danger" id="${allData[i]}" onclick="cancelBooked(this.id)">예매취소</div>
+                    <table>
+                        <tr>
+                            <td>영화 명:</td>
+                            <td>${reservedName}</td>
+                        </tr>
+                        <tr>    
+                            <td>날짜:</td>
+                            <td>${reservedDate}</td>
+                        </tr>
+                        <tr>
+                            <td>시작시각:</td>
+                            <td>${reservedTime}</td>
+                        </tr>
+                        <tr>
+                            <td>좌석:</td>
+                            <td>${reservedSeat[0]}
+            `
+
+            //예매 좌석이 2개이상인 경우
+            if(reservedSeat.length > 1){
+                //좌석정보 담기
+                for(var k = 1; k < reservedSeat.length; k++){
+                    printBookedBlock += `
+                        , ${reservedSeat[k]}
+                    `
+                }
+            }
+
+            printBookedBlock += `
+                        </td>
+                    </tr>
+                </table>
+
+            `
+
+            document.write(printBookedBlock);
+
+            //다음정보 디코딩을 위해 초기화
+
+
+            reservedName = '';
+            reservedDate = ''; 
+            reservedTime = ''; 
+            reservedPeopleCount = '';
+            reservedSeat = [];
+        
+            //출력할 화면 정보
+            printBookedBlock = '';
+    }
+}
 
 
 /**예매취소 */
+function cancelBooked(thisId){ /**thisId = 닥터스트레인지2,2022년,5월,13일,11:,15,2명,E3,E4  와 같은 형식*/
+    let thisUser = localStorage.getItem("userName");
+
+    let getData = localStorage.getItem(`booked/${thisUser}`);
+
+    //배열로 변환
+    let allData = getData.split(",");
+
+    let updateData = '';
+
+    for(var i = 0; i < allData.length; i++){
+        //예매기록에서 삭제할 예매 건 식별 후 제외
+        if(thisId !== allData[i]){
+            updateData += `${allData[i]}`;
+        }
+    }
+
+    //선택된 예매 내역 삭제된 정보 업데이트
+    localStorage.setItem(`booked/${thisUser}`, `${updateData}`);
+}
+
+
+/**현재상영작 안내 
+ * 출력할 내용:
+ *      1.제목
+ *      2.이미지
+*/
 
 
 
-/**현재상영작 안내 */
+/**개봉예정작 안내 
+ * 출력할 내용:
+ *      1.제목
+ *      2.이미지
+ *      3.개봉예정일
+*/
 
-
-
-/**개봉예정작 안내 */
 
 
 
