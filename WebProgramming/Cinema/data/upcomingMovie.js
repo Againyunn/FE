@@ -5,8 +5,8 @@ time:"요일번호/시작/종료*요일번호/시작/종료"
 img:"썸네일 이미지의 경로"
 */
 
-//현재 상영작
-let movieList = [
+
+let comingSoonMovieList = [
     {
         name:"닥터스트레인지2",
         brief:"",
@@ -68,7 +68,3 @@ let movieList = [
         img:"./media/현재상영작/엠뷸런스.jpg"
     }
 ];
-
-// function getMovieList(){
-//     return movieList;
-// }

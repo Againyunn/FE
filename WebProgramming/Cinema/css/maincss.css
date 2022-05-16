@@ -109,7 +109,7 @@ footer{
 
 
 /***********upcomingMovieList.html서식************/
-.currentMovieList{
+.upcomingMovieList{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -117,7 +117,10 @@ footer{
     /*align-items: stretch;*/
 }
 
-.currentMovieBlock{
+.upcomingMovieBlock{
     flex-grow: 0;
     margin: 20px;
 }
+
+
+/***********about.html서식************/

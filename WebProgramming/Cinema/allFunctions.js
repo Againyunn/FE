@@ -2,6 +2,9 @@
 document.write("<script src='./data/currentMovie.js'></script>");
 // const movieList = getMovieList();
 
+/**상영예정 영화 데이터 불러오기 */
+document.write("<script src='./data/upcomingMovie.js'></script>");
+// const movieList = getMovieList();
 
 
 /**예매 기능 */
@@ -882,6 +885,11 @@ function goHome(){
     location.href="./main.html"
 }
 
+//예매화면으로
+function goBooking(){
+    location.href ="./booking.html";
+}
+
 //상세 영화시간 선택 및 영화 좌석 선택
 
 
@@ -1088,10 +1096,6 @@ function currentMovieList(movieList){//현재 상영작 리스트 받아오기
     */
 
     //출력할 내용을 담은 현재상영작 mapping해서 출력
-
-
-    // for(var i = 0; i < movieList.length; i++){
-
     movieList.map( element => (
         document.write(`
             <div class="currentMovieBlock">
@@ -1099,20 +1103,15 @@ function currentMovieList(movieList){//현재 상영작 리스트 받아오기
                     <img src="${element.img}" class="card-img-top" alt="${element.name}">
                     <div class="card-body">
                         <h5 class="card-title">${element.name}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text">${element.brief}</p>
+                        <button type="button" class="btn btn-success" onclick="goBooking()">예매하기</button>
                     </div>
                 </div>
             </div>
         `)
     //}
     ));
-
 }
-
-
-
-
 
 /**개봉예정작 안내 
  * 출력할 내용:
@@ -1120,6 +1119,30 @@ function currentMovieList(movieList){//현재 상영작 리스트 받아오기
  *      2.이미지
  *      3.개봉예정일
 */
+function upcomingMovieList(comingSoonMovieList){//현재 상영작 리스트 받아오기
+    /**구분방식:     
+    name:"이름"
+    time:"요일번호/시작/종료*요일번호/시작/종료"
+    img:"썸네일 이미지의 경로"
+    */
+
+    //출력할 내용을 담은 현재상영작 mapping해서 출력
+    comingSoonMovieList.map( element => (
+        document.write(`
+            <div class="currentMovieBlock">
+                <div class="card" style="width: 18rem;">
+                    <img src="${element.img}" class="card-img-top" alt="${element.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.name}</h5>
+                        <p class="card-text">${element.brief}</p>
+                    </div>
+                </div>
+            </div>
+        `)
+    //}
+    ));
+}
+
 
 
 
