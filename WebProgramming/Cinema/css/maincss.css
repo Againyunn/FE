@@ -1,8 +1,10 @@
+/***********공통 서식************/
 body{
     text-align: center;
     align-items: center;
 }
 
+/*공통헤더 CSS*/
 #mainHeader{
     width: 100%;
     height: 200px;
@@ -28,6 +30,12 @@ section{
     padding-right: 200px;
 }
 
+/*공통푸터 CSS*/
+footer{
+    background-color: #F2F2F2;
+}
+
+/*링크 기능 공통 서식 */
 #anchor{
     text-decoration: none;
     color: #FFFFFF;
@@ -41,6 +49,8 @@ section{
     color:black;
 }
 
+/***********main.html서식************/
+/*main.html 의 티켓 */
 #ticket_unchecked{
     width: 200px;
 }
@@ -50,29 +60,26 @@ section{
 }   
 
 #ticket_unchecked_box{
-
     height: 150%;
 }
 
 #ticket_checked_box{
-
     height: 150%;
 }
 
 #ticket_unchecked_box:hover{
     box-shadow: 0 1em 1em #D2D2D2;
+    border-radius: 10px;
 }
 
 #ticket_checked_box:hover{
     box-shadow: 0 1em 1em #D2D2D2;
+    border-radius: 10px;
 }
 
 
-footer{
-    background-color: #F2F2F2;
-}
 
-/*carousel의 배치 용이성을 위해 flex 사용*/
+/*main.html carousel의 배치 용이성을 위해 flex 사용*/
 .carouselContainer{
     display: flex;
     flex-direction: row;
@@ -86,3 +93,31 @@ footer{
     flex-grow: 0;
 }
 
+/***********currentMovieList.html서식************/
+.currentMovieList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    /*align-items: stretch;*/
+}
+
+.currentMovieBlock{
+    flex-grow: 0;
+    margin: 20px;
+}
+
+
+/***********upcomingMovieList.html서식************/
+.currentMovieList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    /*align-items: stretch;*/
+}
+
+.currentMovieBlock{
+    flex-grow: 0;
+    margin: 20px;
+}

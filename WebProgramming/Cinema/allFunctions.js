@@ -932,8 +932,11 @@ function printCarousel(){
     `;
 
 }
+/************************************************** */
 
 
+/**예매확인& 취소 기능 */
+/************************************************** */
 /**예매확인 */
 function getBookedList(){
     let thisUser = localStorage.getItem("userName");
@@ -1067,13 +1070,47 @@ function cancelBooked(thisId){ /**thisId = 닥터스트레인지2,2022년,5월,1
     //선택된 예매 내역 삭제된 정보 업데이트
     localStorage.setItem(`booked/${thisUser}`, `${updateData}`);
 }
+/************************************************** */
 
 
+/**영화 리스트 출력함수 */
+/************************************************** */
 /**현재상영작 안내 
  * 출력할 내용:
  *      1.제목
  *      2.이미지
 */
+function currentMovieList(movieList){//현재 상영작 리스트 받아오기
+    /**구분방식:     
+    name:"이름"
+    time:"요일번호/시작/종료*요일번호/시작/종료"
+    img:"썸네일 이미지의 경로"
+    */
+
+    //출력할 내용을 담은 현재상영작 mapping해서 출력
+
+
+    // for(var i = 0; i < movieList.length; i++){
+
+    movieList.map( element => (
+        document.write(`
+            <div class="currentMovieBlock">
+                <div class="card" style="width: 18rem;">
+                    <img src="${element.img}" class="card-img-top" alt="${element.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.name}</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        `)
+    //}
+    ));
+
+}
+
+
 
 
 
@@ -1086,4 +1123,45 @@ function cancelBooked(thisId){ /**thisId = 닥터스트레인지2,2022년,5월,1
 
 
 
+/**여러 공통 출력 함수 */
+/************************************************** */
+/**헤더&푸터 출력 함수 */
+function showHeader(){
+    document.write(`
+    <div id="mainHeader">
+        <a id="anchor" href="./main.html" target="_self">
+            <img src="./media/component/대표이미지.jpg" alt="대표이미지">
+            <h2 id="main_font">다시, 봄</h2>
+        </a>
+    </div> 
 
+    <nav>
+        <table>
+            <tr>
+                <td><a id="anchor" href="./booking.html" target="_self" >영화예매</a></td>
+                <td><a id="anchor" href="./currentMovieList.html" target="_self" >현재상영작</a></td>
+                <td><a id="anchor" href="./upcommingMovieList.html" target="_self" >개봉예정작</a></td>
+                <td><a id="anchor" href="./about.html" target="_self" >극장안내</a></td>
+            </tr>
+        </table>
+    </nav>
+    `)
+}
+
+function showFooter(){
+    document.write(`
+        <footer>
+            <table>
+                <tr>
+                    <td>
+                        <img src="./media/component/대표이미지.jpg" alt="대표이미지">
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        (주)Againyunn's Film &nbsp; 주소: 제주 제주시 용담로 105 <br>Tel: 064)123-4567 <br>대표자명: 정재윤
+                    </td>
+                </tr>
+            </table>
+        </footer>
+    `)
+}
