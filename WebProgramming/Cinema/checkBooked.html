@@ -10,38 +10,29 @@
 
 </head>
 <body>
-    <div id="mainHeader">
-        <a id="anchor" href="./main.html" target="_self">
-            <img src="./media/component/대표이미지.jpg" alt="대표이미지">
-            <h2 id="main_font">다시, 봄</h2>
-        </a>
-    </div> 
-
-    <nav>
-        <table>
-            <tr>
-                <td><a id="anchor" href="./booking.html" target="_self" >영화예매</a></td>
-                <td><a id="anchor" href="./showMovieList.html" target="_self" >현재상영작</a></td>
-                <td>개봉예정작</td>
-                <td>극장안내</td>
-            </tr>
-        </table>
-    </nav>
-
-    <br>
-    <h3>예매자 이름 입력</h3>
-    <br/>
-    <div class="input-group">
-        <input type="text" class="form-control" id="userName" size="15" placeholder="유저 이름 입력">
-        <button type="button" class="btn btn-success" onclick="setUserName('userName')">확인</button>
-    </div>
-
-    <br/>
-
-    
     <script type="text/javascript">
-        getBookedList()
+        showHeader();
     </script>
+
+    <div class="bodyFrame">
+        <div class="setUser">
+            <br>
+            <h3>예매자 이름 입력</h3>
+            <br/>
+            <div class="input-group">
+                <input type="text" class="form-control" id="userName" size="40" placeholder="유저 이름 입력">
+                <button type="button" class="btn btn-success" onclick="setUserName('userName')">확인</button>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+    <div class="bookedFrame">
+        <script type="text/javascript">
+            setUser();
+            getBookedList();
+        </script>
+    </div>
 
 
 </body>

@@ -15,49 +15,66 @@
     </script>
 
     <br>
-    <h3>예매자 이름 입력</h3>
-    <br/>
-    <div class="input-group">
-        <input type="text" class="form-control" id="userName" size="15" placeholder="유저 이름 입력">
-        <button type="button" class="btn btn-success" onclick="setUserName('userName')">확인</button>
+    <div class="bodyFrame">
+        <div class="setUser">
+            <h3>예매자 이름 입력</h3>
+            <br/>
+            <div class="input-group">
+                <input type="text" class="form-control" id="userName" size="40" placeholder="유저 이름 입력">
+                <button type="button" class="btn btn-success" onclick="setUserName('userName')">확인</button>
+            </div>
+            <span>*예매자 이름을 기억해주세요:)</span>
+            <script type="text/javascript">
+                setUser();
+            </script>
+        </div>
     </div>
-    <span>*예매자 이름을 기억해주세요:)</span>
+    <br/>
+    <hr/>
+    <br/>
 
-    <h3>영화</h3>
-    <script type="text/javascript">
-        createMovieList(movieList);
-    </script>
-
-    <h3>날짜</h3>
-    <script type="text/javascript">
-        createDate('today',7);
-    </script>
-
-    <h3>시간</h3>
-    <script type="text/javascript">
-        createTime(movieList);    
-    </script>
-
-    <h3>좌석</h3>
-    <script type="text/javascript">
-        //좌석 생성
-        createSeat(1, 10, 8);
-
-        
-        //현재 값들 검증
-        checkedObject();
-    </script>
-
-    <br>
-
-
-
-    <!-- <button type="button" onclick="setReserve()">예매하기</button> -->
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setReserve()">
-        Launch demo modal
-    </button>
+    <div class="mainFrame">
+        <div class="selectMovieName">
+            <h3><b>영화</b></h3>
+            <script type="text/javascript">
+                createMovieList(movieList);
+            </script>
+        </div>
+    
+        <div class="selectDate">
+            <h3><b>날짜</b></h3>
+            <script type="text/javascript">
+                createDate('today',7);
+            </script>
+        </div>
+    
+        <div className="selectTime">
+            <h3><b>시간</b></h3>
+            <script type="text/javascript">
+                createTime(movieList);    
+            </script>
+        </div>
+    
+        <div class="selectSeat">
+            <h3><b>좌석</b></h3>
+            <script type="text/javascript">
+                //좌석 생성
+                createSeat(1, 10, 8);
+      
+                //현재 값들 검증
+                checkedObject();
+            </script>
+        </div>
+    
+        <br>
+    
+        <div class="selectBook">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setReserve()">
+                예매하기
+            </button>
+        </div>
+    </div>
+  
     
 
    <!-- Modal -->

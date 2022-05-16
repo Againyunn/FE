@@ -1,17 +1,92 @@
+/**************공통**************/
+
+.bodyFrame{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.setUser{
+    flex-grow: 0;
+}
+
+
+
+/***************예매페이지****************/
+
+.mainFrame{
+    display: grid;
+    grid-template-columns: 1fr, 1fr, 1fr, 4fr,1fr;
+    background-color: white;
+    text-align: center;
+    align-items: stretch;
+    /* justify-content:space-around; */
+}
+
+/*영화제목 선택*/
+.selectMovieName{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 70%;
+}
+
+.moveList{
+    width: 100px;
+}
+
+/*날짜 선택*/
+.selectDate{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 50%;
+}
+
+/*시간선택*/
+.selectTime{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    width: 50%;
+}
+
+.timeItem{
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    flex-direction: row; /* default: row */
+    justify-content: center; /* flex direction에 대해서 정렬방식 선택 */
+}
+
+/*좌석선택*/
+.selectSeat{
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+/*예매하기*/
+.selectBook{
+    grid-column-start: 1;
+    grid-column-end: 6;
+
+    padding: 5%;
+}
+
+.selectBook button{
+    width: 200px;
+    font-size: 20px;
+}
+
+
+/***************각 컴포넌트 단위 CSS****************/
 /*날짜 선택*/
 .reserveMonth{
     font-size: 25px;
     font-weight: bold;
-
 }
 
 .reserveDate{
     font-size: 20px;
 }
-
-/* .reserveDate:hover{
-    font-weight: bold;
-} */
 
 .reserveDate .day0{
     color: red;
@@ -27,13 +102,6 @@
     border: 2px solid #A2A2A2;
 }
 
-/* .movieFrame:hover{
-    background-color: #A2A2A2;
-    opacity: 0.9;
-} */
-
-
-
 
 /*좌석 선택*/
 .seat{
@@ -48,3 +116,18 @@
     opacity: 1;
 }
 
+
+
+/***************예매확인 페이지****************/
+
+.bookedFrame{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.currentMovieBlock{
+    flex-grow: 0;
+}

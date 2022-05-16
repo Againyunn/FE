@@ -29,7 +29,22 @@ function setUserName(thisId){
     else{
         localStorage.setItem('userName', userName);
     }
+
+    //동기화(상태관리가 불가하므로 재로딩)
+    window.location.reload();
 }
+
+/**사용자 설정 시 자동 입력 기능*/
+function setUser(){
+    let thisUser = localStorage.getItem("userName");
+    let inputUser;
+
+    if(thisUser !== null && thisUser !== undefined){
+        inputUser = document.getElementById("userName");
+        inputUser.value = thisUser;
+    }
+}
+
 
 /**영화리스트 */
 //영화리스트 생성 함수
@@ -121,7 +136,7 @@ function createDate(start, days){
 
     //표 시작
     document.write(`
-        <table id="dateTable">
+        <table className="dateTable" id="dateTable">
     `);
 
     //월 생성
@@ -456,7 +471,7 @@ function createSeat(type, rows, cols){ //type은 생성할 좌석의 라인 위�
     
     //표 시작
     document.write(`
-        <table id="${type}">
+        <table class="timeItem" id="${type}">
     `);
     
     for(var i = 0; i < rows; i++){
@@ -505,14 +520,14 @@ function selectSeat(thisId) {//thisId: 선택된 좌석id 받기
     let allData;
 
     //데이터가 있다면
-    if(getData!==null){/**`tmp${thisUser}`: 영화이름/년,월,일,요일/시,분*/
+    if(getData!==null & getData!== undefined){/**`tmp${thisUser}`: 영화이름/년,월,일,요일/시,분*/
        allData = getData.split(`/`);
        thisMovie = allData[0]; /**영화이름 */
        reserveDay = allData[1];  /**년,월,일,요일 */
        reserveTime = allData[2]; /**시,분 */
 
-       //관람 날짜를 선택했는 지 검증
-       if(reserveTime === null){
+       //관람 시간을 선택했는 지 검증
+       if(reserveTime === null||reserveTime === undefined){
            returnError("관람시간을 선택해주세요.");
            return;
        }
@@ -942,7 +957,6 @@ function printCarousel(){
 }
 /************************************************** */
 
-
 /**예매확인& 취소 기능 */
 /************************************************** */
 /**예매확인 */
@@ -1003,25 +1017,27 @@ function getBookedList(){
 
             //예매 내역 화면에 랜더링
             printBookedBlock += `
-                <div class="bookedBlock" id="booked/${allData[i]}">
-                    <button type="button" class="btn btn-danger" id="${allData[i]}" onclick="cancelBooked(this.id)">예매취소</div>
-                    <table>
-                        <tr>
-                            <td>영화 명:</td>
-                            <td>${reservedName}</td>
-                        </tr>
-                        <tr>    
-                            <td>날짜:</td>
-                            <td>${reservedDate}</td>
-                        </tr>
-                        <tr>
-                            <td>시작시각:</td>
-                            <td>${reservedTime}</td>
-                        </tr>
-                        <tr>
-                            <td>좌석:</td>
-                            <td>${reservedSeat[0]}
+
+                <div class="currentMovieBlock">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="bookedBlock" id="booked/${allData[i]}">
+
+                            <h3 class="card-title">${reservedName}</h3>
+                                <table>
+                                    <tr class="card-text">    
+                                        <td>날짜:&nbsp;</td>
+                                        <td>${reservedDate}</td>
+                                    </tr>
+                                    <tr class="card-text">
+                                        <td>시작시각:&nbsp;</td>
+                                        <td>${reservedTime}</td>
+                                    </tr>
+                                    <tr class="card-text">
+                                        <td>좌석:&nbsp;</td>
+                                        <td>${reservedSeat[0]}
             `
+
 
             //예매 좌석이 2개이상인 경우
             if(reservedSeat.length > 1){
@@ -1034,9 +1050,14 @@ function getBookedList(){
             }
 
             printBookedBlock += `
-                        </td>
-                    </tr>
-                </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <button type="button" class="btn btn-danger" id="${allData[i]}" onclick="cancelBooked(this.id)">예매취소</div>
+                    </div>
+                </div>
+            </div>
 
             `
 
@@ -1163,7 +1184,7 @@ function showHeader(){
             <tr>
                 <td><a id="anchor" href="./booking.html" target="_self" >영화예매</a></td>
                 <td><a id="anchor" href="./currentMovieList.html" target="_self" >현재상영작</a></td>
-                <td><a id="anchor" href="./upcommingMovieList.html" target="_self" >개봉예정작</a></td>
+                <td><a id="anchor" href="./upcomingMovieList.html" target="_self" >개봉예정작</a></td>
                 <td><a id="anchor" href="./about.html" target="_self" >극장안내</a></td>
             </tr>
         </table>
