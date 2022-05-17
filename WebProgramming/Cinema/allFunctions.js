@@ -87,6 +87,10 @@ function selectMovie(thisId, movieList){
     let userName = localStorage.getItem('userName');
     let selectedSeatId = document.getElementById(thisId);
 
+    if(userName === null || userName === undefined){
+        returnError("예매자 명을 입력해주세요.");
+        return;
+    }
 
     //클릭한 영화가 선택되었는 지 확인
     if(localStorage.getItem(`tmp${userName}`) === `${thisId}`){
@@ -259,6 +263,11 @@ function selectDate(thisId){
     
     console.log("getData:", getData);
 
+    if(userName === null || userName === undefined){
+        returnError("예매자 명을 입력해주세요.");
+        return;
+    }
+
     //데이터가 있다면
     if(getData!==null){/**`tmp${thisUser}`: 영화이름*/
         thisMovie = getData;
@@ -407,6 +416,11 @@ function selectTime(thisId){
     let getData = localStorage.getItem(`tmp${thisUser}`);
     let allData;
 
+    if(userName === null || userName === undefined){
+        returnError("예매자 명을 입력해주세요.");
+        return;
+    }
+
     //데이터가 있다면
     if(getData!==null){/**`tmp${thisUser}`: 영화이름/년,월,일,요일*/
        allData = getData.split(`/`);
@@ -518,6 +532,11 @@ function selectSeat(thisId) {//thisId: 선택된 좌석id 받기
     let thisUser = localStorage.getItem('userName');
     let getData = localStorage.getItem(`tmp${thisUser}`);
     let allData;
+
+    if(userName === null || userName === undefined){
+        returnError("예매자 명을 입력해주세요.");
+        return;
+    }
 
     //데이터가 있다면
     if(getData!==null & getData!== undefined){/**`tmp${thisUser}`: 영화이름/년,월,일,요일/시,분*/
@@ -732,6 +751,9 @@ function setReserve(){
         
         thisSeat.push(element)
     ));
+    
+    //가격산정
+    let thisAmount = seatInfo.length * 10000;
 
     document.getElementById("reservationResult").innerHTML=`
 
@@ -765,7 +787,10 @@ function setReserve(){
                 ))
             }
             </tr>
-
+            <tr>
+                <td><b>가격: </b></td>
+                <td>${thisAmount}원</td>
+            </tr>
         </table>
         ${blockBottom}
     `
@@ -905,6 +930,11 @@ function goBooking(){
     location.href ="./booking.html";
 }
 
+//예매확인화면으로
+function checkBooking(){
+    location.href ="./checkBooked.html";
+}
+
 //상세 영화시간 선택 및 영화 좌석 선택
 
 
@@ -937,7 +967,7 @@ function printCarousel(){
 
     let content = `
     <div class="carousel-item active">
-        <img src="${movieList[0].img}" class="d-block w-100" alt="...">
+        <img src="${movieList[0].img}" width="500px" height="750px"  alt="...">
     </div>
     `
 
@@ -945,7 +975,7 @@ function printCarousel(){
     for(var i = 1; i < movieList.length; i++){
         content += `
             <div class="carousel-item">
-                <img src="${movieList[i].img}" class="d-block w-100" alt="...">
+                <img src="${movieList[i].img}" width="500px"  height="750px"  alt="...">
             </div>
         `
     }
@@ -964,7 +994,7 @@ function getBookedList(){
     let thisUser = localStorage.getItem("userName");
 
     let getData = localStorage.getItem(`booked/${thisUser}`);
-    if(getData === null && getData === undefined){
+    if(getData === null || getData === undefined){
         returnError("영화예매를 해주세요:)");
         return;
     }
@@ -986,6 +1016,8 @@ function getBookedList(){
 
     //출력할 화면 정보
     let printBookedBlock = '';
+
+
 
     //유저에 해당하는 영화리스트 디코딩
     for(var i = 0; i < allData.length; i++){
@@ -1017,25 +1049,29 @@ function getBookedList(){
 
             //예매 내역 화면에 랜더링
             printBookedBlock += `
+            
+            <div class="accordion-item" id="booked/${allData[i]}">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        ${reservedName}, ${reservedSeat.length}명
+                    </button>
+                </h2>
 
-                <div class="currentMovieBlock">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <div class="bookedBlock" id="booked/${allData[i]}">
-
-                            <h3 class="card-title">${reservedName}</h3>
-                                <table>
-                                    <tr class="card-text">    
-                                        <td>날짜:&nbsp;</td>
-                                        <td>${reservedDate}</td>
-                                    </tr>
-                                    <tr class="card-text">
-                                        <td>시작시각:&nbsp;</td>
-                                        <td>${reservedTime}</td>
-                                    </tr>
-                                    <tr class="card-text">
-                                        <td>좌석:&nbsp;</td>
-                                        <td>${reservedSeat[0]}
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <h3>${reservedName}</h3>
+                            <table>
+                                <tr class="card-text">    
+                                    <td>날짜:&nbsp;</td>
+                                    <td>${reservedDate}</td>
+                                </tr>
+                                <tr class="card-text">
+                                    <td>시작시각:&nbsp;</td>
+                                    <td>${reservedTime}</td>
+                                </tr>
+                                <tr class="card-text">
+                                    <td>좌석:&nbsp;</td>
+                                    <td>${reservedSeat[0]}
             `
 
 
@@ -1049,8 +1085,14 @@ function getBookedList(){
                 }
             }
 
+            let reservedAmount = reservedSeat.length * 10000;
+
             printBookedBlock += `
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>가격:&nbsp;</td>
+                                <td>${reservedAmount}원</td>
                             </tr>
                         </table>
                         <br/>
@@ -1058,6 +1100,7 @@ function getBookedList(){
                     </div>
                 </div>
             </div>
+            
 
             `
 
@@ -1075,8 +1118,22 @@ function getBookedList(){
             //출력할 화면 정보
             printBookedBlock = '';
     }
+
+
 }
 
+const printAllBookedList = () => {
+    document.write(`
+    <div class="bookedFrame">
+        <h3>예매 내역 리스트</h3><br/>
+            <div class="accordion" id="accordionBookedList">
+    `)
+    getBookedList();
+    document.write(`
+    </div>
+    </div>
+    `)
+}
 
 /**예매취소 */
 function cancelBooked(thisId){ /**thisId = 닥터스트레인지2,2022년,5월,13일,11:,15,2명,E3,E4  와 같은 형식*/
@@ -1098,6 +1155,12 @@ function cancelBooked(thisId){ /**thisId = 닥터스트레인지2,2022년,5월,1
 
     //선택된 예매 내역 삭제된 정보 업데이트
     localStorage.setItem(`booked/${thisUser}`, `${updateData}`);
+
+    if(updateData === ''){
+        localStorage.removeItem(`booked/${thisUser}`);
+    }
+
+    window.location.reload();
 }
 /************************************************** */
 
@@ -1116,22 +1179,30 @@ function currentMovieList(movieList){//현재 상영작 리스트 받아오기
     img:"썸네일 이미지의 경로"
     */
 
+
+
     //출력할 내용을 담은 현재상영작 mapping해서 출력
-    movieList.map( element => (
+    for(var i = 0; i < movieList.length; i++){
+        let thisBrief  = ''
+        for(var j = 0; j < 100; j++){
+            thisBrief += movieList[i].brief[j];
+        }
+        thisBrief += `...`;
+
         document.write(`
-            <div class="currentMovieBlock">
-                <div class="card" style="width: 18rem;">
-                    <img src="${element.img}" class="card-img-top" alt="${element.name}">
-                    <div class="card-body">
-                        <h5 class="card-title">${element.name}</h5>
-                        <p class="card-text">${element.brief}</p>
-                        <button type="button" class="btn btn-success" onclick="goBooking()">예매하기</button>
-                    </div>
+        <div class="currentMovieBlock">
+            <div class="card" style="width: 18rem;">
+                <img src="${movieList[i].img}" class="card-img-top" alt="${movieList[i].name}">
+                <div class="card-body">
+                    <h5 class="card-title">${movieList[i].name}</h5>
+                    <p class="card-text">${thisBrief}</p>
+                    <button type="button" class="btn btn-success" onclick="goBooking()">예매하기</button>
                 </div>
             </div>
-        `)
-    //}
-    ));
+        </div>
+    `)
+    }
+    
 }
 
 /**개봉예정작 안내 
@@ -1148,20 +1219,25 @@ function upcomingMovieList(comingSoonMovieList){//현재 상영작 리스트 받
     */
 
     //출력할 내용을 담은 현재상영작 mapping해서 출력
-    comingSoonMovieList.map( element => (
+    for(var i = 0; i < comingSoonMovieList.length; i++){
+        let thisBrief  = ''
+        for(var j = 0; j < 100; j++){
+            thisBrief += comingSoonMovieList[i].brief[j];
+        }
+        thisBrief += `...`;
+
         document.write(`
-            <div class="currentMovieBlock">
-                <div class="card" style="width: 18rem;">
-                    <img src="${element.img}" class="card-img-top" alt="${element.name}">
-                    <div class="card-body">
-                        <h5 class="card-title">${element.name}</h5>
-                        <p class="card-text">${element.brief}</p>
-                    </div>
+        <div class="currentMovieBlock">
+            <div class="card" style="width: 18rem;">
+                <img src="${comingSoonMovieList[i].img}" class="card-img-top" alt="${comingSoonMovieList[i].name}">
+                <div class="card-body">
+                    <h5 class="card-title">${comingSoonMovieList[i].name}</h5>
+                    <p class="card-text">${thisBrief}</p>
                 </div>
             </div>
-        `)
-    //}
-    ));
+        </div>
+    `)
+    }
 }
 
 

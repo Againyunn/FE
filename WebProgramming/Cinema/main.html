@@ -15,38 +15,34 @@
     </script>
 
     <section>
-        <table>
-            <tr>
-                <td>
-                    <div id="carousel"></div>
-                    <script type="text/javascript">
-                        printCarousel();
-                    </script>
-                  
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <a id="anchor" href="./booking.html" target="_self">
-                                <div id="ticket_unchecked_box">
-                                    <img id="ticket_unchecked" src="./media/component/ticket_unchecked.jpg" alt="예매하기">
-                                    <h5 id="black_font">예매하기</h5>
-                                </div>
-                            </a>
-                        </tr>
-                        <tr>
-                            <a id="anchor" href="./checkBooked.html" target="_self">
-                                <div id="ticket_checked_box">
-                                    <img id="ticket_checked" src="./media/component/ticket_checked.jpg" alt="예매확인">
-                                    <h5 id="black_font">예매확인</h5>
-                                </div>
-                            </a>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-       
+        <div class="mainCenterBlock">
+            <div class="mainCarousel">
+                <div id="carousel"></div>
+                <script type="text/javascript">
+                    printCarousel();
+                </script>
+                
+            </div>
+            <table class="mainTicketing">
+                <tr>
+                    <a id="anchor" href="./booking.html" target="_self">
+                        <div id="ticket_unchecked_box">
+                            <img id="ticket_unchecked" src="./media/component/ticket_unchecked.jpg" alt="예매하기">
+                            <h5 id="black_font">예매하기</h5>
+                        </div>
+                    </a>
+                </tr>
+                <tr>
+                    <a id="anchor" href="./checkBooked.html" target="_self">
+                        <div id="ticket_checked_box">
+                            <img id="ticket_checked" src="./media/component/ticket_checked.jpg" alt="예매확인">
+                            <h5 id="black_font">예매확인</h5>
+                        </div>
+                    </a>
+                </tr>
+            </table>
+
+        </div>
     </section>
 
     <script type="text/javascript">

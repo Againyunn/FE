@@ -50,21 +50,44 @@ footer{
 }
 
 /***********main.html서식************/
+
+.mainCenterBlock{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content:center;
+    /*align-items: stretch;*/
+}
+
+.mainCarousel{
+    flex-grow: 1;
+    margin: 20px;
+}
+
+.mainTicketing{
+    flex-grow: 0;
+    margin: 20px;
+}
+
+
+
+
 /*main.html 의 티켓 */
 #ticket_unchecked{
-    width: 200px;
+    width: 300px;
 }
 
 #ticket_checked{
-    width: 200px;
+    width: 300px;
 }   
 
 #ticket_unchecked_box{
-    height: 150%;
+    height: 300px;
 }
 
 #ticket_checked_box{
-    height: 150%;
+    height: 300px;
 }
 
 #ticket_unchecked_box:hover{
@@ -124,3 +147,27 @@ footer{
 
 
 /***********about.html서식************/
+.aboutTable{
+    margin: 3%;
+}
+
+.aboutIntro td{
+    text-align: center;
+    padding: 20px;
+}
+
+
+.aboutBuilding img{
+    margin: 5%;
+    width: 500px;
+}
+
+.aboutLocation img{
+    margin: 5%;
+    width: 800px;
+}
+
+.aboutSeat img{
+    margin: 5%;
+    width: 500px;
+}

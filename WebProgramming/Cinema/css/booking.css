@@ -116,18 +116,30 @@
     opacity: 1;
 }
 
+/***************예매완료 페이지****************/
+.BookSuccess{
+    padding: 10%;
+    text-align: center;
+}
+
 
 
 /***************예매확인 페이지****************/
 
-.bookedFrame{
+/* .bookedFrame{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+
+    border: 1px solid #C4C4C4;
+    margin: 5%;
+    padding:10px;
 }
 
-.currentMovieBlock{
+
+.accordion{
     flex-grow: 0;
-}
+    width: 500px;
+} */
