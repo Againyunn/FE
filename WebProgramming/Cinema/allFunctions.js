@@ -1248,9 +1248,10 @@ function upcomingMovieList(comingSoonMovieList){//현재 상영작 리스트 받
 /**헤더&푸터 출력 함수 */
 function showHeader(){
     document.write(`
-    <div id="mainHeader">
+    <div class="mainHeader">
         <a id="anchor" href="./main.html" target="_self">
             <img src="./media/component/대표이미지.jpg" alt="대표이미지">
+
             <h2 id="main_font">다시, 봄</h2>
         </a>
     </div> 
