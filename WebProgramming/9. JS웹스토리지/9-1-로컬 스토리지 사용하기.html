@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>로컬 스토리지 사용하기</title>
+</head>
+
+<!-- html의 body가 로드될 때 자동으로 pageload를 실행하여 로컬스토리지에 저장된 요소를 불러오도록 설정 -->
+<body onload="pageload()">
+	키 <input type="text" id="id_key" size="5"> <br>
+	값 <input type="text" id="id_value" size="5"> <br><br>
+	<input type="button" value="추가" onclick="addItem()">
+	<input type="button" value="삭제" onclick="deleteItem()"><br>
+	<p id="id_prt"> </p>
+
+	<script type="text/javascript">
+		var ls = window.localStorage;				// 로컬 스토리지
+		var ls_key = document.getElementById("id_key");
+		var ls_value = document.getElementById("id_value");
+		var prt = document.getElementById("id_prt");
+
+		if (!ls) {
+			alert("로컬 스토리지를 지원하지 않습니다.");
+		}
+
+		function pageload() {	
+			prt.innerHTML = "";		
+			for (var i = 0; i < ls.length; i++) {	// 로컬 스토리지 전체 검색
+				var k = ls.key(i);
+				prt.innerHTML += k + " : " + ls.getItem(k) + "<br>";
+			}
+		}
+
+		function addItem() {						// 로컬 스토리지에 저장
+			ls.setItem(ls_key.value, ls_value.value);
+			pageload();
+		}
+
+		function deleteItem() {						// 로컬 스토리지에서 삭제
+			ls.removeItem(ls_key.value);
+			pageload();
+		}
+	</script>
+</body>
+</html>
