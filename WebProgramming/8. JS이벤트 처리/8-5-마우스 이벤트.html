@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title> 마우스 이벤트 예제 </title>
+</head>
+
+<!-- body 전체의 영역에 사용자의 마우스 커서가 이동할 때 move함수 부여 -->
+<body onmousemove="move();" style="width:500px; height:500px;">
+	<img id="img1" src="둘리.jpg" width="100px"
+		style="position: absolute; left: 50px; top: 120px;" />
+
+	<form>
+		마우스로 이미지를 클릭하면 움직이기 시작합니다.<br>
+		다시 클릭하면 움직임이 멈춤니다.<br><br>
+		Mouse Position: (X, Y)=(
+		<input id="x" size="3" type="text"/>,
+		<input id="y" size="3" type="text"/>)
+	</form>
+	
+	<script type="text/javascript">
+		var stopped = true;
+
+		//둘리이미지가 클릭되면 start_stop_move함수 실행
+		document.getElementById("img1").onclick = start_stop_move;
+
+		//이미지를 클릭했을 때 선택/선택해제 효과부여를 위한 함수
+		function start_stop_move() { 
+			/*3항식 활용:
+			 * stopped가 true이면 false로, false이면 true 변경
+			*/
+			stopped = (stopped) ? false : true; 
+		}
+
+		//body전체에 부여된 함수로 stopped 변수가 false이면 사용자의 x좌표 y좌표가 둘리 이미지의 좌표 값으로 변경된다
+		function move() {
+			/* 사용자의 커서 위치를 반환하는 메소드
+			 * window.event.clientX : x좌표 값을 반환
+			 * window.event.clientY : y좌표 값을 반환
+			*/
+			mouse_x = window.event.clientX;
+			mouse_y = window.event.clientY;
+
+			document.getElementById("x").value = mouse_x;
+			document.getElementById("y").value = mouse_y;
+
+			if (!stopped) {
+				document.getElementById("img1").style.left = (mouse_x-50) + "px";
+				document.getElementById("img1").style.top = (mouse_y-70) + "px";
+			}
+		}
+	</script>
+</body>
+</html>

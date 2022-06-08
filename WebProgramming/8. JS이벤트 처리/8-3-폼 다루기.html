@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> 단순 계산기 </title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<script type="text/javascript">
+		function add() {
+			var a = document.getElementById("op1").value;
+			var b = document.getElementById("op2").value;
+			//DOM으로 받아온 데이터는 모두 string이므로 int형으로 형변환 뒤, 연산 수행
+			document.getElementById("result").value = parseInt(a) + parseInt(b); 
+		}
+	</script>
+	<form>
+		<input id="op1" type="text" size="2" />+
+		<input id="op2" type="text" size="2" />
+		<input type="button" value="=" onclick="add();" />
+		<input id="result" type="text" size="2" />
+	</form>
+</body>
+</html>

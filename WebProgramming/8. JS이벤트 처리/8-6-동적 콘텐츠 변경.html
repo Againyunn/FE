@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title> 콘텐츠 변경 </title>
+</head>
+<body>
+	<button id="b1">innerHTML</button>
+	<button id="b2">innerText</button>
+	<br/>
+	<p id="text">This text will be dynamically changed</p>
+
+	<script	 type="text/javascript" >  
+		//각 각의 id를 가진 DOM요소의 onmouseover나 onmouseout 설정에 함수기능을 부여하여 이벤트효과를 지정
+		document.getElementById("b1").onmouseover = mouseover_innerHTML;
+		document.getElementById("b2").onmouseover = mouseover_innerText;
+
+		document.getElementById("b1").onmouseout = reset_text;
+		document.getElementById("b2").onmouseout = reset_text;
+
+		//"text" id를 가진 DOM요소의 HTML태그 자체를 바꿔버릴 수 있다.
+		function mouseover_innerHTML() {
+			document.getElementById("text").innerHTML =
+					"<h1>Mouse cursor is over the innerHTML button</h1>";
+		}
+		function mouseover_innerText() {
+			document.getElementById("text").innerText =
+					"<h1>Mouse cursor is over the innerText button</h1>";
+		}
+		function reset_text() {
+			document.getElementById("text").innerHTML =
+					"This text will be dynamically changed";
+		}
+	</script>
+</body>
+</html>
