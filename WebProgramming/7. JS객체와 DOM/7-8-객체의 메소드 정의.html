@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Method</title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<script type="text/javascript">
+		//생성자 this를 통해 함수들을 객체화하여 연계 사용할 수 있다.
+
+		function display_book() {
+			document.write("Title: "+ this.title + "<br/>");
+			document.write("Publisher: "+ this.publisher + "<br/>");
+			document.write("Author: "+ this.author + "<br/><br/>");
+		}
+		
+		function Book (title_value, publisher_value, author_value) {
+			this.title = title_value;
+			this.publisher = publisher_value;
+			this.author = author_value;
+
+			//display_book이라는 함수를 Book함수의 메소드로 넣어버려서, 외부에서 호출 시 
+			this.display = display_book; 
+		}
+
+		var book_obj1 = new Book("HTML5 입문", "파란출판사", "홍길동");
+		book_obj1.display(); //.display 메소드를 호출하면 display_book 함수가 실행된다.
+		var book_obj2 = new Book("JavaScript", "노란출판사", "임꺽정");
+		book_obj2.display();
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array</title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<script type="text/javascript">
+		function print_array(a, name) {
+			document.write("Size of array: " + a.length + "<br/>");
+			for (i = 0; i < a.length; i++) {
+				document.write(name + "[" + i + "]: ");
+				if (typeof(a[i]) == "string")
+					document.write("\"" + a[i] + "\" <br/>"); //이스케이프 문자\로 "와 ' 표시하기
+				else
+					document.write(a[i] + " <br/>");
+			}
+		}
+
+		var arr = new Array("zero", "one", 3, "45", "Five");
+		
+		document.write("Original Array: <br/>");
+		print_array(arr, "arr");
+		
+		arr.reverse();
+		document.write("<br/> After reverse: <br/>");
+		print_array(arr, "arr");
+
+		var str = arr.join(" = ");// array의 원소들 사이에 " = "을 원소로 추가
+		document.write("<br/> After join: <br/>");
+		document.write("str: \"" + str + "\"<br/>");
+	</script>
+
+</body>
+</html>

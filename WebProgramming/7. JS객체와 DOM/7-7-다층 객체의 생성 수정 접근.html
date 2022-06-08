@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- An example for JavaScript Objects -->
+<html>
+<head>
+	<title> Using Objects </title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+
+<table border="1">
+	<caption>서적 정보</caption>
+	<tr><th>항목 (속성: property)</th><th>내용 (값: value)</td></tr>
+
+	<script type="text/javascript">
+		//객체 생성
+		var book = new Object();
+
+		//객체 별 메소드 초기화(Method = string)
+		book.title = "HTML5 입문";			// -> 객체 타입x string타입 o
+		book.publisher = "파란출판사"; 		// -> 객체 타입x string타입 o
+		book.author = "홍길동";				// -> 객체 타입x string타입 o
+
+		//2중 객체 생성
+		book.info = new Object();
+		book.info.pages = 512;
+		book.info.size = "188mm*254mm";
+
+		for (var p in book) {
+			//객체의 메소드(1차 객체만 호출)
+			if (typeof(book[p]) != "object") { //-> string 타입
+				document.write("<tr><td> book." + p + "</td>");
+				document.write("<td> " + book[p] + "</td></tr>");
+			}
+
+			//객체의 하위 객체(2차 객체만 호출)
+			else {					// -> object 타입
+				for (var q in book[p]) {
+				document.write("<tr><td> book." + p + "." + q + "</td>");
+				document.write("<td> " + book[p][q] + " </td></tr>");
+				}
+			}
+		}
+	</script>
+
+</table>
+
+</body>
+</html>

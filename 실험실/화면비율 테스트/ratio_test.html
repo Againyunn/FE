@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>테스트</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <style>
+        .square {
+                    position: relative;
+                    width: 50%;
+                }
+
+        .square:after {
+                    content: "";
+                    display: block;
+                    padding-bottom: 100%;
+                }
+
+        .content {
+                    position: absolute;
+                    width: 56.25vw;
+                    height: 100vh;
+                    background-color: blanchedalmond;
+                }
+    </style>
+</head>
+<body>
+    <div class="square">
+        <div class="content">내용입니다.</div>
+    </div>
+    
+</body>
+</html>
