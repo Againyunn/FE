@@ -1,0 +1,89 @@
+-테이블 생성
+create table 테이블이름 (
+
+	num int not null auto_increament,
+	id char(20) not null,
+	pass char(20) not null,
+	name char(20) not null,
+	age int,
+	primary key(num)
+);
+
+-테이블 구조 확인
+desc 테이블이름;
+
+-테이블 필드 추가
+alter table 테이블이름 add 필드명 char(30);
+
+-테이블 필드 삭제
+alter table 테이블이름 drop 필드명1, 필드명2...
+ex) alter table mem drop email;
+
+-테이블 필드 수정
+alter table 테이블이름 change 수정할필드명 새로운필드명 새로운필드의데이터형;
+ex) alter table mem change age phone char(20);
+
+-테이블 필드의 자료형 수정
+alter table 테이블이름 modify 필드명 수정할데이터형;
+ex) alter table mem modify phone int;
+
+-테이블 이름 변경
+alter table 수정할테이블이름 rename 새로운테이블이름;
+ex) alter table mem rename mem2;
+
+-테이블 삭제
+drop table 테이블이름;
+ex) drop table mem2;
+
+
+-테이블에 데이터 삽입
+insert into 테이블이름 (필드1, 필드2...) values(필드값1, 필드값2,..);
+ex) insert into friend (name, tel, address) values('홍길동', '031-123-4567', '경기도 용인시 처인구');
+
+-테이블 내용확인
+select * from 테이블이름;
+ex) select * from friend;
+
+-특정 필드의 전체 레코드 검색
+select 필드명1, 필드명2... from 테이블이름;
+ex) select name, tel, address from member;
+
+-특정조건에 맞는 레코드검색
+select 필드명1, 필드명2... from 테이블명 where 조건식;
+ex) select id, name, address, gender from member where gender='W';
+     select name, tel, gender, age from member where age >= 50 and gender = 'M';
+     select name, tel, gender, age from member where ((age >= 30 and age <= 39) or (age >= 50 and age <= 59) and gender = 'M';
+
+-특정 문자열이 포함된 레코드 검색
+select 필드명1, 필드명2... from 테이블명 where 검색필드 like 문자열수식;
+ex) select name, tel from member where name like '박%';
+     select name, tel from member where address like '%은평구%';
+     select name, tel from member where address like '%광주%' and name like '김%';
+
+-레코드 정렬
+* order by '필드명' : 검색된 데이터를 '필드명'기준으로 오름차순 정렬
+select 필드명1, 필드명2... from 테이블이름 order by 필드명;
+ex) select name, age, address, tel, gender from member where address like '서울%' order by age;
+
+* order by '필드명' desc : 검색된 데이터를 '필드명'기준으로 내림차순 정렬
+select 필드명1, 필드명2... from 테이블이름 order by 필드명 desc;
+ex) select name, age, address, tel, gender from member where address like '서울%' order by age desc;
+
+-레코드 수정
+update 테이블이름 set 필드명 = 필드값 where 조건식;
+ex) update member set tel = '123-4567' where name = '고재진';
+     update member set age = 37 where name = '정한나';
+
+-레코드 삭제:
+delete from 테이블이름 where 조건식;
+ex) delete from member where name= '김수련';
+     delete from member where age >= 40 and age <= 49;   //40대 회원 레코드 삭제
+
+-전체 레코드 삭제
+delete from 테이블이름
+ex) delete from member;
+
+     
+
+
+
