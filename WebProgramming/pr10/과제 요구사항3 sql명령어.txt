@@ -1,0 +1,31 @@
+1.
+SELECT id, name, address from worker WHERE age >= 20 AND age <= 29;
+
+2.
+SELECT name, gender, department, phone FROM worker WHERE department = "경리부" AND name LIKE "정%";
+
+3.
+SELECT name, address, gender, phone FROM worker WHERE address LIKE "경기도%" ORDER BY age;
+
+4.
+SELECT name, gender, id, phone, address FROM worker WHERE gender = "F"ORDER BY age DESC;
+
+5.
+SELECT name, phone FROM worker WHERE gender = 'M' AND department = "홍보부";
+
+6.
+SELECT name, phone FROM worker WHERE address LIKE "%용인시%";
+
+7.
+UPDATE worker SET phone = "010-2222-3333" WHERE name = "김영철";
+
+8.
+UPDATE worker SET age = 33 WHERE id = "chulsu";
+
+9.
+DELETE FROM worker WHERE id = "jhjang";
+
+10.
+DELETE FROM worker WHERE department = "경리부" AND name = "이세영";
+
+
