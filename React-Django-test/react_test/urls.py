@@ -23,4 +23,5 @@ app_name='react_test'
 
 urlpatterns = [ #함수는 그냥 호출 / 클래스는 클래스명.as_view() 처리
     path('main/', views.main_html, name="main_html"),
+    path('testAJAX/', views.testAJAX, name="testAJAX")
 ]

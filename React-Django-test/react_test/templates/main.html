@@ -1,11 +1,42 @@
-
 <html>
     <head>
         
         <title>main</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- 리액트 설정 -->
         <script crossorigin  src="/static/react_source/react.development.js"></script>
         <script crossorigin  src="/static/react_source/react-dom.development.js"></script>
         <script src="/static/react_source/babel.min.js"></script>
+
+        <!-- 부트스트랩설정 -->
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+        
+        <!-- 차트 설정 -->
+        <script crossorigin src="/static/chart_js_source/chart.js.js"></script>
+
+        <!-- alert창 -->
+        <script crossorigin src="/static/sweetAlert2_source/sweetalert2.js"></script>
+
+        <!-- axios(AJAX-REACT) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+        <!-- csrf_token 조기 설정 -->
+        <!-- <script>
+            $.ajaxSetup({
+              headers: { "X-CSRFToken": '{{csrf_token}}' }
+            });
+          </script> -->
+        <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     </head>
     <body>
         <h2>Add React in One Minute</h2>
@@ -15,14 +46,89 @@
         <!-- We will put our React component inside this div. -->
         <div id="like_button_container"></div>
     
-        <!-- Load React. -->
-        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-        <!-- <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> -->
-        <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
-        <!-- {% load static %} -->
-        <!-- Load our React component. -->
-        <!-- <script type = "text/javascript" src="{% static 'js/like_button.js' %}"></script> -->
         <script type = "text/javascript" src="/static/js/like_button.js"></script>
+        <br/>
+        <div id="styledButton"></div>
+        <script type="text/babel" src="/static/js/button_test.js"></script>
+
+        <br/>
+
+        <!-- <canvas id="myChart" width="400" height="400"></canvas>
+        <script type="text/babel" src="/static/js/chart_test.js"></script> -->
+
+        <div id="button_test"></div>
+        <script type="text/babel">
+            const showAlert = () => {
+                console.log("clicked");
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Do you want to continue',
+                    confirmButtonText: 'Cool',
+                    confirmButtonColor: '#000000',
+                    
+                })
+            }
+
+            const ButtonTest = () => {
+                return(
+                    <button type="button" onClick={showAlert}>클릭</button>
+                );
+            }
+            
+            ReactDOM.render(<ButtonTest/>,document.getElementById("button_test"));
+        </script>
+        
+        {% csrf_token %}
+        <div id="input_test"></div>
+        <script type="text/babel">
+            const Input = () => {
+                const [thisData, setThisData] = React.useState('');
+                const [receivedData, setReceivedData] = React.useState('');
+
+                React.useEffect( ()=> {
+                    event.preventDefault()
+                    let sendData = new FormData();
+
+                    // sendData.append("data",thisData);
+                    // sendData.append("csrfmiddlewaretoken", '{{csrf_token}}')
+                    
+                    // console.log("thisData :", thisData);
+                    // console.log("axios test:", sendData['data']);
+
+                    // let url = '{% url "react_test:testAJAX" %}'
+                    let url = "http://localhost:8000/react_test/testAJAX/"
+                    // axios.defaults.xsrfCookieName = "csrftoken"
+                    // axios.defaults.xsrfHeaderName = "X-CSRFToken"
+                    axios.post(url, {
+                        input:thisData
+                    }).then(
+                        (response) =>{
+                            setReceivedData(response.data);
+                            console.log("receivedData:", response.data);
+                        }
+                    ).catch(
+                        (error) => {
+                            console.log(error);
+                        }
+                    )
+                },[thisData])
+
+                const getInputData = () => {
+                    let data = document.getElementById("userInput").value;
+
+                    setThisData(data);
+                }
+                return(
+                    <div>
+                        <input type="text" id="userInput"></input><button type="button" onClick={getInputData}>제출</button><br/>
+                        <div>{receivedData.data}</div>
+                    </div>
+                )
+            }
+
+            ReactDOM.render(<Input/>, document.getElementById("input_test"))
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -1,3 +1,8 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
+# from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import * #모든 모델 상속
@@ -12,3 +17,13 @@ from .models import * #모든 모델 상속
 #html 연결
 def main_html(request):
     return render(request, 'main.html')
+
+# @csrf_exempt
+@method_decorator(csrf_exempt, name='dispatch')
+def testAJAX(request):
+    if request.method == "POST":
+        req = json.loads(request.body.decode('utf-8'))
+        data = req['input']
+        returnData = str(data)+"server send"
+
+        return JsonResponse({"data": returnData})
