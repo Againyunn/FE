@@ -25,4 +25,6 @@ REACT공부/공식문서로 디테일 잡기/my-app/node_modules
 REACT공부/공식문서로 디테일 잡기/my-app/package.json
 REACT공부/공식문서로 디테일 잡기/my-app/package-lock.json
 
+#병합 충돌 방지를 위해 DB는 git upload 제외 처리
+React-Django-test/db.sqlite3
 
