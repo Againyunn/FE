@@ -10,8 +10,8 @@
 	echo "$c <br>";
 
 	$fruit = "사과";
-	echo "$fruit <br>";
+	echo "{$fruit} <br>";
 
 	$fruit = "오렌지";
-	echo "$fruit <br>";
+	echo "{$fruit} <br>";
 ?>

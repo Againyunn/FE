@@ -17,8 +17,11 @@
 		//sql query 가져오기
 		$result = mysqli_query($con, $sql); //mysqli_query(연결할sql과정보, 실행할sql명령어)
 		
-		//sql query를 배열로 바꾸기
+		//sql query를 객체(배열)로 바꾸기
 		$row = mysqli_fetch_array($result);
+		//이때 일반적인 배열이 아니라, sql의 필드가 객체 형태로 반환된다.
+		//따라서 $row["객체명"]을 입력하면 해당 레코드의 "필드"값에 해당하는 값이 반환된다.
+
 
 		//sql 서버와 연결 종료
 		mysqli_close($con);

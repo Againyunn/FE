@@ -25,10 +25,10 @@
 
 		
 		for ($i = 0; $i < $count; $i++) {
-			//sql내에서 i번째 레코드를 가져오라는 명령어
+			//sql내의 많은 레코드 중에 i번째 레코드를 가져오라는 명령어
 			mysqli_data_seek($result, $i);
 
-			//sql query를 배열로 바꾸기
+			//sql query를 객체(배열)로 바꾸기
 			$row = mysqli_fetch_array($result);
 
 			echo("
