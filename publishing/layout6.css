@@ -1,0 +1,37 @@
+*{
+    margin: 0; padding: 0;
+}
+#wrap{
+    text-align: center; font-size: 30px; color: #fff;
+}
+#header{
+    width: 100%; height: 140px;
+    background: #ffe1e4;
+    line-height: 140px;
+}
+#banner{
+    width: 100%; height: 450px;
+    background: #fbd6e3;
+    line-height: 450px;
+}
+#content{
+    width: 100%; height: 950px;
+    background: #ead5ee;
+    line-height: 950px;
+}
+#footer{
+    width: 100%; height: 220px;
+    background: #d6ebfd;
+    line-height: 220px;
+}
+.container{
+    width: 1100px; margin: auto; height: inherit; 
+    background-color: rgba(0,0,0,0.3);
+}
+
+/* 
+속성값 중 inherit 는 "부모의 속성값을 그대로 상속" 받는다는 의미 
+rgba로 4번째 값만 지정하면 밝기를 조절할 수 있다.
+*/
+
+/* line-height속성은 line-box의 높이를 결정하며, 텍스트 간의 줄 간격을 조절할 때 사용할 수 있다. */
