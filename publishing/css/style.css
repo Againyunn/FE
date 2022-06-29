@@ -26,36 +26,35 @@
 
 /* 레이아웃 */
 #wrap{
-    width: 100%;
+    /* width: 100%; */
 }
 #header{
-    width: 100%; 
+    /* width: 100%;  */
     height: 325px; 
     /* background-color: #111; */
     background: url("../img/header_bg.jpg") center top repeat-x;
     /* 이미지를 가운데 위쪽 기준으로 x축으로 반복하여 화면에 랜더링한다. */
 }
 #contents{
-    width: 100%;
+    /* width: 100%;
     height: 800px;
-    background-color: #222;
+    background-color: #222; */
 }
 #footer{
-    width: 100%;
+    /* width: 100%; */
     height: 200px;
     background-color: #333;
 }
 
 /* 컨텐츠 레이아웃 */
 #cont_nav{
-    width: 100%;
+    /* width: 100%;
     height: 200px;
-    background-color: #333;
+    background-color: #333; */
+    background-color: #F6FDFF;
 }
 #cont_tit{
-    width: 100%;
-    height: 200px;
-    background-color: #444;
+    background-color: #EAF7FD;
 }
 #cont_ban{
     width: 100%;
@@ -81,10 +80,6 @@
 /* CSS에서도 각 클래스/아이디의 계층구조를 확인할 수 있도록 
 상속관계를 나타내면 좋다. */
 /* 해더 */
-.header{
-
-}
-
 .header .header-menu{
     text-align: right;
 }
@@ -123,6 +118,113 @@
     padding: 5px 20px 6px 20px;
     margin-top: -5px;
 }
+
+/* 해더 아이콘 */
 .header .header-icon{
-    
+    text-align: center;
+    margin-top: 30px;
 }
+.header .header-icon a{
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    background: url("../img/icon.png");
+    margin: 3px;
+}
+
+.header .header-icon a.icon1{
+    background-position: 0 0;
+}
+.header .header-icon a.icon2{
+    background-position: 0 -60px;
+}
+.header .header-icon a.icon3{
+    background-position: 0 -120px;
+}
+.header .header-icon a.icon4{
+    background-position: 0 -180px;
+}
+
+.header .header-icon a.icon1:hover{
+    background-position: -60px 0;
+}
+.header .header-icon a.icon2:hover{
+    background-position: -60px -60px;
+}
+.header .header-icon a.icon3:hover{
+    background-position: -60px -120px;
+}
+.header .header-icon a.icon4:hover{
+    background-position: -60px -180px;
+}
+
+/* float: left로 인한 영역깨짐(height: 0) 방지법 
+sol 1. 깨지는 영역에 똑같이 float: left를 사용(X) --> 모든 박스에 float:left를 사용해야 한다.
+sol 2. float의 성질을 차단하는 clear: both;를 사용(X) --> 어떤 영역이 깨졌는 지 찾기 어렵다.
+sol 3. float을 사용한 상위 박스ㅏㄴ테 overflow: hidden을 사용(그나마 이용) 
+sol 4. clearfix를 사용(O) 
+*/
+
+/* 전체 메뉴 */
+.nav{
+    /* float: left; */
+    overflow: hidden;
+    padding: 30px 0px;
+}
+
+/* nav 클래스의 직계 div 자손만을 인식 */
+.nav > div {
+    float: left; 
+    width: 40%;
+}
+.nav > div:last-child{  /*ie9 부터 사용가능 */
+    width: 20%; 
+}
+
+.nav > div h3 {
+    font-size: 18px; 
+    color: #25a2d0;
+    margin-bottom: 4px ;
+}
+
+.nav > div ol{
+    overflow: hidden;
+}
+.nav > div ol li{
+    float: left;
+    width: 50%;
+}
+.nav > div.last ol li{
+    width: 100%;
+}
+.nav > div ol li a:hover{
+    text-decoration: underline;
+}
+
+/* 타이틀 */
+.tit{
+    position: relative;
+}
+.tit h2{
+    font-size: 40px;
+    text-align: center;
+    padding: 5px 0;
+    letter-spacing: 2px; /*글자 간의 간격 지정*/
+    color: #2C94c4;
+    font-family: 'Nanum Brush Script', cursive;
+}
+.tit .btn{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: url("../img/icon.png") no-repeat 0 -600px;
+}
+.tit .btn:hover{
+    background: url("../img/icon.png") no-repeat -60px -600px;
+}
+
+
+/* position: relative의 역할:
+타 포지션 특히 absolute의 기준점이 되는 역할을 수행한다. */
