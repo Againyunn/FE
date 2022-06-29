@@ -5,3 +5,20 @@ body,div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p
     margin: 0;
     padding: 0;
 }
+
+/* a태그 초기화 */
+a{
+    color: #222;
+    text-decoration: none;
+}
+a:hover{
+    color: #390;
+}
+
+/* 폰트 초기화 */
+body, input, textarea, select, button, table {
+    font-family: 'Nanum Gothic', sans-serif;
+    color: #222;
+    font-size: 13px;
+    line-height: 1.5;
+}
