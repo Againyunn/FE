@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>layout1</title>
+    <style>
+        body {background: #c8e6c9;}
+        #wrap {width: 1000px; height: 900px; margin: auto auto; font-size: 40px; color: #fff; text-align: center; text-transform: uppercase; }
+        #header {width: 1000px; height: 100px; line-height: 100px; background: #2e7d32;}
+        #nav {width: 1000px; height: 100px; line-height: 100px; background: #388e3c;}
+        #side {float: left; width: 300px; height: 600px; line-height: 600px; background: #43a047;}
+        #contents {float: left; width: 700px; height: 600px; line-height: 600px; background: #4caf50;}
+        #footer {float: left; width: 1000px; height: 100px; line-height: 100px; background: #66bb6a;}
+
+        /* 
+        float은 해당 블록의 height를 0으로 만들어, 해당 블록 이후의 블록 배치에 영향을 미친다.
+        margin 위 아래 → margin auto auto로 주면 가운데 정렬가능 
+        */
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">header</div>
+        <div id="nav">nav</div>
+        <div id="side">side</div>
+        <div id="contents">contents</div>
+        <div id="footer">footer</div>
+    </div>
+</body>
+</html>
+
