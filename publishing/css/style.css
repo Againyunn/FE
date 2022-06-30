@@ -42,8 +42,9 @@
 }
 #footer{
     /* width: 100%; */
-    height: 200px;
-    background-color: #333;
+    /* height: 200px;
+    background-color: #333; */
+    border-top: 1px solid #EEE;
 }
 
 /* 컨텐츠 레이아웃 */
@@ -775,9 +776,10 @@ sol 4. clearfix를 사용(O)
 }
 
 /* 로그인 */
-#login_form{
+#login_wrap{
     background: #f2f4f5;
     padding: 15px;
+    margin-bottom: 15px;
 }
 .login_header{
     overflow: hidden;
@@ -830,4 +832,61 @@ sol 4. clearfix를 사용(O)
 }
 .login_footer li a{
     font-size: 12px;
+}
+
+/* 팝업 */
+.popup{
+    /* margin-top: 15px;/ */
+}
+.popup h4{
+    font-size: 14px;
+    color: #0093bd;
+    padding-bottom: 4px;
+    font-weight: 700;
+}
+.popup ul{
+    overflow: hidden;
+}
+.popup li{
+    float: left;
+    width: 90px;
+    margin-right: 5px;
+}
+.popup:last-child{
+    margin-right: 0;
+}
+.popup li img{
+    width: 100%;
+}
+
+/* 푸터 */
+.footer{
+    padding: 25px 0;
+    text-align: center;
+    
+}
+.footer li{
+    display: inline;
+    padding: 0 7px 0 10px;
+    position: relative;
+}
+/* css의 가상속성을 이용해서 footer의 각 요소 앞에 | 표시 만들기 */
+/* 불필요한 그림 대신 css를 이용해서 쉽게만들 수 있다. */
+.footer li:before{
+    content: '';
+    width: 1px;
+    height: 12px;
+    background-color: #CCC;
+    position: absolute;
+    left: 0px;
+    top: 2px;
+}
+/* footer의 첫번째 요소 앞에는 |를 제외하기 위한 작업 */
+.footer li:first-child:before{
+    content: '';
+    width: 0px;
+    height: 0px;
+}
+.footer ul{
+    margin-bottom: 10px;
 }
