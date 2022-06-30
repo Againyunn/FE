@@ -773,3 +773,61 @@ sol 4. clearfix를 사용(O)
 .gallery .gallery_img img{
     width: 100%;
 }
+
+/* 로그인 */
+#login_form{
+    background: #f2f4f5;
+    padding: 15px;
+}
+.login_header{
+    overflow: hidden;
+    font-size: 12px;
+    height: 30px;
+}
+.login_header .lh_check{
+    float: left;
+    padding-right: 15px;
+}
+/* checkbox와 글씨의 위치를 동일하게 맞춰주기 위한 처리 */
+.login_header .lh_check .input_check{
+    vertical-align: -2px;
+}
+.login_header .lh_ip{
+    float: left;
+}
+.login_header .lh_ip em{
+    color: #0093bd;
+    text-decoration: underline;
+}
+.login_content{
+    position: relative;
+}
+.login_content .lc_text{
+
+}
+.login_content .input_text{
+    width: 180px;
+    height: 16px;
+    padding: 2px 5px;
+    border: 1px solid #bebebe;
+    margin-bottom: 3px;
+    background: #FFF;
+}
+.login_content .lc_btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 62px;
+    height: 47px;
+    background-color: #FFF;
+    border: 1px solid #bebebe;
+}
+.login_footer{
+    margin-top: 5px;
+}
+.login_footer li{
+    display: inline;
+}
+.login_footer li a{
+    font-size: 12px;
+}

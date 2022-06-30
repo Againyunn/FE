@@ -41,6 +41,10 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
 
+/* 테두리 초기화 */
+img, fieldset{
+    border: 0 none;
+}
 
 /* IR효과의 3가지 방법 */
 /* 의미 있는 이미지의 대체 텍스트 제공하는경우 */
