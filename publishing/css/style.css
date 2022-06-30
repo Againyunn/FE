@@ -57,9 +57,9 @@
     background-color: #EAF7FD;
 }
 #cont_ban{
-    width: 100%;
-    height: 200px;
-    background-color: #555;
+    /* width: 100%;
+    height: 200px; */
+    background-color: #dceff7; 
 }
 #cont_cont{
     width: 100%;
@@ -224,7 +224,54 @@ sol 4. clearfix를 사용(O)
 .tit .btn:hover{
     background: url("../img/icon.png") no-repeat -60px -600px;
 }
-
-
 /* position: relative의 역할:
 타 포지션 특히 absolute의 기준점이 되는 역할을 수행한다. */
+
+
+/* 배너 */
+.ban{
+    position: relative;
+    padding: 24px 0px;
+}
+.ban a.prev{
+    position: absolute;
+    left: -80px;
+    top: 60px;
+    width: 43px;
+    height: 43px;
+    background: url("../img/icon.png") no-repeat -150px 0px;
+}
+.ban a.prev:hover{
+    background-position: -193px 0px;
+}
+.ban a.next{
+    position: absolute;
+    right: -60px;
+    top: 60px;
+    width: 43px;
+    height: 43px;
+    background: url("../img/icon.png") no-repeat -150px -43px;
+}
+.ban a.next:hover{
+    background-position: -193px -43px;
+}
+.ban ul{
+    overflow: hidden;
+}
+.ban ul li{
+    float: left;
+    width: 330px;
+}
+.ban ul li:last-child{  /*ie9부터 적용가능*/
+    text-align: right;
+}
+.ban ul li:nth-child(2){
+    text-align: center;
+}
+.ban ul li img{
+    display: block;
+    border: 4px solid #dcdcdc;
+}
+.ban ul li img:hover{
+    border-color: #98dcdc;
+}
