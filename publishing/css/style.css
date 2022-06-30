@@ -301,7 +301,7 @@ sol 4. clearfix를 사용(O)
 .cont .col3{
     margin-right: 0px;
     padding-right: 0px;
-    border-right: 1px solid #c8c8c8;
+    /* border-right: 1px solid #c8c8c8; */
 }
 .cont .col4{
     border-right: 1px solid #c8c8c8;
@@ -312,7 +312,7 @@ sol 4. clearfix를 사용(O)
 .cont .col6{
     margin-right: 0px;
     padding-right: 0px;
-    border-right: 1px solid #c8c8c8;
+    /* border-right: 1px solid #c8c8c8; */
 }
 
 
@@ -657,4 +657,119 @@ sol 4. clearfix를 사용(O)
 }
 .tab_menu ul li.active >a{
     color: #FFF;
+}
+
+/* 최신 공지사항 */
+.new_notice{
+    margin-top: 20px;
+    position: relative;
+    border: 1px solid #CCC;
+    /* padding: 8px; */
+    height: 120px;
+}
+.new_notice h4{
+    padding: 8px;
+    overflow: hidden;
+    border-bottom: 1px solid #CCC;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0093bd;
+}
+.new_notice h4 em{
+    color: #cf3292;
+}
+.new_notice ul{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.new_notice ul li{
+    overflow: hidden;
+    background: url("../img/dot.gif") no-repeat 9px 8px;
+}
+.new_notice ul li a{
+    display: block;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 160px;
+    font-size: 12px;
+    padding-left: 20px;
+}
+.new_notice ul li span{
+    display: block;
+    float: left;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    margin-left: 20px;
+}
+.new_notice .more{
+    position: absolute;
+    margin: 5px;
+    right: 0px;
+    top: 0px;
+    font-size: 12px;
+}
+
+/* 갤러리 */
+.gallery{
+    border: 1px solid #CCC;
+    height: 254px;
+    position: relative;
+    overflow: hidden;
+}
+.gallery h4{
+    font-size: 14px;
+    color: #0093bd;
+    border-bottom: 1px solid #CCC;
+    padding: 10px 0 8px 11px;
+    font-weight: bold;
+}
+.gallery .gallery_btn{
+    position: absolute;
+    right: 5px;
+    top: 7px;
+}   
+.gallery .gallery_btn ul{
+    overflow: hidden;
+}
+.gallery .gallery_btn li{
+    float: left;
+}
+.gallery .gallery_btn li a{
+    display: block;
+    width: 23px;
+    height: 23px;
+    background: url("../img/icon.png") no-repeat;
+}
+/* icon이미지는 background를 a태그에 부여했으므로, 역시 a태그에 부여한다. */
+.gallery .gallery_btn li.gb_icon1 a{
+    background-position: -150px -120px;
+}
+.gallery .gallery_btn li.gb_icon2 a{
+    background-position: -150px -143px;
+}
+.gallery .gallery_btn li.gb_icon3 a{
+    background-position: -150px -166px;
+}
+.gallery .gallery_btn li.gb_icon4 a{
+    background-position: -150px -189px;
+}
+.gallery .gallery_btn li.gb_icon1 a:hover{
+    background-position: -173px -120px;
+}
+.gallery .gallery_btn li.gb_icon2 a:hover{
+    background-position: -173px -143px;
+}
+.gallery .gallery_btn li.gb_icon3 a:hover{
+    background-position: -173px -166px;
+}
+.gallery .gallery_btn li.gb_icon4 a:hover{
+    background-position: -173px -189px;
+}
+.gallery .gallery_img img{
+    width: 100%;
 }
