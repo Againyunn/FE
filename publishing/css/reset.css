@@ -23,6 +23,11 @@ body, input, textarea, select, button, table {
     line-height: 1.5;
 }
 
+/* 폰트 스타일 초기화 */
+em{
+    font-style: normal;
+}
+
 /* 블릿기호 초기화 */ 
 /* html 내의 리스트 블릿기호들 초기화해서 없애기 */
 dl, ul, li, ol, menu {
@@ -66,4 +71,26 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 0;
     text-indent: -9999px;
 }
+
+/* 자주 사용하는 margin이나 padding은 css로 미리 서식을 정의하기도 한다. */
+/* margin, padding */  
+.mt10{
+    margin-top: 10px !important;
+}
+.mt15{
+    margin-top: 15px !important;
+}
+.mt20{
+    margin-top: 20px !important;
+}
+.mt25{
+    margin-top: 25px !important;
+}
+.mt30{
+    margin-top: 30px !important;
+}
+.mt35{
+    margin-top: 35px !important;
+}
+/* !important를 통해 css적용 우선순위를 지정할 수 있다. */
 
