@@ -46,6 +46,11 @@ img, fieldset{
     border: 0 none;
 }
 
+/* 버튼 초기화 */
+button{
+    border: 0;
+}
+
 /* IR효과의 3가지 방법 */
 /* 의미 있는 이미지의 대체 텍스트 제공하는경우 */
 .ir_pharkMethod{

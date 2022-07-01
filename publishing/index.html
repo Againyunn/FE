@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/reset.css">
 
+    <!-- JS -->
+    <script type="text/javascript" src="./js/script.js"></script>
+
+    <!-- slick js -->
+    <link rel="stylesheet" href="./css/slick.css">
+
     <!-- 웹 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,7 +137,7 @@
                 <div class="container">
                     <div class="tit">
                         <h2>"나는 프론트엔드 개발자다"</h2>
-                        <a href="#" class="btn"><span class="ir_pharkMethod">전체메뉴</span></a>
+                        <a href="#" id="clickMenuBtn" class="btn"><span class="ir_pharkMethod">전체메뉴</span></a>
                     </div>
                 </div>
             </div>
@@ -139,7 +145,7 @@
             <div id="cont_ban">
                 <div class="container">
                     <div class="ban">
-                        <a href="#" class="prev"><span class="ir_pharkMethod">이전 이미지</span></a>
+                        <!-- <a href="#" class="prev"><span class="ir_pharkMethod">이전 이미지</span></a>
                         <ul>
                             <li class="ban_img1">
                                 <a href="#"><img src="./img/banner_link1.jpg" alt="웹 표준 지침서 보기"></a>
@@ -151,7 +157,17 @@
                                 <a href="#"><img src="./img/banner_link3.jpg" alt="로그인 폼 만들기"></a>
                             </li>
                         </ul>
-                        <a href="#" class="next"><span class="ir_pharkMethod">다음 이미지</span></a>
+                        <a href="#" class="next"><span class="ir_pharkMethod">다음 이미지</span></a> -->
+
+                        <div><a href="#"><img src="./img/banner_link1.jpg" alt="웹 표준 지침서 보기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link2.jpg" alt="CSS 버튼 만들기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link3.jpg" alt="로그인 폼 만들기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link1.jpg" alt="웹 표준 지침서 보기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link2.jpg" alt="CSS 버튼 만들기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link3.jpg" alt="로그인 폼 만들기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link1.jpg" alt="웹 표준 지침서 보기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link2.jpg" alt="CSS 버튼 만들기"></a></div>
+                        <div><a href="#"><img src="./img/banner_link3.jpg" alt="로그인 폼 만들기"></a></div>
                     </div>
                 </div>
             </div>
@@ -356,14 +372,14 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">공지사항2</a>
-                                        <ul style="display: none;">
+                                        <ul>
                                             <li><a href="#">두번째 공지사항 탭 메뉴 테스트 목록입니다.</a></li>
                                             <li><a href="#">두번째 공지사항 탭 메뉴 테스트 목록입니다.</a></li>
                                             <li><a href="#">두번째 공지사항 탭 메뉴 테스트 목록입니다.</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">공지사항3</a>
-                                        <ul style="display: none;">
+                                        <ul>
                                             <li><a href="#">세번째 공지사항 탭 메뉴 테스트 목록입니다.</a></li>
                                             <li><a href="#">세번째 공지사항 탭 메뉴 테스트 목록입니다.</a></li>
                                             <li><a href="#">세번째 공지사항 탭 메뉴 테스트 목록입니다.</a></li>
@@ -443,5 +459,61 @@
         <!-- //footer -->
     </div>
     <!-- //contents -->
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <script type="text/javascript">
+        //탭 메뉴
+        let $tab_list = $(".tab_menu");
+
+        //$tab_list의 ul > ul을 찾아서, display: none 상태로 바꾼다.
+        $tab_list.find("ul ul").hide();
+
+        //$tab_list의 li active의 직속 ul를 찾아서, display: block 상태로 바꾼다.
+        $tab_list.find("li active > ul").show();
+
+        function tabMenu(e){
+            e.preventDefault();
+            //event값으로 받아온 객체의 자기 자신을 $(this)로 호출할 수 있는데,
+            //호출된 자기 자신을 $this라는 객체로 저장하여 변수화 처리
+            var $this = $(this);
+
+            $this.next("ul").show().parent("li").addClass("active").siblings("li").removeClass("active").find(">ul").hide();
+        }
+
+        $tab_list.find("ul>li>a").click(tabMenu).focus(tabMenu)
+
+
+
+
+        // 배너 slide 처리
+        $('.ban').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplayspeed: 3000,
+            dots: true,
+        });
+
+
+
+        // 버튼을 클릭하면 전체 메뉴가 보입니다.
+        $(".tit .btn").click(function(e){
+            //기존에 설정된 효과 제거
+            e.preventDefault();
+            // $("#cont_nav").slideDown();
+
+            //나타났다가 사라지는 작업을 쉽게 처리 가능
+            // $("#cont_nav").toggle(); //애니메이션 없이 나타나고 사라지는 기능
+            // $("#cont_nav").fadeToggle();//fade애니메이션 + 나타나고 사라지는 기능
+            $("#cont_nav").slideToggle(200);//slide애니메이션 + 나타나고 사라지는 기능
+
+            // 버튼이 클릭되었을 때 css를 별도로 만들어서 추가적인 효과를 줄 수도 있다.
+            $(".tit .btn").toggleClass("on"); //클릭 시 "on" class가 추가되고, 다시 클릭하면 "on" class가 삭제 된다.
+            // $(this).toggleClass("on"); //자기자신(.tit .btn)을 지칭할 때 서식자 this 사용가능
+        })
+    </script>
 </body>
 </html>
