@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>layout3</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #f3e5f5;
+        }
+        #wrap{
+            width: 1200px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        header{
+            width: 100%;
+            height: 150px;
+            background-color: #9575cd;
+        }
+        aside{
+            float: left;
+            width: 30%;
+            height: 700px;
+            background-color: #7e56c2;
+        }
+        section{
+            float: left;
+            width: 70%;
+            height: 700px;
+            background-color: #673ab7;
+        }
+        footer{
+            clear: both;
+            width: 100%;
+            height: 150px;
+            background-color: #5e34b1;
+        }
+
+        /*
+        반응형 작업 시 화면에 스크롤바가 나타나면 안된다!
+        이때 서로 width/height등의 레이아웃 영역이 겹친 것이니, 
+        겹치지 않게 조정해줄 필요가 있다.
+        아래의 media query도 일부러 레이아웃 영역이 겹치지 않게 다르게 설정한 것
+        */
+
+        /* 화면 너비: 0 ~ 1200px */
+        @media (max-width: 1220px){
+            #wrap{
+                /* width: 100%; */
+                width: 95%; /*의도적으로 여백을 남기기 위해*/
+            }
+        }
+        /* 화면 너비: 0 ~ 768px */
+        @media (max-width: 768px){
+            #wrap{
+                width: 100%;
+            }
+        }
+        /* 화면 너비: 0 ~ 567px */
+        @media (max-width: 567px){
+            #wrap{
+                width: 100%;
+            }
+            header{
+                height: 300px;
+            }
+            aside{
+                float: none; /*기존에 float: left로 지정한 값을 깨기 위해*/
+                width: 100%;
+                height: 300px;
+            }
+            section{
+                float: none; /*기존에 float: left로 지정한 값을 깨기 위해*/
+                width: 100%;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header></header>
+        <aside></aside>
+        <section></section>
+        <footer></footer>
+    </div>
+</body>
+</html>
