@@ -2,11 +2,20 @@
 #header{
     background: url("../img/header_bg.jpg") repeat-x center top;
 }
+#nav{
+    background-color: #f6fdff;
+}
+#title{
+    background-color: #eaf7fd;
+}
 
 /* 컨테이너 */
 .container{
     width: 1200px;
     margin: 0 auto;
+}
+
+header .container{
     background-color: rgba(0,0,0,0.3);
 }
 
@@ -145,12 +154,176 @@
 }
 
 
+/* 전체 메뉴 */
+.nav{
+    overflow: hidden;
+    padding: 25px 0;
+
+    display: none;
+}
+.nav > div{
+    float: left;
+    width: 40%;
+}
+.nav > div:last-child{
+    width: 20%;
+}
+.nav > div ol{
+    overflow: hidden;
+}
+.nav > div li{
+    float: left;
+    width: 50%;
+
+    position: relative;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+.nav > div li:last-child{
+    overflow: hidden;
+}
+.nav > div li:before{
+    content: '';
+    width: 3px;
+    height: 3px;
+    background: #25a2d0;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 6px;
+}
+.nav > div h3 {
+    font-size: 18px;
+    color: #25a2d0;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.nav > div li a{
+    position: relative;
+}
+.nav > div li a:after{
+    content: "";
+    /* 글씨 영역만 밑줄 표시 하기 위해 inline으로 display변경*/
+    display: inline-block;
+
+    /* 각 메뉴가 적혀있는 a태그에 밑줄 서식을 넣지지만, hover되기 전까지는 사용x */
+    width: 0%;
+    height: 1px;
+    background-color: #25aad0;
+    transition: all 0.2s ease-out;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+/* 각 메뉴가 적혀있는 a태그에 hover되면 밑줄 서식 넣기 */
+.nav > div li:hover a:after{
+    width: 100%;
+}
+
+/* title */
+.title{
+    text-align: center;
+    position: relative;
+}
+.title h2{
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 39px;
+    color: #0093bd;
+    padding: 5px 0;
+}
+.title .btn{
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background-color: #3192bf;
+    color: #FFF;
+    /* fontasome의 아이콘은 모두 "font"이다.
+    따라서 크기를 조정하고 싶으면 일반적인 글자의 font처럼 취급하면 된다. */
+    font-size: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.title .btn:hover{
+    box-shadow: 
+        inset 0 0 0 3px rgba(71, 154, 191, 0.9),
+        inset 0 0 0 100px rgba(0, 0, 0, 0.3);
+}
+
+
 /* 미디어쿼리 */
+/* 화면너비 0 ~ 1220px */
 @media (max-width: 1220px){
     .container{
         width:100%;
     }
     .row{
         padding: 0 15px;
+    }
+    .title .btn{
+        right: 5px;   
+    }
+}
+/* 화면너비 0 ~ 1024px */
+@media (max-width: 1024px){
+
+}
+/* 화면너비 0 ~ 960px */
+@media (max-width: 960px){
+    .nav > div{
+        float: none;
+        width: 100%;
+    }
+    .nav > div:last-child{
+        float: none;
+        width: 100%;
+    }
+    .nav > div li{
+        width: 33.3333%;
+    }
+    .nav > div ol{
+        margin-bottom: 10px;
+    }
+}
+/* 화면너비 0 ~ 768px */
+@media (max-width: 768px){
+
+}
+/* 화면너비 0 ~ 600px */
+@media (max-width: 600px){
+    .nav > div li{
+        width: 50%;
+    }
+    .nav > div:last-child li{
+        width: 50%;
+    }
+    .header .header-tit {
+        display: none;
+    }
+    .header .header-icon{
+        display: none;
+    }
+    /* 헤더 자체를 숨기기 때문에 header의 height 값을 깨는 기능 수행 */
+    .header{
+        height: auto; /*height&width 값 깨는 방법: auto로 설정*/
+    }
+    .title .btn{
+        display: none;
+    }
+
+}
+/* 화면너비 0 ~ 480px */
+@media (max-width: 480px){
+
+}
+/* 화면너비 0 ~ 320px */
+@media (max-width: 320px){
+    .nav > div li{
+        width: 100%;
+    }
+    .nav > div:last-child li{
+        width: 100%;
     }
 }
