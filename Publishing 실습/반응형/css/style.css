@@ -1,6 +1,9 @@
 /* 레이아웃 */
-#header{
+body{
     background: url("../img/header_bg.jpg") repeat-x center top;
+}
+#header{
+    /* background: url("../img/header_bg.jpg") repeat-x center top; */
 }
 #nav{
     background-color: #f6fdff;
