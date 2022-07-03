@@ -29,4 +29,4 @@ REACT공부/공식문서로 디테일 잡기/my-app/package-lock.json
 React-Django-test/db.sqlite3
 
 #venv파일 제외
-React-Django-test/venv
+React-Django-test/venv/
