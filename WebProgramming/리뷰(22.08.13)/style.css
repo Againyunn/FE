@@ -1,3 +1,8 @@
+body,div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p, select, table, th, td, tr, textarea, button, form {
+    margin: 0;
+    padding: 0;
+}
+
 table, tr, td, th{
     border-collapse : collapse; 
     border : 1px solid black;
@@ -7,3 +12,44 @@ a{
     text-decoration: none; /* 링크의 밑줄 제거 */
     color: inherit; /* 링크의 색상 제거 */
 }
+
+.main-wrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-wrap{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    text-align:justify;
+    row-gap: 5px;
+}
+
+.form-content:nth-child(odd){
+    color: purple;
+}
+
+.items{
+    cursor: pointer;
+}
+
+
+.title-wrap{
+    position: relative;
+}
+
+.title-con{
+    float:left;
+    margin-left: 50px;
+    transition: font-size 1s;
+}
+
+.title-con:hover{
+    font-size: 500%;
+}
+
