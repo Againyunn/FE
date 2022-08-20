@@ -123,6 +123,53 @@
             v-show는 변동사항 발생과 무관하게 block이 생성된 상태에서 display값만 노출/숨김으로 변경
             </span>
         </div>
+        <div>
+            <h3>Click Event</h3>
+            <button type="button" @click="increaseCounter">Add 1</button>
+            <button type="button" @click="decreaseCounter">Sub 1</button>
+            <br/>
+            <button type="button" @click="setCounter(7)">Set 7</button>
+
+            <p style="color:green; font-weight:bold;">The Counter is : {{counter}}</p>
+            <br/>
+
+            <span>1번의 클릭으로 여러 함수 제어</span>
+            <button type="button" @click="one(), two()">Click</button>
+        </div>
+        <div>
+            <h3>Change Event</h3>
+            <select v-model="selectedCityValue" @change="changeSelect">
+                <option value="서울">서울</option>
+                <option value="부산">부산</option>
+                <option value="제주">제주</option>
+            </select>
+        </div>
+        <div>
+            <h3>Key Event</h3>
+            <input id="inputValue" type="text" @keyup.enter="goSearch()"/>
+            <br/>
+            <span>{{searchData}}</span>
+        </div>
+        <div>
+            <h3>통합 상태 관리 역할</h3>
+            <div>
+                <h5>computed</h5>
+                <span>정의된 데이터 값의 변경과 관계 없이 최초에 1번 함수 실행<br/>
+                    이후, 데이터 값의 변경이 발생 시 자동으로 함수 실행하여 데이터 업데이트<br/>
+                    단, 1번의 함수 연산으로 페이지 내의 모든 값이 자동으로 변경되어 효율적
+                </span><br/>
+                <b>Full Name: {{fullNameComputed}}</b>
+            </div>
+            <div>
+                <h5>watch</h5>
+                <span>정의된 데이터 값의 변경이 발생했을 때만 함수 실행(랜더링 시 실행x)<br/>
+                    이후, 데이터 값의 변경이 발생 시 자동으로 함수 실행하여 데이터 업데이트<br/>
+                    단, 1번의 함수 연산으로 페이지 내의 모든 값이 자동으로 변경되어 효율적
+                </span><br/>
+                <b>Full Name: {{fullName}}</b><br/>
+                <button type="button" @click="changeName">이름 변경</button>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -167,7 +214,55 @@ export default{
             ],
             type: "A",
             bShow: true,
+            counter: 0,
+            selectedCityValue: '서울',
+            searchData: "",
+            firstName: 'Jaeyun',
+            lastName: 'Jung',
+            fullName: ""
         };
+    },
+    methods: {
+        increaseCounter(){
+            this.counter += 1;
+        },
+        decreaseCounter(){
+            if(this.counter > 0){
+                this.counter -= 1;
+            }
+        },
+        setCounter(num){
+            this.counter = num;
+        },
+        one(){
+            window.alert('One');
+        },
+        two(){
+            window.alert('Two');
+        },
+        changeSelect(){
+            window.alert(`선택된 도시: ${this.selectedCityValue}`)
+        },
+        goSearch(){
+            this.searchData = document.getElementById('inputValue').value
+            window.alert(this.searchData);
+        },
+        changeName(){
+            this.firstName = 'Againyunn';
+        }
+    },
+    computed: {
+        fullNameComputed(){
+            return this.firstName + ' ' + this.lastName;
+        }
+    },
+    watch: {
+        firstName(){
+            this.fullName = this.firstName + ' ' + this.lastName;
+        },
+        lastName(){
+            this.fullName = this.firstName + ' ' + this.lastName;
+        }
     }
 }
 // const PrintCheckedCity = (checkedCity) => {
