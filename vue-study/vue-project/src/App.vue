@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/dataBinding">dataBinding</router-link> |
-    <router-link to="/apiDataBinding">APIDataBinding</router-link>
+    <router-link to="/apiDataBinding">APIDataBinding</router-link> |
+    <router-link to="/nestedComponentTest">nestedComponentTest</router-link>
   </nav>
   <router-view/>
 </template>
