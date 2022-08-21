@@ -8,6 +8,7 @@ import ParentComponent2 from '../views/componentStudy/ParentComponent2.vue'
 import ParentComponent3 from '../views/componentStudy/ParentComponent3.vue'
 import ParentComponent4 from '../views/componentStudy/ParentComponent4.vue'
 import ParentComponent5 from '../views/componentStudy/ParentComponent5.vue'
+import ProvideInject from '../views/provide.injectStudy/ProvideInject'
 
 const routes = [
   {
@@ -62,6 +63,11 @@ const routes = [
     path: '/ParentComponent5',
     name: 'ParentComponent5',
     component: ParentComponent5
+  },
+  {
+    path: '/ProvideInject',
+    name: 'ProvideInject',
+    component: ProvideInject
   }
 ]
 
