@@ -4,7 +4,9 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/dataBinding">dataBinding</router-link> |
     <router-link to="/apiDataBinding">APIDataBinding</router-link> |
-    <router-link to="/nestedComponentTest">nestedComponentTest</router-link>
+    <router-link to="/nestedComponentTest">nestedComponentTest</router-link> <br/>
+    <router-link to="/ParentComponent">ParentComponent</router-link> 
+    <!-- <router-link to="/ChildComponent">ChildComponent</router-link> -->
   </nav>
   <router-view/>
 </template>
