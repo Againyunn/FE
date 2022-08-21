@@ -19,7 +19,7 @@
 #doc/**/*.pdf
 
 
-
+.vscode
 REACT공부/공식문서로 디테일 잡기/my-app/.vscode
 REACT공부/공식문서로 디테일 잡기/my-app/node_modules
 REACT공부/공식문서로 디테일 잡기/my-app/package.json
