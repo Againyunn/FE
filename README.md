@@ -46,7 +46,7 @@
    <tr>
     <td>WebProgramming</td>
     <td>전반적 복습</td>
-    <td>html, css, javascript</td>
+    <td>html, css, javascript, php</td>
     <td>22.05.22~22.08.15</td>
   </tr>
    <tr>
