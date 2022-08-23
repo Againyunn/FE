@@ -18,6 +18,8 @@ import ProvideInject from '../views/provide.injectStudy/ProvideInject.vue'
 import CompositionAPI2 from '../views/compositionStudy/CompositionAPI2.vue'
 import CompositionAPI3 from '../views/compositionStudy/CompositionAPI3.vue'
 import CompositionAPI4 from '../views/compositionStudy/CompositionAPI4.vue'
+import Mixins from '../views/mixinsStudy/MixinsTest.vue'
+import CustomDirective from '../views/CustomDirective/CustomDirective.vue'
 
 const routes = [
   {
@@ -92,6 +94,15 @@ const routes = [
     path: '/CompositionAPI4',
     name: 'CompositionAPI4',
     component: CompositionAPI4
+  },
+  {
+    path: '/Mixins',
+    name: 'Mixins',
+    component: Mixins
+  },{
+    path: '/CustomDirective',
+    name: 'CustomDirective',
+    component: CustomDirective
   }
 ]
 

@@ -1,5 +1,9 @@
 import {reactive, computed, toRefs} from 'vue';
 
+/**
+ * @props null
+ * @returns state.num1, state.num2, state.result
+ */
 const plusCalculator = () => {
     let state = reactive({
         num1: 0,

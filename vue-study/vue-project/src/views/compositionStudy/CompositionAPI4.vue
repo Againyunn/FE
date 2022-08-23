@@ -13,6 +13,7 @@ import { plusCalculator } from './compositionAPI4';
 export default {
     name: 'calculatorLogic',
     setup() {
+        /**인자 개수에 맞게 데이터(값)을 할당받을 변수를 지정해야 한다.*/
         let {num1, num2, result} = plusCalculator();
         
         return{

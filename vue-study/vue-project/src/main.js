@@ -7,3 +7,9 @@ const app = createApp(App);
 app.use(router);
 app.mount('#app');
 app.mixin(mixins);
+//전역적으로 custom directive 사용 가능
+app.directive('focus', {
+    mounted(el){
+        el.focus()
+    }
+})

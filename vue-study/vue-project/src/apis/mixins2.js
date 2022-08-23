@@ -1,17 +1,22 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default{
     methods: {
-        async api(url, method, data){
+        async $callAPI(url, method, data){
             return (await axios({
                 method: method,
                 url,
                 data
-            }).catch(
+            }).then(
+                el=>{
+                    data = el;
+                    return data
+                }
+            ).catch(
                 e => {
                     console.log(e);
                 }
-            )).data;
+            ))
         }
     }
 }

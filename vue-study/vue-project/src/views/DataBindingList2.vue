@@ -36,7 +36,7 @@ export default{
     //컴포넌트 내에서 사용할 메소드 정의
     methods: {
         async getList(){
-            this.productList = await this.$api(this.API + '/list', "get")
+            this.productList = await this.api(this.API + '/list', "get")
         }
     }
 }
