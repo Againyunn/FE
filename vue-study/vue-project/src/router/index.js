@@ -20,6 +20,8 @@ import CompositionAPI3 from '../views/compositionStudy/CompositionAPI3.vue'
 import CompositionAPI4 from '../views/compositionStudy/CompositionAPI4.vue'
 import Mixins from '../views/mixinsStudy/MixinsTest.vue'
 import CustomDirective from '../views/CustomDirective/CustomDirective.vue'
+// 카카오 로그인
+import KakaoLogin from '../views/Login/LoginKakao.vue'
 
 const routes = [
   {
@@ -103,6 +105,11 @@ const routes = [
     path: '/CustomDirective',
     name: 'CustomDirective',
     component: CustomDirective
+  },
+  {
+    path: '/KakaoLogin',
+    name: 'KakaoLogin',
+    component: KakaoLogin
   }
 ]
 

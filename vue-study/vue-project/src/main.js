@@ -13,3 +13,6 @@ app.directive('focus', {
         el.focus()
     }
 })
+
+// 카카오 로그인
+window.Kakao.init('145469a9a4c6bed59c20fe8f4b72fcbb');
