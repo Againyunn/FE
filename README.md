@@ -59,6 +59,12 @@
     <td>vue-study</td>
     <td>응용</td>
     <td>vue.js</td>
-    <td>22.08.18~현재</td>
+    <td>22.08.18~09.05</td>
+  </tr>
+     <tr>
+    <td>next.js-study</td>
+    <td>응용</td>
+    <td>react.js framework</td>
+    <td>22.09.08~현재</td>
   </tr>
 </table>
