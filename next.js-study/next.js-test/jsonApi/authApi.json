@@ -1,0 +1,7 @@
+{
+  "loginApi": {
+    "url": "login/",
+    "method": "get",
+    "data": ["userId", "password"]
+  }
+}
